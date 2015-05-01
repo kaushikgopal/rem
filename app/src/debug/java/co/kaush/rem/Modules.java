@@ -14,6 +14,7 @@ public class Modules {
 
     List<Object> modules = new ArrayList<>();
     modules.add(new RemModule(app));
+    modules.add(new DebugRemModule());
 
     // Injected from UI Tests
     if (testModules != null) {
