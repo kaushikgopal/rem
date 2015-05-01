@@ -1,8 +1,6 @@
 package co.kaush.rem.ui;
 
 import android.os.Bundle;
-import butterknife.ButterKnife;
-import co.kaush.rem.R;
 import co.kaush.rem.RemModule;
 import dagger.Module;
 import java.util.Arrays;
@@ -14,8 +12,12 @@ public class LauncherActivity
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-    ButterKnife.inject(this);
+
+    if (savedInstanceState == null) {
+      getSupportFragmentManager().beginTransaction()
+          .add(android.R.id.content, new TaskListFragment())
+          .commit();
+    }
   }
 
   @Override
@@ -23,7 +25,7 @@ public class LauncherActivity
     return Arrays.<Object>asList(new LauncherModule());
   }
 
-  @Module(injects = { LauncherActivity.class },
+  @Module(injects = { LauncherActivity.class, TaskListFragment.class },
       addsTo = RemModule.class,
       library = true)
   public class LauncherModule {}

@@ -3,7 +3,9 @@ package co.kaush.rem.ui;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import co.kaush.rem.MyApp;
+import co.kaush.rem.R;
 import dagger.ObjectGraph;
 import java.util.List;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -42,6 +44,8 @@ public abstract class BaseActivity
 
     // Inject ourselves so subclasses will have dependencies fulfilled when this method returns.
     _activityObjectGraph.inject(this);
+
+    //_initializeToolbar();
   }
 
   @Override
@@ -61,5 +65,12 @@ public abstract class BaseActivity
   protected void attachBaseContext(Context newBase) {
     super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
   }
+
+  //private void _initializeToolbar() {
+  //  Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+  //  if (toolbar != null) {
+  //    setSupportActionBar(toolbar);
+  //  }
+  //}
 }
 

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Remme</string>
+    <string name="action_nav_drawer">Nav</string>
 </resources>
