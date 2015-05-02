@@ -9,24 +9,29 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import co.kaush.rem.MyApp;
 import co.kaush.rem.R;
 import co.kaush.rem.util.ColorFilterCache;
+import javax.inject.Inject;
 
 public class TaskListFragment
-    extends BaseFragment {
+    extends BaseFragment
+    implements TaskListController.ITalkToTaskList {
 
   @InjectView(R.id.toolbar) Toolbar toolbar;
+
+  @Inject TaskListController _taskListController;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-
-    // enable action bar items
-    setHasOptionsMenu(true);
+    setHasOptionsMenu(true);  // enable action bar items
   }
 
   @Override
@@ -45,17 +50,32 @@ public class TaskListFragment
   }
 
   @Override
-  public void onActivityCreated(Bundle savedInstanceState) {
-    super.onActivityCreated(savedInstanceState);
+  public void onPrepareOptionsMenu(Menu menu) {
+    super.onPrepareOptionsMenu(menu);
+    _changeColorOfAddButton((MenuBuilder) menu);
   }
 
   @Override
-  public void onPrepareOptionsMenu(Menu menu) {
-    super.onPrepareOptionsMenu(menu);
+  public boolean onOptionsItemSelected(MenuItem item) {
 
-    Drawable add = ((MenuBuilder) menu).getActionItems().get(0).getIcon();
-    add.setColorFilter(ColorFilterCache.getWhiteColorFilter());
+    switch (item.getItemId()) {
+
+      case R.id.menu_add:
+        _taskListController.onAddTaskClicked();
+        return true;
+
+      default:
+        return super.onOptionsItemSelected(item);
+    }
   }
+  // -----------------------------------------------------------------------------------
+
+  @Override
+  public void moveToCreateNewTask() {
+    Toast.makeText(MyApp.get(), "create new task", Toast.LENGTH_SHORT).show();
+  }
+
+  // -----------------------------------------------------------------------------------
 
   private void _initializeToolbar() {
     // enable the actionbar (so menu items get hooked on)
@@ -67,12 +87,17 @@ public class TaskListFragment
       supportActionBar.setDisplayShowTitleEnabled(false);
     }
 
-    // -----------------------------------------------------------------------------------
+    // -------------------------
     // style action bar
 
     // add navigation icon
     Drawable nav = getResources().getDrawable(R.drawable.ic_menu);
     nav.setColorFilter(ColorFilterCache.getWhiteColorFilter());
     toolbar.setNavigationIcon(nav);
+  }
+
+  private void _changeColorOfAddButton(MenuBuilder menu) {
+    Drawable add = menu.getActionItems().get(0).getIcon();
+    add.setColorFilter(ColorFilterCache.getWhiteColorFilter());
   }
 }
