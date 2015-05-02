@@ -11,7 +11,7 @@ public class ColorFilterCache {
   private static ParcelableSparseArray _colorFilterCache;
 
   public static ColorFilter getWhiteColorFilter() {
-    return _getPossiblyCachedColorFilter(R.color.white_1);
+    return _getPossiblyCachedColorFilter(R.color.white_2);
   }
 
   // -----------------------------------------------------------------------------------
