@@ -9,15 +9,11 @@ import co.kaush.rem.R;
 import co.kaush.rem.RemModule;
 import co.kaush.rem.util.ColorFilterCache;
 import dagger.Module;
-import dagger.Provides;
 import java.util.Arrays;
 import java.util.List;
-import javax.inject.Inject;
 
 public class LauncherActivity
     extends BaseActivity {
-
-  @Inject TaskListFragment _taskListFrag;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -25,7 +21,7 @@ public class LauncherActivity
 
     if (savedInstanceState == null) {
       getSupportFragmentManager().beginTransaction()
-          .add(android.R.id.content, _taskListFrag)
+          .add(android.R.id.content, new TaskListFragment())
           .commit();
     }
   }
@@ -58,26 +54,5 @@ public class LauncherActivity
   @Module(injects = { LauncherActivity.class, TaskListFragment.class },
       addsTo = RemModule.class,
       library = true)
-  public class LauncherModule {
-
-    @Provides
-    public TaskListFragment provideTaskListFragment() {
-      return new TaskListFragment();
-    }
-
-    @Provides
-    public TaskListController provideTaskListController(TaskListFragment fragment) {
-      return new TaskListController(fragment);
-    }
-
-    @Provides
-    public TaskCreateFragment provideTaskCreateFragment() {
-      return new TaskCreateFragment();
-    }
-
-    @Provides
-    public TaskCreateController provideTaskCreateController(TaskCreateFragment fragment) {
-      return new TaskCreateController(fragment);
-    }
-  }
+  public class LauncherModule {}
 }

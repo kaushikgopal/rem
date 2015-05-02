@@ -1,6 +1,5 @@
 package co.kaush.rem.ui;
 
-import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -13,28 +12,21 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import co.kaush.rem.MyApp;
 import co.kaush.rem.R;
 import co.kaush.rem.util.ColorFilterCache;
-import javax.inject.Inject;
 
 public class TaskListFragment
     extends BaseFragment
     implements TaskListController.ITalkToTaskList {
 
   @InjectView(R.id.toolbar) Toolbar toolbar;
-
-  @Inject TaskListController _taskListController;
+  private TaskListController _taskListController;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setHasOptionsMenu(true);  // enable action bar items
-  }
-
-  @Override
-  public void onAttach(Activity activity) {
-    super.onAttach(activity);
+    _taskListController = new TaskListController(this);
   }
 
   @Override
@@ -51,7 +43,6 @@ public class TaskListFragment
   public boolean onOptionsItemSelected(MenuItem item) {
 
     switch (item.getItemId()) {
-
       case R.id.menu_add:
         _taskListController.onAddTaskClicked();
         return true;
@@ -61,16 +52,12 @@ public class TaskListFragment
     }
   }
 
-  @Override
-  public void onActivityCreated(Bundle savedInstanceState) {
-    super.onActivityCreated(savedInstanceState);
-  }
-
   // -----------------------------------------------------------------------------------
+  // ITalkToTaskList implementation
 
   @Override
   public void moveToCreateNewTask() {
-    Toast.makeText(MyApp.get(), "xxxxxxx", Toast.LENGTH_SHORT).show();
+    Toast.makeText(getActivity(), "xxxxxxx", Toast.LENGTH_SHORT).show();
   }
 
   // -----------------------------------------------------------------------------------
