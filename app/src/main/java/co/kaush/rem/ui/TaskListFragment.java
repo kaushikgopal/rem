@@ -1,17 +1,22 @@
 package co.kaush.rem.ui;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.internal.view.menu.MenuBuilder;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import co.kaush.rem.R;
+import co.kaush.rem.util.ColorFilterCache;
 
 public class TaskListFragment
     extends BaseFragment {
@@ -46,6 +51,14 @@ public class TaskListFragment
     super.onActivityCreated(savedInstanceState);
   }
 
+  @Override
+  public void onPrepareOptionsMenu(Menu menu) {
+    super.onPrepareOptionsMenu(menu);
+
+    Drawable add = ((MenuBuilder) menu).getActionItems().get(0).getIcon();
+    add.setColorFilter(ColorFilterCache.getWhiteColorFilter());
+  }
+
   private void _initializeToolbar() {
     // enable the actionbar (so menu items get hooked on)
     ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
@@ -55,5 +68,13 @@ public class TaskListFragment
     if (supportActionBar != null) {
       supportActionBar.setDisplayShowTitleEnabled(false);
     }
+
+    // -----------------------------------------------------------------------------------
+    // style action bar
+
+    // add navigation icon
+    Drawable nav = getResources().getDrawable(R.drawable.ic_menu);
+    nav.setColorFilter(ColorFilterCache.getWhiteColorFilter());
+    toolbar.setNavigationIcon(nav);
   }
 }

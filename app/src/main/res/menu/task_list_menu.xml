@@ -7,9 +7,9 @@
     >
 
     <item
-        android:id="@+id/action_nav_drawer"
-        android:title="@string/action_nav_drawer"
-        android:icon="@android:drawable/ic_delete"
+        android:id="@+id/menu_add"
+        android:title="@string/menu_add"
+        android:icon="@drawable/ic_add"
         android:orderInCategory="100"
         app:showAsAction="ifRoom"
         />
