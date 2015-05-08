@@ -63,26 +63,20 @@
 
         <Button
             android:id="@+id/decrease_hr"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
             android:text="- 1 hr"
-            style="@style/btn_quick_create"
+            style="@style/btn_quick_create_time"
             />
 
         <Button
             android:id="@+id/increase_hr"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
             android:text="+ 1 hr"
-            style="@style/btn_quick_create"
+            style="@style/btn_quick_create_time"
             />
 
         <Button
             android:id="@+id/set_8_am"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
             android:text="8:00 AM"
-            style="@style/btn_quick_create"
+            style="@style/btn_quick_create_time"
             />
     </TableRow>
 
@@ -94,26 +88,20 @@
 
         <Button
             android:id="@+id/decrease_10_mt"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
             android:text="- 10 mt"
-            style="@style/btn_quick_create"
+            style="@style/btn_quick_create_time"
             />
 
         <Button
             android:id="@+id/increase_10_mt"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
             android:text="+ 10 mt"
-            style="@style/btn_quick_create"
+            style="@style/btn_quick_create_time"
             />
 
         <Button
             android:id="@+id/set_1030_am"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
             android:text="10:30 am"
-            style="@style/btn_quick_create"
+            style="@style/btn_quick_create_time"
             />
     </TableRow>
 
@@ -125,26 +113,20 @@
 
         <Button
             android:id="@+id/decrease_3_hr"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
             android:text="- 3 hr"
-            style="@style/btn_quick_create"
+            style="@style/btn_quick_create_time"
             />
 
         <Button
             android:id="@+id/increase_3_hr"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
             android:text="+ 3 hr"
-            style="@style/btn_quick_create"
+            style="@style/btn_quick_create_time"
             />
 
         <Button
             android:id="@+id/set_1_pm"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
             android:text="1:00 pm"
-            style="@style/btn_quick_create"
+            style="@style/btn_quick_create_time"
             />
     </TableRow>
 
@@ -156,26 +138,20 @@
 
         <Button
             android:id="@+id/decrease_1_dy"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
             android:text="- 1 dy"
-            style="@style/btn_quick_create"
+            style="@style/btn_quick_create_time"
             />
 
         <Button
             android:id="@+id/increase_1_dy"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
             android:text="+ 1 dy"
-            style="@style/btn_quick_create"
+            style="@style/btn_quick_create_time"
             />
 
         <Button
             android:id="@+id/set_11_pm"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
             android:text="11:00 pm"
-            style="@style/btn_quick_create"
+            style="@style/btn_quick_create_time"
             />
     </TableRow>
 
