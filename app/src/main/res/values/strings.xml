@@ -2,4 +2,5 @@
     <string name="app_name">Remme</string>
 
     <string name="menu_add">Add Task</string>
+    <string name="task_description">Enter task description…</string>
 </resources>

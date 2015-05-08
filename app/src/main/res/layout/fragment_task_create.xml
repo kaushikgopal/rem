@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TableLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:paddingTop="@dimen/spacing_xlarge"
+
+    android:paddingLeft="@dimen/spacing_xxlarge"
+    android:paddingRight="@dimen/spacing_xxlarge"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <TableRow
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        >
+
+        <EditText
+            android:id="@+id/task_create_desc"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:textSize="@dimen/text_size_regular"
+            android:textColor="@color/gray_1"
+            android:hint="@string/task_description"
+            android:textColorHint="@color/gray_2"
+            android:layout_span="3"
+            android:maxLines="2"
+            />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/btn_task_due_date"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        >
+
+        <TextView
+            android:id="@+id/btn_task_due_date_display"
+            android:background="@color/accent"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="@dimen/spacing_micro"
+            android:layout_marginRight="@dimen/spacing_micro"
+            android:padding="@dimen/spacing_micro"
+            android:gravity="center"
+            android:textSize="@dimen/text_size_small"
+            android:textColor="@color/white_2"
+            fontPath="fonts/SourceSansPro-Bold.ttf"
+            tools:ignore="MissingPrefix"
+            android:layout_span="3"
+            tools:text="17 Dec 9:00 AM in 3 hours"
+            />
+    </TableRow>
+
+    <TableRow
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        >
+
+        <Button
+            android:id="@+id/decrease_hr"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="- 1 hr"
+            style="@style/btn_quick_create"
+            />
+
+        <Button
+            android:id="@+id/increase_hr"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="+ 1 hr"
+            style="@style/btn_quick_create"
+            />
+
+        <Button
+            android:id="@+id/set_8_am"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="8:00 AM"
+            style="@style/btn_quick_create"
+            />
+    </TableRow>
+
+    <TableRow
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        >
+
+        <Button
+            android:id="@+id/decrease_10_mt"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="- 10 mt"
+            style="@style/btn_quick_create"
+            />
+
+        <Button
+            android:id="@+id/increase_10_mt"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="+ 10 mt"
+            style="@style/btn_quick_create"
+            />
+
+        <Button
+            android:id="@+id/set_1030_am"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="10:30 am"
+            style="@style/btn_quick_create"
+            />
+    </TableRow>
+
+    <TableRow
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        >
+
+        <Button
+            android:id="@+id/decrease_3_hr"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="- 3 hr"
+            style="@style/btn_quick_create"
+            />
+
+        <Button
+            android:id="@+id/increase_3_hr"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="+ 3 hr"
+            style="@style/btn_quick_create"
+            />
+
+        <Button
+            android:id="@+id/set_1_pm"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="1:00 pm"
+            style="@style/btn_quick_create"
+            />
+    </TableRow>
+
+    <TableRow
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        >
+
+        <Button
+            android:id="@+id/decrease_1_dy"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="- 1 dy"
+            style="@style/btn_quick_create"
+            />
+
+        <Button
+            android:id="@+id/increase_1_dy"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="+ 1 dy"
+            style="@style/btn_quick_create"
+            />
+
+        <Button
+            android:id="@+id/set_11_pm"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="11:00 pm"
+            style="@style/btn_quick_create"
+            />
+    </TableRow>
+
+    <TableRow
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        >
+
+        <ImageView
+            android:id="@+id/btn_task_cancel"
+            android:src="@drawable/ic_cancel"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_span="1"
+            />
+
+        <ImageView
+            android:id="@+id/btn_task_schedule"
+            android:src="@drawable/ic_scheduled"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_span="1"
+            />
+
+        <ImageView
+            android:id="@+id/btn_task_done"
+            android:src="@drawable/ic_done"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_span="1"
+            />
+
+    </TableRow>
+</TableLayout><!-- From: file:/Users/kaush/code/android/_kg/pkr/app/src/main/res/layout/fragment_task_creator.xml -->

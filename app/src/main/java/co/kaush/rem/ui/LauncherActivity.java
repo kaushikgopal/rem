@@ -13,46 +13,46 @@ import java.util.Arrays;
 import java.util.List;
 
 public class LauncherActivity
-    extends BaseActivity {
+      extends BaseActivity {
 
-  @Override
-  public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-    if (savedInstanceState == null) {
-      getSupportFragmentManager().beginTransaction()
-          .add(android.R.id.content, new TaskListFragment())
-          .commit();
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                  .replace(android.R.id.content, new TaskListFragment())
+                  .commit();
+        }
     }
-  }
 
-  @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
-    MenuInflater inflater = getMenuInflater();
-    inflater.inflate(R.menu.task_list_menu, menu);
-    return true;
-  }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.task_list_menu, menu);
+        return true;
+    }
 
-  @Override
-  public boolean onPrepareOptionsMenu(Menu menu) {
-    _changeColorOfAddButton((MenuBuilder) menu);
-    return super.onPrepareOptionsMenu(menu);
-  }
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        _changeColorOfAddButton((MenuBuilder) menu);
+        return super.onPrepareOptionsMenu(menu);
+    }
 
-  @Override
-  protected List<Object> getActivitySpecificModules() {
-    return Arrays.<Object>asList(new LauncherModule());
-  }
+    @Override
+    protected List<Object> getActivitySpecificModules() {
+        return Arrays.<Object>asList(new LauncherModule());
+    }
 
-  // -----------------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------
 
-  private void _changeColorOfAddButton(MenuBuilder menu) {
-    Drawable add = menu.getActionItems().get(0).getIcon();
-    add.setColorFilter(ColorFilterCache.getWhiteColorFilter());
-  }
+    private void _changeColorOfAddButton(MenuBuilder menu) {
+        Drawable add = menu.getActionItems().get(0).getIcon();
+        add.setColorFilter(ColorFilterCache.getWhiteColorFilter());
+    }
 
-  @Module(injects = { LauncherActivity.class, TaskListFragment.class },
-      addsTo = RemModule.class,
-      library = true)
-  public class LauncherModule {}
+    @Module(injects = { LauncherActivity.class, TaskListFragment.class, TaskCreateFragment.class },
+          addsTo = RemModule.class,
+          library = true)
+    public class LauncherModule {}
 }

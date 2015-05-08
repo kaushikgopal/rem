@@ -1,3 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <style name="btn_quick_create">
+        <item name="android:minHeight">0dp</item>
+        <item name="android:layout_span">1</item>
+        <item name="android:textColor">@color/primary_background</item>
+    </style>
 </resources>
