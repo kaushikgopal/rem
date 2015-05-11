@@ -2,12 +2,21 @@ package co.kaush.rem.util;
 
 import hirondelle.date4j.DateTime;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
+import org.jetbrains.annotations.NotNull;
 
 public class CoreDateUtils {
 
-    // ---------------------------------------------------------------------------------------
-    // Utility methods
+    private Locale _locale;
+
+    public CoreDateUtils() {
+        _locale = Locale.getDefault();
+    }
+
+    public CoreDateUtils(Locale locale) {
+        _locale = locale;
+    }
 
     /**
      * This is a non-cached version of UTC (depending on the timezone of the user)
@@ -15,15 +24,26 @@ public class CoreDateUtils {
      *
      * @return DateTimeZone
      */
-    public static TimeZone getUtcTimeZone() {
+    public TimeZone getUtcTimeZone() {
         return TimeZone.getTimeZone("UTC");
     }
 
-    public static Date getDateFor(DateTime dt) {
+    public DateTime now() {
+        return DateTime.now(TimeZone.getDefault());
+    }
+
+    public String format(@NotNull String pattern, @NotNull DateTime dateTime) {
+        return dateTime.format(pattern, _locale);
+    }
+
+    // -----------------------------------------------------------------------------------
+    //  java.util.Date < -- > date4j.DateTime
+
+    public Date getDateFor(DateTime dt) {
         return new Date(dt.getMilliseconds(getUtcTimeZone()));
     }
 
-    public static DateTime getDateTimeFor(Date dt) {
+    public DateTime getDateTimeFor(Date dt) {
         return DateTime.forInstant(dt.getTime(), getUtcTimeZone());
     }
 
