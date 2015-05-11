@@ -2,13 +2,13 @@ package co.kaush.rem.ui;
 
 public class TaskCreateController {
 
-    private ITalkToTaskCreate _talkToTaskCreate;
+    private ITalkToTaskCreateScreen _talkToTaskCreate;
 
-    public TaskCreateController(ITalkToTaskCreate talkToTaskList) {
+    public TaskCreateController(ITalkToTaskCreateScreen talkToTaskList) {
         _talkToTaskCreate = talkToTaskList;
     }
 
-    public interface ITalkToTaskCreate {
+    public interface ITalkToTaskCreateScreen {
 
     }
 }

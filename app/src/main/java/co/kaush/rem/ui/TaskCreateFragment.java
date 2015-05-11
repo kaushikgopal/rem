@@ -9,9 +9,11 @@ import co.kaush.rem.R;
 
 public class TaskCreateFragment
       extends BaseFragment
-      implements TaskCreateController.ITalkToTaskCreate {
+      implements TaskCreateController.ITalkToTaskCreateScreen {
 
     public static final String FRAG_TAG = "co.kaush.rem.ui.TaskCreateFragment";
+
+    private TaskCreateController _taskCreateController;
 
     @Override
     public View onCreateView(LayoutInflater inflater,

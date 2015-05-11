@@ -16,7 +16,7 @@ import co.kaush.rem.util.ColorFilterCache;
 
 public class TaskListFragment
       extends BaseFragment
-      implements TaskListController.ITalkToTaskList {
+      implements TaskListController.ITalkToTaskListScreen {
 
     @InjectView(R.id.toolbar) Toolbar toolbar;
     private TaskListController _taskListController;

@@ -2,9 +2,9 @@ package co.kaush.rem.ui;
 
 public class TaskListController {
 
-    private ITalkToTaskList _talkToTaskList;
+    private ITalkToTaskListScreen _talkToTaskList;
 
-    public TaskListController(ITalkToTaskList talkToTaskList) {
+    public TaskListController(ITalkToTaskListScreen talkToTaskList) {
         _talkToTaskList = talkToTaskList;
     }
 
@@ -12,7 +12,7 @@ public class TaskListController {
         _talkToTaskList.moveToCreateNewTask();
     }
 
-    public interface ITalkToTaskList {
+    public interface ITalkToTaskListScreen {
         void moveToCreateNewTask();
     }
 }
