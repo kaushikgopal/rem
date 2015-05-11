@@ -10,15 +10,15 @@ import javax.inject.Singleton;
 @Module(complete = false, library = true)
 public final class DbModule {
 
-  @Provides
-  @Singleton
-  SQLiteOpenHelper provideOpenHelper(MyApp app) {
-    return new DbOpenHelper(app);
-  }
+    @Provides
+    @Singleton
+    SQLiteOpenHelper provideOpenHelper(MyApp app) {
+        return new DbOpenHelper(app);
+    }
 
-  @Provides
-  @Singleton
-  SqlBrite provideSqlBrite(SQLiteOpenHelper openHelper) {
-    return SqlBrite.create(openHelper);
-  }
+    @Provides
+    @Singleton
+    SqlBrite provideSqlBrite(SQLiteOpenHelper openHelper) {
+        return SqlBrite.create(openHelper);
+    }
 }

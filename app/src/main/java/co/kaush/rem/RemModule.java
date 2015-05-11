@@ -6,20 +6,20 @@ import dagger.Provides;
 import javax.inject.Singleton;
 
 @Module(
-    injects = { MyApp.class },
-    includes = { DbModule.class },
-    library = true)
+      injects = { MyApp.class },
+      includes = { DbModule.class },
+      library = true)
 public class RemModule {
 
-  private final MyApp _app;
+    private final MyApp _app;
 
-  RemModule(MyApp app) {
-    _app = app;
-  }
+    RemModule(MyApp app) {
+        _app = app;
+    }
 
-  @Provides
-  @Singleton
-  MyApp provideApplication() {
-    return _app;
-  }
+    @Provides
+    @Singleton
+    MyApp provideApplication() {
+        return _app;
+    }
 }

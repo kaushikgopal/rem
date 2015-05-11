@@ -8,11 +8,10 @@ import butterknife.ButterKnife;
 import co.kaush.rem.R;
 
 public class TaskCreateFragment
-    extends BaseFragment
-    implements TaskCreateController.ITalkToTaskCreate {
+      extends BaseFragment
+      implements TaskCreateController.ITalkToTaskCreate {
 
     public static final String FRAG_TAG = "co.kaush.rem.ui.TaskCreateFragment";
-
 
     @Override
     public View onCreateView(LayoutInflater inflater,

@@ -11,25 +11,33 @@
     <color name="black_1">#000000</color>
     <color name="black_1_transparent">#4D000000</color>
 
-    <color name="gray_1">#303030</color>  <!--charcoal default bg for L dark-->
+    <color name="gray_1">#303030</color>
+    <!--charcoal default bg for L dark-->
     <color name="gray_2">#8f8f8f</color>
 
     <color name="white_1">#ffffff</color>
-    <color name="white_2">#EFEFE6</color> <!--carrarra-->
+    <color name="white_2">#EFEFE6</color>
+    <!--carrarra-->
     <color name="white_3">#DDDDDD</color>
 
     <color name="brown_1">#c7b299</color>
 
-    <color name="orange_1">#E34F30</color> <!--cinnabar-->
-    <color name="orange_2">#ED7B20</color> <!--tango-->
+    <color name="orange_1">#E34F30</color>
+    <!--cinnabar-->
+    <color name="orange_2">#ED7B20</color>
+    <!--tango-->
     <color name="orange_3">#f6ab70</color>
 
-    <color name="blue_1">#0A4D6D</color> <!--regal blue-->
-    <color name="blue_2">#20546E</color> <!--chathams blue-->
+    <color name="blue_1">#0A4D6D</color>
+    <!--regal blue-->
+    <color name="blue_2">#20546E</color>
+    <!--chathams blue-->
 
     <!--unused-->
 
-    <color name="green_1">#263645</color> <!--elephant-->
-    <color name="green_2">#707C3C</color> <!--pesto-->
+    <color name="green_1">#263645</color>
+    <!--elephant-->
+    <color name="green_2">#707C3C</color>
+    <!--pesto-->
 
 </resources>

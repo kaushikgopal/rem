@@ -10,20 +10,20 @@ import timber.log.Timber;
 @Module(complete = false, library = true, overrides = true)
 public final class DebugDbModule {
 
-  @Provides
-  @Singleton
-  SqlBrite provideSqlBrite(SQLiteOpenHelper openHelper) {
-    SqlBrite db = SqlBrite.create(openHelper);
+    @Provides
+    @Singleton
+    SqlBrite provideSqlBrite(SQLiteOpenHelper openHelper) {
+        SqlBrite db = SqlBrite.create(openHelper);
 
-    db.setLogger(new SqlBrite.Logger() {
-      @Override
-      public void log(String message) {
-        Timber.tag("Database").v(message);
-      }
-    });
-    db.setLoggingEnabled(true);
+        db.setLogger(new SqlBrite.Logger() {
+            @Override
+            public void log(String message) {
+                Timber.tag("Database").v(message);
+            }
+        });
+        db.setLoggingEnabled(true);
 
-    return db;
-  }
+        return db;
+    }
 }
 
