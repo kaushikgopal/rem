@@ -53,6 +53,7 @@
             android:layout_span="3"
             tools:text="17 Dec 9:00 AM in 3 hours"
             />
+
     </TableRow>
 
     <TableRow
