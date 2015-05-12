@@ -18,7 +18,7 @@ public class TaskCreateController {
 
         if (initialTaskId == NEW_TASK) {
             _talkToTaskCreate.updateDueDateDisplay(_coreDateUtils.format(DUE_DATE_FORMAT,
-                  _coreDateUtils.now()), "");
+                  _coreDateUtils.now()), "now");
         }
     }
 
