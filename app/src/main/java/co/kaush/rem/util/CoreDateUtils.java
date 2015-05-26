@@ -4,6 +4,7 @@ import hirondelle.date4j.DateTime;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
 import org.jetbrains.annotations.NotNull;
 
 public class CoreDateUtils {
@@ -36,15 +37,18 @@ public class CoreDateUtils {
         return dateTime.format(pattern, _locale);
     }
 
-    // -----------------------------------------------------------------------------------
-    //  java.util.Date < -- > date4j.DateTime
-
     public Date getDateFor(DateTime dt) {
         return new Date(dt.getMilliseconds(getUtcTimeZone()));
     }
+
+    // -----------------------------------------------------------------------------------
+    //  java.util.Date < -- > date4j.DateTime
 
     public DateTime getDateTimeFor(Date dt) {
         return DateTime.forInstant(dt.getTime(), getUtcTimeZone());
     }
 
+    public enum IncreaseOrDecrease {
+        PLUS, MINUS
+    }
 }

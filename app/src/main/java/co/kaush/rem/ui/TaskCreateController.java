@@ -1,6 +1,12 @@
 package co.kaush.rem.ui;
 
 import co.kaush.rem.util.CoreDateUtils;
+import co.kaush.rem.util.CoreDateUtils.IncreaseOrDecrease;
+import hirondelle.date4j.DateTime;
+import hirondelle.date4j.DateTime.DayOverflow;
+import java.util.concurrent.TimeUnit;
+
+import static co.kaush.rem.util.CoreDateUtils.IncreaseOrDecrease.MINUS;
 
 public class TaskCreateController {
 
@@ -9,6 +15,7 @@ public class TaskCreateController {
 
     private ITalkToTaskCreateScreen _talkToTaskCreate;
     private CoreDateUtils _coreDateUtils;
+    private DateTime _dueDateTime;
 
     public TaskCreateController(ITalkToTaskCreateScreen talkToTaskList,
                                 CoreDateUtils coreDateUtils,
@@ -17,9 +24,38 @@ public class TaskCreateController {
         _coreDateUtils = coreDateUtils;
 
         if (initialTaskId == NEW_TASK) {
-            _talkToTaskCreate.updateDueDateDisplay(_coreDateUtils.format(DUE_DATE_FORMAT,
-                  _coreDateUtils.now()), "now");
+            _talkToTaskCreate.updateDueDateDisplay(//
+                  _coreDateUtils.format(DUE_DATE_FORMAT, _coreDateUtils.now()), "now");
         }
+    }
+
+    public void changeDueDateBy(IncreaseOrDecrease increaseOrDecrease,
+                                TimeUnit timeUnit,
+                                int quantity) {
+
+        DayOverflow overflow = DayOverflow.LastDay;
+        int dys = 0, hrs = 0, mts = 0;
+
+        switch (timeUnit) {
+            case DAYS:
+                dys += quantity;
+                break;
+            case MINUTES:
+                mts += quantity;
+                break;
+            case HOURS:
+                hrs += quantity;
+        }
+
+        if (increaseOrDecrease == MINUS) {
+            _dueDateTime = _coreDateUtils.now().minus(0, 0, dys, hrs, mts, 0, 0, overflow);
+        } else {
+            _dueDateTime = _coreDateUtils.now().plus(0, 0, dys, hrs, mts, 0, 0, overflow);
+        }
+
+
+        _talkToTaskCreate.updateDueDateDisplay(//
+              _coreDateUtils.format(DUE_DATE_FORMAT, _dueDateTime), "");
     }
 
     // -----------------------------------------------------------------------------------

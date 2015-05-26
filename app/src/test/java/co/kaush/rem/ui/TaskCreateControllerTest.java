@@ -2,28 +2,44 @@ package co.kaush.rem.ui;
 
 import co.kaush.rem.util.CoreDateUtils;
 import hirondelle.date4j.DateTime;
+import java.util.concurrent.TimeUnit;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.mockito.verification.VerificationMode;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
+import static co.kaush.rem.util.CoreDateUtils.IncreaseOrDecrease.MINUS;
+import static co.kaush.rem.util.CoreDateUtils.IncreaseOrDecrease.PLUS;
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class TaskCreateControllerTest {
 
-    private TaskCreateController _controller;
     private static TaskCreateController.ITalkToTaskCreateScreen _talkToTCSMock;
     private static CoreDateUtils _coreDateUtils;
+    private TaskCreateController _controller;
 
     @BeforeClass
-    public static void setup1Time() {
+    public static void setupOnceBeforeAllTests() {
         _coreDateUtils = spy(new CoreDateUtils());
-        when(_coreDateUtils.now()).thenReturn(new DateTime(1979, 4, 3, 7, 12, 20, 0));
+        when(_coreDateUtils.now()).thenReturn(new DateTime(1979,
+              4,
+              3,
+              7,
+              12,
+              20,
+              0));
+        // "Apr 3 [Tue] 7:12 AM"
+    }
+
+    @Before
+    public void setUpBeforeEveryTest() throws Exception {
         _talkToTCSMock = mock(TaskCreateController.ITalkToTaskCreateScreen.class);
+
     }
 
     @Test
@@ -34,4 +50,32 @@ public class TaskCreateControllerTest {
 
         verify(_talkToTCSMock).updateDueDateDisplay("Apr 3 [Tue] 7:12 AM", "now");
     }
+
+    @Test
+    public void IncreaseBy_1HR() {
+        _controller = new TaskCreateController(_talkToTCSMock,
+              _coreDateUtils,
+              TaskCreateController.NEW_TASK);
+        _controller.changeDueDateBy(PLUS, TimeUnit.HOURS, 1);
+        verify(_talkToTCSMock, atLeastOnce()).updateDueDateDisplay("Apr 3 [Tue] 8:12 AM", "");
+    }
+
+    @Test
+    public void IncreaseBy_5HRS() {
+        _controller = new TaskCreateController(_talkToTCSMock,
+              _coreDateUtils,
+              TaskCreateController.NEW_TASK);
+        _controller.changeDueDateBy(PLUS, TimeUnit.HOURS, 5);
+        verify(_talkToTCSMock, atLeastOnce()).updateDueDateDisplay("Apr 3 [Tue] 12:12 PM", "");
+    }
+
+    @Test
+    public void DecreaseBy_1HR() {
+        _controller = new TaskCreateController(_talkToTCSMock,
+              _coreDateUtils,
+              TaskCreateController.NEW_TASK);
+        _controller.changeDueDateBy(MINUS, TimeUnit.HOURS, 1);
+        verify(_talkToTCSMock, atLeastOnce()).updateDueDateDisplay("Apr 3 [Tue] 6:12 AM", "");
+    }
+
 }
