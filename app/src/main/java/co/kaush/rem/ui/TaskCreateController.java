@@ -15,7 +15,7 @@ public class TaskCreateController {
 
     private ITalkToTaskCreateScreen _talkToTaskCreate;
     private CoreDateUtils _coreDateUtils;
-    private DateTime _dueDateTime;
+    private DateTime _dueDateTime = null;
 
     public TaskCreateController(ITalkToTaskCreateScreen talkToTaskList,
                                 CoreDateUtils coreDateUtils,
@@ -47,12 +47,15 @@ public class TaskCreateController {
                 hrs += quantity;
         }
 
-        if (increaseOrDecrease == MINUS) {
-            _dueDateTime = _coreDateUtils.now().minus(0, 0, dys, hrs, mts, 0, 0, overflow);
-        } else {
-            _dueDateTime = _coreDateUtils.now().plus(0, 0, dys, hrs, mts, 0, 0, overflow);
+        if (_dueDateTime == null) {
+            _dueDateTime = _coreDateUtils.now();
         }
 
+        if (increaseOrDecrease == MINUS) {
+            _dueDateTime = _dueDateTime.minus(0, 0, dys, hrs, mts, 0, 0, overflow);
+        } else {
+            _dueDateTime = _dueDateTime.plus(0, 0, dys, hrs, mts, 0, 0, overflow);
+        }
 
         _talkToTaskCreate.updateDueDateDisplay(//
               _coreDateUtils.format(DUE_DATE_FORMAT, _dueDateTime), "");

@@ -78,4 +78,15 @@ public class TaskCreateControllerTest {
         verify(_talkToTCSMock, atLeastOnce()).updateDueDateDisplay("Apr 3 [Tue] 6:12 AM", "");
     }
 
+    @Test
+    public void SubsequentChanges_3HRS_Then1HR_Decrease() {
+        _controller = new TaskCreateController(_talkToTCSMock,
+              _coreDateUtils,
+              TaskCreateController.NEW_TASK);
+
+        _controller.changeDueDateBy(PLUS, TimeUnit.HOURS, 3);
+        _controller.changeDueDateBy(MINUS, TimeUnit.HOURS, 1);
+        verify(_talkToTCSMock, atLeastOnce()).updateDueDateDisplay("Apr 3 [Tue] 9:12 AM", "");
+    }
+
 }
