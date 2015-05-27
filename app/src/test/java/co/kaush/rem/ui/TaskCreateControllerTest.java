@@ -54,7 +54,6 @@ public class TaskCreateControllerTest {
               "in 1 Hr");
     }
 
-    @Ignore
     @Test
     public void IncreaseBy_5HRS() {
         _controller = new TaskCreateController(_talkToTCSMock,
@@ -65,18 +64,16 @@ public class TaskCreateControllerTest {
               "in 5 Hrs");
     }
 
-    @Ignore
     @Test
     public void DecreaseBy_1HR() {
         _controller = new TaskCreateController(_talkToTCSMock,
               _coreDateUtils,
               TaskCreateController.NEW_TASK);
         _controller.changeDueDateBy(MINUS, TimeUnit.HOURS, 1);
-        verify(_talkToTCSMock, atLeastOnce()).updateDueDateDisplay("Apr 3 [Tue] 6:12 AM", "");
-        //verify(_talkToTCSMock, atLeastOnce()).updateDueDateDisplay("Apr 3 [Tue] 6:12 AM", "1 Hr before");
+        verify(_talkToTCSMock, atLeastOnce()).updateDueDateDisplay("Apr 3 [Tue] 6:12 AM",
+              "1 Hr before");
     }
 
-    @Ignore
     @Test
     public void SubsequentChanges_3HRS_Then1HR_Decrease() {
         _controller = new TaskCreateController(_talkToTCSMock,
@@ -85,8 +82,8 @@ public class TaskCreateControllerTest {
 
         _controller.changeDueDateBy(PLUS, TimeUnit.HOURS, 3);
         _controller.changeDueDateBy(MINUS, TimeUnit.HOURS, 1);
-        verify(_talkToTCSMock, atLeastOnce()).updateDueDateDisplay("Apr 3 [Tue] 9:12 AM", "");
-        //verify(_talkToTCSMock, atLeastOnce()).updateDueDateDisplay("Apr 3 [Tue] 9:12 AM", "in 2 Hrs");
+        verify(_talkToTCSMock, atLeastOnce()).updateDueDateDisplay("Apr 3 [Tue] 9:12 AM",
+              "in 2 Hrs");
     }
 
 }
