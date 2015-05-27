@@ -62,9 +62,15 @@ public class TaskCreateControllerTest {
 
     @Test
     public void DecreaseBy_1HR() {
+        ArgumentCaptor<String> dueDateTextCaptor = ArgumentCaptor.forClass(String.class);
+        ArgumentCaptor<String> dueDateDiffTextCaptor = ArgumentCaptor.forClass(String.class);
+
         _controller.changeDueDateBy(MINUS, TimeUnit.HOURS, 1);
-        verify(_talkToTCSMock, atLeastOnce()).updateDueDateDisplay("Apr 3 [Tue] 6:12 AM",
-              "1 Hr before");
+
+        verify(_talkToTCSMock, times(2)).updateDueDateDisplay(//
+              dueDateTextCaptor.capture(), dueDateDiffTextCaptor.capture());
+        assertThat(dueDateTextCaptor.getValue()).isEqualToIgnoringCase("Apr 3 [Tue] 6:12 AM");
+        assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("1 Hr before");
     }
 
     @Test
