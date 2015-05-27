@@ -34,7 +34,6 @@ public class TaskCreateControllerTest {
 
     @Before
     public void setUpBeforeEveryTest() throws Exception {
-
         _talkToTCSMock = mock(TaskCreateController.ITalkToTaskCreateScreen.class);
 
         _controller = new TaskCreateController(_talkToTCSMock,
@@ -79,7 +78,23 @@ public class TaskCreateControllerTest {
         verify(_talkToTCSMock, times(3)).updateDueDateDisplay(//
               dueDateTextCaptor.capture(), dueDateDiffTextCaptor.capture());
 
+        // argument captor by default checks last value
         assertThat(dueDateTextCaptor.getValue()).isEqualToIgnoringCase("Apr 3 [Tue] 9:12 AM");
         assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("in 2 Hrs");
+    }
+
+    @Test
+    public void DueDateDiffText_ShouldShowDaysOnly_IfDueDateIsWithin7Days() {
+        ArgumentCaptor<String> dueDateTextCaptor = ArgumentCaptor.forClass(String.class);
+        ArgumentCaptor<String> dueDateDiffTextCaptor = ArgumentCaptor.forClass(String.class);
+
+        _controller.changeDueDateBy(PLUS, TimeUnit.DAYS, 6);
+        _controller.changeDueDateBy(MINUS, TimeUnit.HOURS, 1);
+
+        verify(_talkToTCSMock, times(3)).updateDueDateDisplay(//
+              dueDateTextCaptor.capture(), dueDateDiffTextCaptor.capture());
+
+        assertThat(dueDateTextCaptor.getValue()).isEqualToIgnoringCase("Apr 9 [Mon] 6:12 AM");
+        assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("in 6 Dys");
     }
 }

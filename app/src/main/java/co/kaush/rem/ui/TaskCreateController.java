@@ -64,7 +64,16 @@ public class TaskCreateController {
     // -----------------------------------------------------------------------------------
 
     private String _getDueDateDiffText() {
-        int diffValue = _dueDateTime.getHour() - _coreDateUtils.now().getHour();
+        int diffValue = _dueDateTime.getDay() - _coreDateUtils.now().getDay();
+        if (diffValue != 0) {
+            if (diffValue > 0) {
+                return String.format("in %d Dy%s", Math.abs(diffValue), (diffValue > 1) ? "s" : "");
+            } else {
+                return String.format("%d Dy%s before", Math.abs(diffValue), (diffValue > 1) ? "s" : "");
+            }
+        }
+
+        diffValue = _dueDateTime.getHour() - _coreDateUtils.now().getHour();
 
         if (diffValue > 0) {
             return String.format("in %d Hr%s", Math.abs(diffValue), (diffValue > 1) ? "s" : "");
