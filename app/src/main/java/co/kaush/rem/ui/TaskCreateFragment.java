@@ -10,9 +10,16 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 import co.kaush.rem.R;
 import co.kaush.rem.util.CoreDateUtils;
 import javax.inject.Inject;
+
+import static co.kaush.rem.util.CoreDateUtils.IncreaseOrDecrease.MINUS;
+import static co.kaush.rem.util.CoreDateUtils.IncreaseOrDecrease.PLUS;
+import static java.util.concurrent.TimeUnit.DAYS;
+import static java.util.concurrent.TimeUnit.HOURS;
+import static java.util.concurrent.TimeUnit.MINUTES;
 
 public class TaskCreateFragment
       extends BaseFragment
@@ -42,6 +49,66 @@ public class TaskCreateFragment
         ButterKnife.inject(this, layout);
         return layout;
     }
+
+    // -----------------------------------------------------------------------------------
+    // Button click listeners
+    // TODO: DRY this code up
+
+    @OnClick(R.id.increase_hr)
+    public void onIncreaseBy1HrClicked() {
+        _taskCreateController.changeDueDateBy(PLUS, HOURS, 1);
+    }
+
+    @OnClick(R.id.decrease_hr)
+    public void onDecreaseBy1HrClicked() {
+        _taskCreateController.changeDueDateBy(MINUS, HOURS, 1);
+    }
+
+    @OnClick(R.id.increase_3_hr)
+    public void onIncreaseBy3HrClicked() {
+        _taskCreateController.changeDueDateBy(PLUS, HOURS, 3);
+    }
+
+    @OnClick(R.id.decrease_3_hr)
+    public void onDecreaseBy3HrClicked() {
+        _taskCreateController.changeDueDateBy(MINUS, HOURS, 3);
+    }
+
+    @OnClick(R.id.increase_10_mt)
+    public void increase_10_Mt() {
+        _taskCreateController.changeDueDateBy(PLUS, MINUTES, 10);
+    }
+
+    @OnClick(R.id.decrease_10_mt)
+    public void decrease_10_Mt() {
+        _taskCreateController.changeDueDateBy(MINUS, MINUTES, 10);
+    }
+
+    @OnClick(R.id.increase_1_dy)
+    public void increase_1_Dy() {
+        _taskCreateController.changeDueDateBy(PLUS, DAYS, 1);
+    }
+
+    @OnClick(R.id.decrease_1_dy)
+    public void decrease_1_Dy() {
+        _taskCreateController.changeDueDateBy(MINUS, DAYS, 1);
+    }
+
+    /*@OnClick(R.id.set_8_am)
+    public void set_8_am() {
+    }
+
+    @OnClick(R.id.set_1030_am)
+    public void set_10_30_am() {
+    }
+
+    @OnClick(R.id.set_1_pm)
+    public void set_1_pm() {
+    }
+
+    @OnClick(R.id.set_11_pm)
+    public void set_11_pm() {
+    }*/
 
     // -----------------------------------------------------------------------------------
     // interface implementations

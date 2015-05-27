@@ -58,7 +58,14 @@ public class TaskCreateController {
         }
 
         _talkToTaskCreate.updateDueDateDisplay(//
-              _coreDateUtils.format(DUE_DATE_FORMAT, _dueDateTime), "");
+              _coreDateUtils.format(DUE_DATE_FORMAT, _dueDateTime), _getDueDateDiffText());
+    }
+
+    // -----------------------------------------------------------------------------------
+
+    private String _getDueDateDiffText() {
+        int diffValue = _dueDateTime.getHour() - _coreDateUtils.now().getHour();
+        return String.format("in %d Hr%s", Math.abs(diffValue), (diffValue > 1) ? "s" : "");
     }
 
     // -----------------------------------------------------------------------------------
