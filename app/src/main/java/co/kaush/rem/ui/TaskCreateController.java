@@ -86,7 +86,11 @@ public class TaskCreateController {
 
         // Check if max diff is in Hours
         diffValue = _dueDateTime.getHour() - _coreDateUtils.now().getHour();
-        return _getDiffText("Hr", diffValue);
+        if (diffValue != 0) {
+            return _getDiffText("Hr", diffValue);
+        }
+
+        return "";
     }
 
     private String _getDiffText(String unit, int diffValue) {

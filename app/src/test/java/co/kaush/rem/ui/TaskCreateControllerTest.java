@@ -113,6 +113,17 @@ public class TaskCreateControllerTest {
         assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("in 3 Weeks");
     }
 
+
+    @Test
+    public void DueDateDiffText_ShouldShowNow_IfDueNow() {
+        _controller.changeDueDateBy(PLUS, TimeUnit.MINUTES, 0);
+
+        verify(_talkToTCSMock, times(2)).updateDueDateDisplay(anyString(),
+              dueDateDiffTextCaptor.capture());
+
+        assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("now");
+    }
+
     @Test
     public void DueDateDiffText_ShouldShowMonthsOnly_IfDueDateIsGreaterThan1Month() {
         _controller.changeDueDateBy(PLUS, TimeUnit.DAYS, 90);
