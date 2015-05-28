@@ -70,41 +70,55 @@ public class TaskCreateController {
         // Check if max diff is in Months
         diffValue = _dueDateTime.getMonth() - now.getMonth();
         if (Math.abs(diffValue) > 1) {
-            return _getDiffText("Mth", diffValue);
+            return _getPluralizedDiffText("Mth", diffValue);
         }
 
         // Check if max diff is in Weeks
         diffValue = _dueDateTime.getWeekIndex() - now.getWeekIndex();
         if (Math.abs(diffValue) > 1) {
-            return _getDiffText("Week", diffValue);
+            return _getPluralizedDiffText("Week", diffValue);
         }
 
         // Check if max diff is in Days
         diffValue = _dueDateTime.getDayOfYear() - now.getDayOfYear();
         if (Math.abs(diffValue) > 1) {
-            return _getDiffText("Dy", diffValue);
+            return _getPluralizedDiffText("Dy", diffValue);
         }
 
         // Check if max diff is in Hours
         diffValue = _dueDateTime.getHour() - now.getHour();
         if (diffValue != 0) {
-            return _getDiffText("Hr", diffValue);
+            if (_dueDateTime.isSameDayAs(now)) {
+                return _getPluralizedDiffText("Hr", diffValue);
+            } else {
+
+                if (_dueDateTime.isInTheFuture(_coreDateUtils.getUtcTimeZone())) {
+                    return _getPluralizedDiffText("Hr", diffValue + 24);
+                } else {
+                    return _getPluralizedDiffText("Hr", diffValue - 24);
+                }
+            }
         }
 
         return "now";
     }
 
-    private String _getDiffText(String unit, int diffValue) {
+    /**
+     * 1. Takes into account if the text needs to be pluralized
+     * 2. if due date is after now then prepends "in X Hr(s)" else "X Hr(s) before"
+     *
+     * @param diffValue real number of hours between due date and now (-v if due is before now)
+     */
+    private String _getPluralizedDiffText(String unit, int diffValue) {
+        boolean pluralize = Math.abs(diffValue) > 1;
+
         if (diffValue > 0) {
-            return String.format("in %d %s%s",
-                  Math.abs(diffValue),
-                  unit,
-                  (diffValue > 1) ? "s" : "");
+            return String.format("in %d %s%s", Math.abs(diffValue), unit, (pluralize) ? "s" : "");
         } else {
             return String.format("%d %s%s before",
                   Math.abs(diffValue),
                   unit,
-                  (diffValue > 1) ? "s" : "");
+                  (pluralize) ? "s" : "");
         }
     }
 
