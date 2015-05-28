@@ -30,8 +30,8 @@ public class TaskCreateControllerTest {
 
     @Before
     public void setUpBeforeEveryTest() throws Exception {
-        when(_coreDateUtils.now()).thenReturn(new DateTime(1979, 4, 3, 7, 12, 20, 0));
-        // today = "Apr 3 [Tue] 7:12 AM"
+        when(_coreDateUtils.now()).thenReturn(new DateTime(1979, 4, 3, 19, 12, 20, 0));
+        // today = "Apr 3 [Tue] 7:12 PM"
 
         _talkToTCSMock = mock(TaskCreateController.ITalkToTaskCreateScreen.class);
         _controller = new TaskCreateController(_talkToTCSMock,
@@ -41,26 +41,26 @@ public class TaskCreateControllerTest {
 
     @Test
     public void DueDateDiffText_ShouldBe_CurrentInstantDateTime_AndDiffTextNow_WhenNewTaskIdPassed() {
-        verify(_talkToTCSMock).updateDueDateDisplay("Apr 3 [Tue] 7:12 AM", "now");
+        verify(_talkToTCSMock).updateDueDateDisplay("Apr 3 [Tue] 7:12 PM", "now");
     }
 
     @Test
     public void IncreaseBy_1HR() {
         _controller.changeDueDateBy(PLUS, TimeUnit.HOURS, 1);
 
-        verify(_talkToTCSMock, atLeastOnce()).updateDueDateDisplay("Apr 3 [Tue] 8:12 AM",
+        verify(_talkToTCSMock, atLeastOnce()).updateDueDateDisplay("Apr 3 [Tue] 8:12 PM",
               "in 1 Hr");
     }
 
     @Test
-    public void IncreaseBy_5HRS() {
-        _controller.changeDueDateBy(PLUS, TimeUnit.HOURS, 5);
+    public void IncreaseBy_6HRS() {
+        _controller.changeDueDateBy(PLUS, TimeUnit.HOURS, 6);
 
         verify(_talkToTCSMock, times(2)).updateDueDateDisplay(//
               dueDateTextCaptor.capture(), dueDateDiffTextCaptor.capture());
 
-        assertThat(dueDateTextCaptor.getValue()).isEqualToIgnoringCase("Apr 3 [Tue] 12:12 PM");
-        assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("in 5 Hrs");
+        assertThat(dueDateTextCaptor.getValue()).isEqualToIgnoringCase("Apr 4 [Wed] 1:12 AM");
+        assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("in 6 Hrs");
     }
 
     @Test
@@ -71,7 +71,7 @@ public class TaskCreateControllerTest {
               dueDateTextCaptor.capture(), dueDateDiffTextCaptor.capture());
 
         // argument captor by default checks last value
-        assertThat(dueDateTextCaptor.getValue()).isEqualToIgnoringCase("Apr 3 [Tue] 6:12 AM");
+        assertThat(dueDateTextCaptor.getValue()).isEqualToIgnoringCase("Apr 3 [Tue] 6:12 PM");
         assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("1 Hr before");
     }
 
@@ -108,7 +108,7 @@ public class TaskCreateControllerTest {
         verify(_talkToTCSMock, times(3)).updateDueDateDisplay(//
               dueDateTextCaptor.capture(), dueDateDiffTextCaptor.capture());
 
-        assertThat(dueDateTextCaptor.getValue()).isEqualToIgnoringCase("Apr 3 [Tue] 9:12 AM");
+        assertThat(dueDateTextCaptor.getValue()).isEqualToIgnoringCase("Apr 3 [Tue] 9:12 PM");
         assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("in 2 Hrs");
     }
 
