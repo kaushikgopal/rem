@@ -4,7 +4,6 @@ import co.kaush.rem.util.CoreDateUtils;
 import hirondelle.date4j.DateTime;
 import java.util.concurrent.TimeUnit;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 
@@ -75,6 +74,19 @@ public class TaskCreateControllerTest {
         assertThat(dueDateTextCaptor.getValue()).isEqualToIgnoringCase("Apr 3 [Tue] 6:12 AM");
         assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("1 Hr before");
     }
+
+    @Test
+    public void DecreaseBy_20HRs() {
+        _controller.changeDueDateBy(MINUS, TimeUnit.HOURS, 20);
+
+        verify(_talkToTCSMock, times(2)).updateDueDateDisplay(anyString(),
+              dueDateDiffTextCaptor.capture());
+
+        assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("20 Hrs before");
+    }
+
+
+
 
     @Test
     public void MultipleChanges_3HRS_Increase_Then1HR_Decrease() {

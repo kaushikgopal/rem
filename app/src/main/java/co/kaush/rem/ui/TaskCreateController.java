@@ -65,27 +65,28 @@ public class TaskCreateController {
 
     private String _getDueDateDiffText() {
         int diffValue;
+        DateTime now = _coreDateUtils.now();
 
         // Check if max diff is in Months
-        diffValue = _dueDateTime.getMonth() - _coreDateUtils.now().getMonth();
+        diffValue = _dueDateTime.getMonth() - now.getMonth();
         if (Math.abs(diffValue) > 1) {
             return _getDiffText("Mth", diffValue);
         }
 
         // Check if max diff is in Weeks
-        diffValue = _dueDateTime.getWeekIndex() - _coreDateUtils.now().getWeekIndex();
+        diffValue = _dueDateTime.getWeekIndex() - now.getWeekIndex();
         if (Math.abs(diffValue) > 1) {
             return _getDiffText("Week", diffValue);
         }
 
         // Check if max diff is in Days
-        diffValue = _dueDateTime.getDayOfYear() - _coreDateUtils.now().getDayOfYear();
-        if (diffValue != 0) {
+        diffValue = _dueDateTime.getDayOfYear() - now.getDayOfYear();
+        if (Math.abs(diffValue) > 1) {
             return _getDiffText("Dy", diffValue);
         }
 
         // Check if max diff is in Hours
-        diffValue = _dueDateTime.getHour() - _coreDateUtils.now().getHour();
+        diffValue = _dueDateTime.getHour() - now.getHour();
         if (diffValue != 0) {
             return _getDiffText("Hr", diffValue);
         }
