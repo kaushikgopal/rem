@@ -11,6 +11,7 @@ import org.mockito.ArgumentCaptor;
 import static co.kaush.rem.util.CoreDateUtils.IncreaseOrDecrease.MINUS;
 import static co.kaush.rem.util.CoreDateUtils.IncreaseOrDecrease.PLUS;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -96,10 +97,30 @@ public class TaskCreateControllerTest {
         _controller.changeDueDateBy(PLUS, TimeUnit.DAYS, 6);
         _controller.changeDueDateBy(MINUS, TimeUnit.HOURS, 1);
 
-        verify(_talkToTCSMock, times(3)).updateDueDateDisplay(//
-              dueDateTextCaptor.capture(), dueDateDiffTextCaptor.capture());
+        verify(_talkToTCSMock, times(3)).updateDueDateDisplay(anyString(),
+              dueDateDiffTextCaptor.capture());
 
-        assertThat(dueDateTextCaptor.getValue()).isEqualToIgnoringCase("Apr 9 [Mon] 6:12 AM");
         assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("in 6 Dys");
     }
+
+    @Test
+    public void DueDateDiffText_ShouldShowWeeksOnly_IfDueDateMaxDiffIsInMonths() {
+        _controller.changeDueDateBy(PLUS, TimeUnit.DAYS, 25);
+
+        verify(_talkToTCSMock, times(2)).updateDueDateDisplay(anyString(),
+              dueDateDiffTextCaptor.capture());
+
+        assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("in 3 Weeks");
+    }
+
+    @Test
+    public void DueDateDiffText_ShouldShowMonthsOnly_IfDueDateIsGreaterThan1Month() {
+        _controller.changeDueDateBy(PLUS, TimeUnit.DAYS, 90);
+
+        verify(_talkToTCSMock, times(2)).updateDueDateDisplay(anyString(),
+              dueDateDiffTextCaptor.capture());
+
+        assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("in 3 Mths");
+    }
+
 }
