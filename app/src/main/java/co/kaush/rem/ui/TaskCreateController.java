@@ -72,14 +72,14 @@ public class TaskCreateController {
             return _getDiffText("Mth", diffValue);
         }
 
-         // Check if max diff is in Weeks
+        // Check if max diff is in Weeks
         diffValue = _dueDateTime.getWeekIndex() - _coreDateUtils.now().getWeekIndex();
         if (Math.abs(diffValue) > 1) {
-                return _getDiffText("Week", diffValue);
+            return _getDiffText("Week", diffValue);
         }
 
         // Check if max diff is in Days
-        diffValue = _dueDateTime.getDay() - _coreDateUtils.now().getDay();
+        diffValue = _dueDateTime.getDayOfYear() - _coreDateUtils.now().getDayOfYear();
         if (diffValue != 0) {
             return _getDiffText("Dy", diffValue);
         }
