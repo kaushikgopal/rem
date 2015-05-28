@@ -91,8 +91,7 @@ public class TaskCreateController {
             if (_dueDateTime.isSameDayAs(now)) {
                 return _getPluralizedDiffText("Hr", diffValue);
             } else {
-
-                if (_dueDateTime.isInTheFuture(_coreDateUtils.getUtcTimeZone())) {
+                if (_coreDateUtils.isAfterToday(_dueDateTime)) {
                     return _getPluralizedDiffText("Hr", diffValue + 24);
                 } else {
                     return _getPluralizedDiffText("Hr", diffValue - 24);
