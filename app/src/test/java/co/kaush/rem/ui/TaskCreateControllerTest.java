@@ -168,4 +168,23 @@ public class TaskCreateControllerTest {
         assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("now");
     }
 
+    @Test
+    public void DueDateDiffText_ShouldShow1Day_IfIncreasedBy24HrsExactly() {
+        _controller.changeDueDateBy(PLUS, TimeUnit.HOURS, 24);
+
+        verify(_talkToTCSMock, times(2)).updateDueDateDisplay(anyString(),
+              dueDateDiffTextCaptor.capture());
+
+        assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("in 1 Dy");
+    }
+
+    @Test
+    public void DueDateDiffText_ShouldShow1Day_IfDecreasedBy24HrsExactly() {
+        _controller.changeDueDateBy(MINUS, TimeUnit.HOURS, 24);
+
+        verify(_talkToTCSMock, times(2)).updateDueDateDisplay(anyString(),
+              dueDateDiffTextCaptor.capture());
+
+        assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("1 Dy before");
+    }
 }

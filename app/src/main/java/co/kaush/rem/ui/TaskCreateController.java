@@ -85,21 +85,27 @@ public class TaskCreateController {
             return _getPluralizedDiffText("Dy", diffValue);
         }
 
-        // Check if max diff is in Hours
         diffValue = _dueDateTime.getHour() - now.getHour();
-        if (diffValue != 0) {
-            if (_dueDateTime.isSameDayAs(now)) {
-                return _getPluralizedDiffText("Hr", diffValue);
+
+        if (_dueDateTime.isSameDayAs(now)) {
+            if (diffValue == 0) {
+                return "now";
             } else {
-                if (_coreDateUtils.isAfterToday(_dueDateTime)) {
-                    return _getPluralizedDiffText("Hr", diffValue + 24);
-                } else {
-                    return _getPluralizedDiffText("Hr", diffValue - 24);
-                }
+                return _getPluralizedDiffText("Hr", diffValue);
             }
         }
 
-        return "now";
+        if (_coreDateUtils.isAfterToday(_dueDateTime)) {
+            diffValue += 24;
+        } else {
+            diffValue -= 24;
+        }
+
+        if (Math.abs(diffValue) == 24) {
+            return _getPluralizedDiffText("Dy", diffValue < 0 ? -1 : 1);
+        }
+
+        return _getPluralizedDiffText("Hr", diffValue);
     }
 
     /**
