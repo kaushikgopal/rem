@@ -101,8 +101,9 @@ public class TaskCreateController {
             diffValue -= 24;
         }
 
-        if (Math.abs(diffValue) == 24) {
-            return _getPluralizedDiffText("Dy", diffValue < 0 ? -1 : 1);
+        if (Math.abs(diffValue) >= 24) {
+            int dysExcess = diffValue / 24;
+            return _getPluralizedDiffText("Dy", diffValue < 0 ? -1 * dysExcess : dysExcess);
         }
 
         return _getPluralizedDiffText("Hr", diffValue);
