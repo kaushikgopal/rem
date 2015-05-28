@@ -22,22 +22,18 @@ import static org.mockito.Mockito.when;
 public class TaskCreateControllerTest {
 
     private static TaskCreateController.ITalkToTaskCreateScreen _talkToTCSMock;
-    private static CoreDateUtils _coreDateUtils;
+    private static CoreDateUtils _coreDateUtils = spy(new CoreDateUtils());
 
     private final ArgumentCaptor<String> dueDateTextCaptor = ArgumentCaptor.forClass(String.class);
     private final ArgumentCaptor<String> dueDateDiffTextCaptor = ArgumentCaptor.forClass(String.class);
 
     private TaskCreateController _controller;
 
-    @BeforeClass
-    public static void setupOnceBeforeAllTests() {
-        _coreDateUtils = spy(new CoreDateUtils());
-        when(_coreDateUtils.now()).thenReturn(new DateTime(1979, 4, 3, 7, 12, 20, 0));
-        // today = "Apr 3 [Tue] 7:12 AM"
-    }
-
     @Before
     public void setUpBeforeEveryTest() throws Exception {
+        when(_coreDateUtils.now()).thenReturn(new DateTime(1979, 4, 3, 7, 12, 20, 0));
+        // today = "Apr 3 [Tue] 7:12 AM"
+
         _talkToTCSMock = mock(TaskCreateController.ITalkToTaskCreateScreen.class);
         _controller = new TaskCreateController(_talkToTCSMock,
               _coreDateUtils,
@@ -104,7 +100,7 @@ public class TaskCreateControllerTest {
     }
 
     @Test
-    public void DueDateDiffText_ShouldShowWeeksOnly_IfDueDateMaxDiffIsInMonths() {
+    public void DueDateDiffText_ShouldShowWeeksOnly_IfDueDateMaxDiffIsWithinAMonth() {
         _controller.changeDueDateBy(PLUS, TimeUnit.DAYS, 25);
 
         verify(_talkToTCSMock, times(2)).updateDueDateDisplay(anyString(),
@@ -113,15 +109,19 @@ public class TaskCreateControllerTest {
         assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("in 3 Weeks");
     }
 
-
     @Test
-    public void DueDateDiffText_ShouldShowNow_IfDueNow() {
-        _controller.changeDueDateBy(PLUS, TimeUnit.MINUTES, 0);
+    public void DueDateDiffText_ShouldShowWeeksOnly_WhenDueDateIsADiffMonth_ButWithin4Weeks() {
+        when(_coreDateUtils.now()).thenReturn(new DateTime(2015, 5, 27, 7, 12, 20, 0));
+        _controller = new TaskCreateController(_talkToTCSMock,
+              _coreDateUtils,
+              TaskCreateController.NEW_TASK);
 
-        verify(_talkToTCSMock, times(2)).updateDueDateDisplay(anyString(),
+        _controller.changeDueDateBy(PLUS, TimeUnit.DAYS, 15);
+
+        verify(_talkToTCSMock, times(3)).updateDueDateDisplay(anyString(),
               dueDateDiffTextCaptor.capture());
 
-        assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("now");
+        assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("in 2 Weeks");
     }
 
     @Test
@@ -132,6 +132,16 @@ public class TaskCreateControllerTest {
               dueDateDiffTextCaptor.capture());
 
         assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("in 3 Mths");
+    }
+
+    @Test
+    public void DueDateDiffText_ShouldShowNow_IfDueNow() {
+        _controller.changeDueDateBy(PLUS, TimeUnit.MINUTES, 0);
+
+        verify(_talkToTCSMock, times(2)).updateDueDateDisplay(anyString(),
+              dueDateDiffTextCaptor.capture());
+
+        assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("now");
     }
 
 }
