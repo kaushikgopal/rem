@@ -90,7 +90,7 @@ public class TaskCreateController {
             return _getDiffText("Hr", diffValue);
         }
 
-        return "";
+        return "now";
     }
 
     private String _getDiffText(String unit, int diffValue) {
