@@ -28,30 +28,58 @@ public class CoreDateUtils {
         return TimeZone.getTimeZone("UTC");
     }
 
+    public boolean isAfterToday(DateTime dt1) {
+        return dt1.getMilliseconds(getUtcTimeZone()) > now().getMilliseconds(getUtcTimeZone());
+    }
+
+    public TimeUnit getDiffUnit(DateTime fromDate, DateTime toDate) {
+        long diffInMs = Math.abs(toDate.getMilliseconds(getUtcTimeZone()) -
+                                 fromDate.getMilliseconds(getUtcTimeZone()));
+
+        // 1 month ~= 2628000000ms
+        if (diffInMs >= 2628000000l) {
+            return TimeUnit.MONTH;
+        } else if (diffInMs >= 604800000) {
+            return TimeUnit.WEEK;
+        } else if (diffInMs >= 86400000) {
+            return TimeUnit.DAY;
+        } else {
+            return TimeUnit.HOUR;
+        }
+    }
+
+    // -----------------------------------------------------------------------------------
+    // Wrappers
+
+    public long getTimeFor(DateTime dt) {
+        return dt.getMilliseconds(getUtcTimeZone());
+    }
+
+    public Date getDateFor(DateTime dt) {
+        return new Date(getTimeFor(dt));
+    }
+
     public DateTime now() {
         return DateTime.now(TimeZone.getDefault());
     }
+
+    //  java.util.Date < -- > date4j.DateTime
+    public DateTime getDateTimeFor(Date dt) {
+        return DateTime.forInstant(dt.getTime(), getUtcTimeZone());
+    }
+
+    // -----------------------------------------------------------------------------------
+    // String conversions
 
     public String format(@NotNull String pattern, @NotNull DateTime dateTime) {
         return dateTime.format(pattern, _locale);
     }
 
-    public Date getDateFor(DateTime dt) {
-        return new Date(dt.getMilliseconds(getUtcTimeZone()));
-    }
-
-    public boolean isAfterToday(DateTime dt1) {
-        return dt1.getMilliseconds(getUtcTimeZone()) > now().getMilliseconds(getUtcTimeZone());
-    }
-
-    // -----------------------------------------------------------------------------------
-    //  java.util.Date < -- > date4j.DateTime
-
-    public DateTime getDateTimeFor(Date dt) {
-        return DateTime.forInstant(dt.getTime(), getUtcTimeZone());
-    }
-
     public enum IncreaseOrDecrease {
         PLUS, MINUS
+    }
+
+    public enum TimeUnit {
+        MONTH, WEEK, DAY, HOUR
     }
 }
