@@ -118,9 +118,6 @@ public class TaskCreateControllerTest {
         assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("in 2 Weeks");
     }
 
-    // -----------------------------------------------------------------------------------
-
-    @Ignore
     @Test
     public void DueDateDiffText_ShouldShowDaysOnly_IfDueDateIsWithin7Days() {
         _controller.changeDueDateBy(PLUS, TimeUnit.DAYS, 6);
@@ -132,7 +129,6 @@ public class TaskCreateControllerTest {
         assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("in 6 Dys");
     }
 
-    @Ignore
     @Test
     public void DueDateDiffText_ShouldShow1Day_IfIncreasedBy24HrsExactly() {
         _controller.changeDueDateBy(PLUS, TimeUnit.HOURS, 24);
@@ -143,7 +139,6 @@ public class TaskCreateControllerTest {
         assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("in 1 Dy");
     }
 
-    @Ignore
     @Test
     public void DueDateDiffText_ShouldShow1Day_IfDecreasedBy24HrsExactly() {
         _controller.changeDueDateBy(MINUS, TimeUnit.HOURS, 24);
@@ -154,14 +149,11 @@ public class TaskCreateControllerTest {
         assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("1 Dy before");
     }
 
-
-    @Ignore
     @Test
     public void DueDateDiffText_ShouldBe_CurrentInstantDateTime_AndDiffTextNow_WhenNewTaskIdPassed() {
         verify(_talkToTCSMock).updateDueDateDisplay("Apr 3 [Tue] 7:12 PM", "now");
     }
 
-    @Ignore
     @Test
     public void IncreaseBy_1HR() {
         _controller.changeDueDateBy(PLUS, TimeUnit.HOURS, 1);
@@ -169,7 +161,6 @@ public class TaskCreateControllerTest {
         verify(_talkToTCSMock, atLeastOnce()).updateDueDateDisplay("Apr 3 [Tue] 8:12 PM", "in 1 Hr");
     }
 
-    @Ignore
     @Test
     public void IncreaseBy_6HRS() {
         _controller.changeDueDateBy(PLUS, TimeUnit.HOURS, 6);
@@ -181,7 +172,6 @@ public class TaskCreateControllerTest {
         assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("in 6 Hrs");
     }
 
-    @Ignore
     @Test
     public void DecreaseBy_1HR() {
         _controller.changeDueDateBy(MINUS, TimeUnit.HOURS, 1);
@@ -194,7 +184,6 @@ public class TaskCreateControllerTest {
         assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("1 Hr before");
     }
 
-    @Ignore
     @Test
     public void DecreaseBy_20HRs() {
         _controller.changeDueDateBy(MINUS, TimeUnit.HOURS, 20);
@@ -205,7 +194,6 @@ public class TaskCreateControllerTest {
         assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("20 Hrs before");
     }
 
-    @Ignore
     @Test
     public void DueDateDiffText_IncreaseBy_5HRs_ShiftsToNextDay() {
         when(_coreDateUtils.now()).thenReturn(new DateTime(2015, 5, 27, 20, 0, 0, 0));
@@ -221,7 +209,6 @@ public class TaskCreateControllerTest {
         assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("in 10 Hrs");
     }
 
-    @Ignore
     @Test
     public void MultipleChanges_3HRS_Increase_Then1HR_Decrease() {
         _controller.changeDueDateBy(PLUS, TimeUnit.HOURS, 3);
@@ -234,7 +221,6 @@ public class TaskCreateControllerTest {
         assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("in 2 Hrs");
     }
 
-    @Ignore
     @Test
     public void DueDateDiffText_ShouldShowNow_IfDueNow() {
         _controller.changeDueDateBy(PLUS, TimeUnit.MINUTES, 0);
@@ -244,6 +230,4 @@ public class TaskCreateControllerTest {
 
         assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("now");
     }
-
-
 }

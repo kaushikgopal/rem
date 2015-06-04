@@ -28,7 +28,7 @@ public class CoreDateUtils {
         return TimeZone.getTimeZone("UTC");
     }
 
-    public boolean isAfterToday(DateTime dt1) {
+    public boolean isAfterNow(DateTime dt1) {
         return dt1.getMilliseconds(getUtcTimeZone()) > now().getMilliseconds(getUtcTimeZone());
     }
 
@@ -43,9 +43,15 @@ public class CoreDateUtils {
             return TimeUnit.WEEK;
         } else if (diffInMs >= 86400000) {
             return TimeUnit.DAY;
-        } else {
+        } else if (diffInMs >= 3600000) {
             return TimeUnit.HOUR;
+        } else {
+            return TimeUnit.MINUTE;
         }
+    }
+
+    public int getLastDayOfTheYear(DateTime dt) {
+        return new DateTime(dt.getYear(), 12, 31, 23, 59, 59, 59).getDayOfYear();
     }
 
     // -----------------------------------------------------------------------------------
@@ -80,6 +86,6 @@ public class CoreDateUtils {
     }
 
     public enum TimeUnit {
-        MONTH, WEEK, DAY, HOUR
+        MONTH, WEEK, DAY, HOUR, MINUTE
     }
 }

@@ -69,7 +69,7 @@ public class TaskCreateController {
 
         switch (_coreDateUtils.getDiffUnit(now, _dueDateTime)) {
             case MONTH:
-                if (_coreDateUtils.isAfterToday(_dueDateTime)) {
+                if (_coreDateUtils.isAfterNow(_dueDateTime)) {
                     diffValue = _dueDateTime.getMonth() - now.getMonth();
                     if (diffValue < 0) {
                         diffValue += 12;
@@ -80,46 +80,40 @@ public class TaskCreateController {
                 return _getPluralizedDiffText("Mth", diffValue);
 
             case WEEK:
-                // If you hit a date before Sunday, January 2, 2000 you're probably going to get funky results
+                // If you hit a date before Sunday, January 2, 2000 you're probably going to get funky results courtesy: date4j
                 diffValue = _dueDateTime.getWeekIndex() - now.getWeekIndex();
                 return _getPluralizedDiffText("Week", diffValue);
 
             case DAY:
-                break;
+                if (_coreDateUtils.isAfterNow(_dueDateTime)) {
+                    diffValue = _dueDateTime.getDayOfYear() - now.getDayOfYear();
+                    if (diffValue < 0) {
+                        diffValue += _coreDateUtils.getLastDayOfTheYear(_dueDateTime);
+                    }
+                } else {
+                    diffValue = _dueDateTime.getDayOfYear() - now.getDayOfYear();
+                }
+
+                return _getPluralizedDiffText("Dy", diffValue);
+
             case HOUR:
-                break;
-        }
+                if (_coreDateUtils.isAfterNow(_dueDateTime)) {
+                    diffValue = _dueDateTime.getHour() - now.getHour();
+                    if (diffValue < 0) {
+                        diffValue += 24;
+                    }
+                } else {
+                    if (_dueDateTime.isSameDayAs(_coreDateUtils.now())) {
+                        diffValue = _dueDateTime.getHour() - now.getHour();
+                    } else {
+                        diffValue = _dueDateTime.getHour() - now.getHour() - 24;
+                    }
+                }
 
-        // Check if max diff is in Days
-        diffValue = _dueDateTime.getDayOfYear() - now.getDayOfYear();
-        // TODO: check why 8/9/10 days reaches here
-
-        if (Math.abs(diffValue) > 1) {
-            return _getPluralizedDiffText("Dy", diffValue);
-        }
-
-        diffValue = _dueDateTime.getHour() - now.getHour();
-
-        if (_dueDateTime.isSameDayAs(now)) {
-            if (diffValue == 0) {
-                return "now";
-            } else {
                 return _getPluralizedDiffText("Hr", diffValue);
-            }
         }
 
-        if (_coreDateUtils.isAfterToday(_dueDateTime)) {
-            diffValue += 24;
-        } else {
-            diffValue -= 24;
-        }
-
-        if (Math.abs(diffValue) >= 24) {
-            int dysExcess = diffValue / 24;
-            return _getPluralizedDiffText("Dy", diffValue < 0 ? -1 * dysExcess : dysExcess);
-        }
-
-        return _getPluralizedDiffText("Hr", diffValue);
+        return "now";
     }
 
     /**
