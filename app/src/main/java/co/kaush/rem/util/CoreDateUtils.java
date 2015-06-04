@@ -41,9 +41,10 @@ public class CoreDateUtils {
             return TimeUnit.MONTH;
         } else if (diffInMs >= 604800000) {
             return TimeUnit.WEEK;
-        } else if (diffInMs >= 86400000) {
+        } else if (diffInMs >= 86340000) { // 23 hours, 59 minutes
             return TimeUnit.DAY;
-        } else if (diffInMs >= 3600000) {
+        } else if (diffInMs >= 3540000) { // 59 minutes
+
             return TimeUnit.HOUR;
         } else {
             return TimeUnit.MINUTE;
