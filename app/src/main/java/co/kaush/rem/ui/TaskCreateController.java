@@ -80,25 +80,14 @@ public class TaskCreateController {
                 return _getPluralizedDiffText("Mth", diffValue);
 
             case WEEK:
+                // If you hit a date before Sunday, January 2, 2000 you're probably going to get funky results
+                diffValue = _dueDateTime.getWeekIndex() - now.getWeekIndex();
+                return _getPluralizedDiffText("Week", diffValue);
 
-                break;
             case DAY:
                 break;
             case HOUR:
                 break;
-        }
-
-        /*// Check if max diff is in Months
-        // TODO: check for condition where month is really after but shows as before because of end of year etc.
-        diffValue = _dueDateTime.getMonth() - now.getMonth();
-        if (Math.abs(diffValue) > 1) {
-            return _getPluralizedDiffText("Mth", diffValue);
-        }*/
-
-        // Check if max diff is in Weeks
-        diffValue = _dueDateTime.getWeekIndex() - now.getWeekIndex();
-        if (Math.abs(diffValue) > 1) {
-            return _getPluralizedDiffText("Week", diffValue);
         }
 
         // Check if max diff is in Days
