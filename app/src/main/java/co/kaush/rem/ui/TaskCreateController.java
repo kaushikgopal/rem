@@ -64,14 +64,36 @@ public class TaskCreateController {
     // -----------------------------------------------------------------------------------
 
     private String _getDueDateDiffText() {
-        int diffValue;
         DateTime now = _coreDateUtils.now();
+        int diffValue;
 
-        // Check if max diff is in Months
+        switch (_coreDateUtils.getDiffUnit(now, _dueDateTime)) {
+            case MONTH:
+                if (_coreDateUtils.isAfterToday(_dueDateTime)) {
+                    diffValue = _dueDateTime.getMonth() - now.getMonth();
+                    if (diffValue < 0) {
+                        diffValue += 12;
+                    }
+                } else {
+                    diffValue = _dueDateTime.getMonth() - now.getMonth();
+                }
+                return _getPluralizedDiffText("Mth", diffValue);
+
+            case WEEK:
+
+                break;
+            case DAY:
+                break;
+            case HOUR:
+                break;
+        }
+
+        /*// Check if max diff is in Months
+        // TODO: check for condition where month is really after but shows as before because of end of year etc.
         diffValue = _dueDateTime.getMonth() - now.getMonth();
         if (Math.abs(diffValue) > 1) {
             return _getPluralizedDiffText("Mth", diffValue);
-        }
+        }*/
 
         // Check if max diff is in Weeks
         diffValue = _dueDateTime.getWeekIndex() - now.getWeekIndex();
@@ -81,6 +103,8 @@ public class TaskCreateController {
 
         // Check if max diff is in Days
         diffValue = _dueDateTime.getDayOfYear() - now.getDayOfYear();
+        // TODO: check why 8/9/10 days reaches here
+
         if (Math.abs(diffValue) > 1) {
             return _getPluralizedDiffText("Dy", diffValue);
         }
