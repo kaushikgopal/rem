@@ -36,8 +36,7 @@ public class CoreDateUtils {
         long diffInMs = Math.abs(toDate.getMilliseconds(getUtcTimeZone()) -
                                  fromDate.getMilliseconds(getUtcTimeZone()));
 
-        // 1 month ~= 2628000000ms
-        if (diffInMs >= 2628000000l) {
+        if (diffInMs >= 2628000000l) {  // ~1 month
             return TimeUnit.MONTH;
         } else if (diffInMs >= 604800000) {
             return TimeUnit.WEEK;
