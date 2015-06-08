@@ -123,7 +123,7 @@ public class TaskCreateFragment
     private Spannable _getFormattedDueDateDisplayText(String dueDateText,
                                                       String dueDateDisplayText) {
         Spannable sb = new SpannableString(dueDateText + " " + dueDateDisplayText);
-        sb.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.orange_3)),
+        sb.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.primary_light)),
               dueDateText.length(),
               sb.length(),
               Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);

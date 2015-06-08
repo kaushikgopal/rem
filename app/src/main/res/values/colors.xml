@@ -2,9 +2,18 @@
 <resources>
     <color name="primary_background">@color/white_2</color>
 
-    <color name="primary">@color/blue_1</color>
-    <color name="primary_dark">@color/blue_1</color>
-    <color name="accent">@color/orange_1</color>
+    <color name="primary">#4DB6AC</color>
+    <color name="primary_dark">#009688</color>
+    <color name="primary_light">#B2DFDB</color>
+    <color name="accent">#607D8B</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#727272</color>
+    <color name="icons">#FFFFFF</color>
+    <color name="divider">#B6B6B6</color>
+
+    <!--<color name="primary">@color/blue_1</color>-->
+    <!--<color name="primary_dark">@color/blue_1</color>-->
+    <!--<color name="accent">@color/orange_1</color>-->
 
     <color name="transparent">#00000000</color>
 
@@ -33,11 +42,6 @@
     <color name="blue_2">#20546E</color>
     <!--chathams blue-->
 
-    <!--unused-->
 
-    <color name="green_1">#263645</color>
-    <!--elephant-->
-    <color name="green_2">#707C3C</color>
-    <!--pesto-->
 
 </resources>
