@@ -11,6 +11,18 @@
     <color name="icons">#FFFFFF</color>
     <color name="divider">#B6B6B6</color>
 
+    <!-- week color combos -->
+
+    <color name="day_1">#488cef</color>
+    <color name="day_2">#0999f1</color>
+    <color name="day_3">#00b3f0</color>
+    <color name="day_4">#00c5e8</color>
+    <color name="day_5">#03c7d6</color>
+    <color name="day_6">#51cdcf</color>
+    <color name="day_7">#3bc4a2</color>
+
+    <!--basic colors-->
+
     <color name="transparent">#00000000</color>
     <color name="black_1">#000000</color>
     <color name="black_1_transparent">#4D000000</color>
