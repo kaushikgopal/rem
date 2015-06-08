@@ -125,8 +125,8 @@
             />
 
         <Button
-            android:id="@+id/set_1_pm"
-            android:text="1:00 pm"
+            android:id="@+id/set_11_pm"
+            android:text="11:00 pm"
             style="@style/btn_quick_create_time"
             />
     </TableRow>
@@ -150,8 +150,8 @@
             />
 
         <Button
-            android:id="@+id/set_11_pm"
-            android:text="11:00 pm"
+            android:id="@+id/reset"
+            android:text="Now"
             style="@style/btn_quick_create_time"
             />
     </TableRow>

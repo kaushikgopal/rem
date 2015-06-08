@@ -50,7 +50,7 @@ public class TaskCreateControllerTest {
         verify(_talkToTCSMock, times(2)).updateDueDateDisplay(anyString(),
               dueDateDiffTextCaptor.capture());
 
-        assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("(in ~3 Mths)");
+        assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("(~3 Mths)");
     }
 
     @Test
@@ -65,7 +65,7 @@ public class TaskCreateControllerTest {
         verify(_talkToTCSMock, times(3)).updateDueDateDisplay(anyString(),
               dueDateDiffTextCaptor.capture());
 
-        assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("(in ~3 Mths)");
+        assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("(~3 Mths)");
     }
 
     @Test
@@ -100,7 +100,7 @@ public class TaskCreateControllerTest {
         verify(_talkToTCSMock, times(2)).updateDueDateDisplay(anyString(),
               dueDateDiffTextCaptor.capture());
 
-        assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("(in ~3 Weeks)");
+        assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("(~3 Weeks)");
     }
 
     @Test
@@ -115,7 +115,7 @@ public class TaskCreateControllerTest {
         verify(_talkToTCSMock, times(3)).updateDueDateDisplay(anyString(),
               dueDateDiffTextCaptor.capture());
 
-        assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("(in ~2 Weeks)");
+        assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("(~2 Weeks)");
     }
 
     @Test
@@ -126,18 +126,75 @@ public class TaskCreateControllerTest {
         verify(_talkToTCSMock, times(3)).updateDueDateDisplay(anyString(),
               dueDateDiffTextCaptor.capture());
 
-        assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("(in ~6 Dys)");
+        assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("(~6 Dys)");
     }
 
     @Test
-    public void DueDateDiffText_ShouldShow1Day_IfIncreasedBy24HrsExactly() {
-        _controller.changeDueDateBy(PLUS, TimeUnit.HOURS, 24);
+    public void DueDateDiffText_ShouldShowMinutesOnly_IfIncreasedByFewMinutes() {
+        _controller.changeDueDateBy(PLUS, TimeUnit.MINUTES, 10);
 
         verify(_talkToTCSMock, times(2)).updateDueDateDisplay(anyString(),
               dueDateDiffTextCaptor.capture());
 
-        assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("(in ~1 Dy)");
+        assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("(~10 Mts)");
     }
+
+    @Test
+    public void DueDateDiffText_ShouldShowMinutesOnly_IfIncreasedBy15Minutes_AndCrossesToNextHour() {
+        when(_coreDateUtils.now()).thenReturn(new DateTime(2015, 12, 25, 4, 50, 0, 0));
+        _controller = new TaskCreateController(_talkToTCSMock,
+              _coreDateUtils,
+              TaskCreateController.NEW_TASK);
+
+        _controller.changeDueDateBy(PLUS, TimeUnit.MINUTES, 15);
+
+        verify(_talkToTCSMock, times(3)).updateDueDateDisplay(anyString(),
+              dueDateDiffTextCaptor.capture());
+
+        assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("(~15 Mts)");
+    }
+
+    @Test
+    public void DueDateDiffText_ShouldShowMinutesOnly_IfDecreasedBy15Minutes_AndCrossesToPreviousHour() {
+        when(_coreDateUtils.now()).thenReturn(new DateTime(2015, 12, 25, 9, 0, 0, 0));
+        _controller = new TaskCreateController(_talkToTCSMock,
+              _coreDateUtils,
+              TaskCreateController.NEW_TASK);
+
+        _controller.changeDueDateBy(MINUS, TimeUnit.MINUTES, 15);
+
+        verify(_talkToTCSMock, times(3)).updateDueDateDisplay(anyString(),
+              dueDateDiffTextCaptor.capture());
+
+        assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("(~15 Mts back)");
+    }
+
+
+    @Test
+    public void DueDateDiffText_ShouldShowNow_IfDifferenceIsLessThan5() {
+        _controller.changeDueDateBy(PLUS, TimeUnit.MINUTES, 5);
+
+        verify(_talkToTCSMock, times(2)).updateDueDateDisplay(anyString(),
+              dueDateDiffTextCaptor.capture());
+
+        assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("now");
+    }
+
+    @Test
+    public void DueDateDiffText_ShouldShowNow_IfDifferenceIsLessThan5_CrossingToNextOrPreviousHour() {
+        when(_coreDateUtils.now()).thenReturn(new DateTime(2015, 12, 25, 9, 0, 0, 0));
+        _controller = new TaskCreateController(_talkToTCSMock,
+              _coreDateUtils,
+              TaskCreateController.NEW_TASK);
+
+        _controller.changeDueDateBy(MINUS, TimeUnit.MINUTES, 4);
+
+        verify(_talkToTCSMock, times(3)).updateDueDateDisplay(anyString(),
+              dueDateDiffTextCaptor.capture());
+
+        assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("(~15 Mts back)");
+    }
+
 
     @Test
     public void DueDateDiffText_ShouldShow1Day_IfDecreasedBy24HrsExactly() {
@@ -150,6 +207,20 @@ public class TaskCreateControllerTest {
     }
 
     @Test
+    public void DueDateDiffText_ShouldShow1Day_IfIncreasedBy24HrsExactly() {
+        _controller.changeDueDateBy(PLUS, TimeUnit.HOURS, 24);
+
+        verify(_talkToTCSMock, times(2)).updateDueDateDisplay(anyString(),
+              dueDateDiffTextCaptor.capture());
+
+        assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("(~1 Dy)");
+    }
+
+
+
+    // -----------------------------------------------------------------------------------
+
+    @Test
     public void DueDateDiffText_ShouldBe_CurrentInstantDateTime_AndDiffTextNow_WhenNewTaskIdPassed() {
         verify(_talkToTCSMock).updateDueDateDisplay("Apr 3 [Tue] 7:12 PM", "now");
     }
@@ -158,7 +229,7 @@ public class TaskCreateControllerTest {
     public void IncreaseBy_1HR() {
         _controller.changeDueDateBy(PLUS, TimeUnit.HOURS, 1);
 
-        verify(_talkToTCSMock, atLeastOnce()).updateDueDateDisplay("Apr 3 [Tue] 8:12 PM", "(in ~1 Hr)");
+        verify(_talkToTCSMock, atLeastOnce()).updateDueDateDisplay("Apr 3 [Tue] 8:12 PM", "(~1 Hr)");
     }
 
     @Test
@@ -169,7 +240,7 @@ public class TaskCreateControllerTest {
               dueDateTextCaptor.capture(), dueDateDiffTextCaptor.capture());
 
         assertThat(dueDateTextCaptor.getValue()).isEqualToIgnoringCase("Apr 4 [Wed] 1:12 AM");
-        assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("(in ~6 Hrs)");
+        assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("(~6 Hrs)");
     }
 
     @Test
@@ -206,7 +277,7 @@ public class TaskCreateControllerTest {
         verify(_talkToTCSMock, times(3)).updateDueDateDisplay(anyString(),
               dueDateDiffTextCaptor.capture());
 
-        assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("(in ~10 Hrs)");
+        assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("(~10 Hrs)");
     }
 
     @Test
@@ -218,7 +289,7 @@ public class TaskCreateControllerTest {
               dueDateTextCaptor.capture(), dueDateDiffTextCaptor.capture());
 
         assertThat(dueDateTextCaptor.getValue()).isEqualToIgnoringCase("Apr 3 [Tue] 9:12 PM");
-        assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("(in ~2 Hrs)");
+        assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("(~2 Hrs)");
     }
 
     @Test

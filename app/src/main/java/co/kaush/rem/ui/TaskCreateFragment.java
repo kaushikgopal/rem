@@ -104,14 +104,14 @@ public class TaskCreateFragment
         _taskCreateController.setTimeTo(10, 30);
     }
 
-    @OnClick(R.id.set_1_pm)
-    public void set_1_pm() {
-        _taskCreateController.setTimeTo(13, 0);
-    }
-
     @OnClick(R.id.set_11_pm)
     public void set_11_pm() {
         _taskCreateController.setTimeTo(23, 0);
+    }
+
+    @OnClick(R.id.reset)
+    public void resetDueDate() {
+        _taskCreateController.resetDueDateToNow();
     }
 
     // -----------------------------------------------------------------------------------

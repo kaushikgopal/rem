@@ -24,9 +24,13 @@ public class TaskCreateController {
         _coreDateUtils = coreDateUtils;
 
         if (initialTaskId == NEW_TASK) {
-            _talkToTaskCreate.updateDueDateDisplay(//
-                  _coreDateUtils.format(DUE_DATE_FORMAT, _coreDateUtils.now()), "now");
+            resetDueDateToNow();
         }
+    }
+
+    public void resetDueDateToNow() {
+        _talkToTaskCreate.updateDueDateDisplay(//
+              _coreDateUtils.format(DUE_DATE_FORMAT, _coreDateUtils.now()), "now");
     }
 
     public void changeDueDateBy(IncreaseOrDecrease increaseOrDecrease,
@@ -130,9 +134,18 @@ public class TaskCreateController {
                 return _getPluralizedDiffText("Hr", diffValue);
         }
 
+        diffValue = _dueDateTime.getMinute() - now.getMinute();
 
+        if (!_dueDateTime.getHour().equals(now.getHour())) {
 
-        return "now";
+            if (_coreDateUtils.isAfterNow(_dueDateTime)) {
+                diffValue += 60;
+            } else {
+                diffValue -= 60;
+            }
+        }
+
+        return _getPluralizedDiffText("Mt", diffValue);
     }
 
     /**
@@ -145,7 +158,7 @@ public class TaskCreateController {
         boolean pluralize = Math.abs(diffValue) > 1;
 
         if (diffValue > 0) {
-            return String.format("(in ~%d %s%s)", Math.abs(diffValue), unit, (pluralize) ? "s" : "");
+            return String.format("(~%d %s%s)", Math.abs(diffValue), unit, (pluralize) ? "s" : "");
         } else {
             return String.format("(~%d %s%s back)",
                   Math.abs(diffValue),
