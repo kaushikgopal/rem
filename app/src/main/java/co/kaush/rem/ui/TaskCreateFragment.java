@@ -94,21 +94,25 @@ public class TaskCreateFragment
         _taskCreateController.changeDueDateBy(MINUS, DAYS, 1);
     }
 
-    /*@OnClick(R.id.set_8_am)
+    @OnClick(R.id.set_8_am)
     public void set_8_am() {
+        _taskCreateController.setTimeTo(8, 0);
     }
 
     @OnClick(R.id.set_1030_am)
     public void set_10_30_am() {
+        _taskCreateController.setTimeTo(10, 30);
     }
 
     @OnClick(R.id.set_1_pm)
     public void set_1_pm() {
+        _taskCreateController.setTimeTo(13, 0);
     }
 
     @OnClick(R.id.set_11_pm)
     public void set_11_pm() {
-    }*/
+        _taskCreateController.setTimeTo(23, 0);
+    }
 
     // -----------------------------------------------------------------------------------
     // interface implementations

@@ -61,6 +61,23 @@ public class TaskCreateController {
               _coreDateUtils.format(DUE_DATE_FORMAT, _dueDateTime), _getDueDateDiffText());
     }
 
+    public void setTimeTo(int hour, int minute) {
+        if (_dueDateTime == null) {
+            _dueDateTime = _coreDateUtils.now();
+        }
+
+        _dueDateTime = new DateTime(_dueDateTime.getYear(),
+              _dueDateTime.getMonth(),
+              _dueDateTime.getDay(),
+              hour,
+              minute,
+              0,
+              0);
+
+        _talkToTaskCreate.updateDueDateDisplay(//
+              _coreDateUtils.format(DUE_DATE_FORMAT, _dueDateTime), _getDueDateDiffText());
+    }
+
     // -----------------------------------------------------------------------------------
 
     private String _getDueDateDiffText() {
@@ -113,6 +130,8 @@ public class TaskCreateController {
                 return _getPluralizedDiffText("Hr", diffValue);
         }
 
+
+
         return "now";
     }
 
@@ -126,9 +145,9 @@ public class TaskCreateController {
         boolean pluralize = Math.abs(diffValue) > 1;
 
         if (diffValue > 0) {
-            return String.format("in %d %s%s", Math.abs(diffValue), unit, (pluralize) ? "s" : "");
+            return String.format("(in ~%d %s%s)", Math.abs(diffValue), unit, (pluralize) ? "s" : "");
         } else {
-            return String.format("%d %s%s before",
+            return String.format("(~%d %s%s back)",
                   Math.abs(diffValue),
                   unit,
                   (pluralize) ? "s" : "");

@@ -43,7 +43,6 @@ public class CoreDateUtils {
         } else if (diffInMs >= 86340000) { // 23 hours, 59 minutes
             return TimeUnit.DAY;
         } else if (diffInMs >= 3540000) { // 59 minutes
-
             return TimeUnit.HOUR;
         } else {
             return TimeUnit.MINUTE;
