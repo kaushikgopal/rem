@@ -11,37 +11,12 @@
     <color name="icons">#FFFFFF</color>
     <color name="divider">#B6B6B6</color>
 
-    <!--<color name="primary">@color/blue_1</color>-->
-    <!--<color name="primary_dark">@color/blue_1</color>-->
-    <!--<color name="accent">@color/orange_1</color>-->
-
     <color name="transparent">#00000000</color>
-
     <color name="black_1">#000000</color>
     <color name="black_1_transparent">#4D000000</color>
-
     <color name="gray_1">#303030</color>
     <!--charcoal default bg for L dark-->
     <color name="gray_2">#8f8f8f</color>
-
     <color name="white_1">#ffffff</color>
     <color name="white_2">#EFEFE6</color>
-    <!--carrarra-->
-    <color name="white_3">#DDDDDD</color>
-
-    <color name="brown_1">#c7b299</color>
-
-    <color name="orange_1">#E34F30</color>
-    <!--cinnabar-->
-    <color name="orange_2">#ED7B20</color>
-    <!--tango-->
-    <color name="orange_3">#f6ab70</color>
-
-    <color name="blue_1">#0A4D6D</color>
-    <!--regal blue-->
-    <color name="blue_2">#20546E</color>
-    <!--chathams blue-->
-
-
-
 </resources>
