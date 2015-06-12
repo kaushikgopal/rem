@@ -82,6 +82,10 @@ public class TaskCreateController {
               _coreDateUtils.format(DUE_DATE_FORMAT, _dueDateTime), _getDueDateDiffText());
     }
 
+    public void onCancelButtonClicked() {
+        _talkToTaskCreate.closeCreateScreen();
+    }
+
     // -----------------------------------------------------------------------------------
 
     private String _getDueDateDiffText() {
@@ -175,5 +179,7 @@ public class TaskCreateController {
 
     public interface ITalkToTaskCreateScreen {
         void updateDueDateDisplay(String dueDateText, String dueDiffDisplayText);
+
+        void closeCreateScreen();
     }
 }

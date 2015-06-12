@@ -52,7 +52,7 @@ public class TaskCreateFragment
 
     @OnClick(R.id.btn_task_cancel)
     public void onCancelButtonClicked() {
-        getFragmentManager().popBackStack();
+        _taskCreateController.onCancelButtonClicked();
     }
 
     // -----------------------------------------------------------------------------------
@@ -125,6 +125,11 @@ public class TaskCreateFragment
     @Override
     public void updateDueDateDisplay(String dueDateText, String dueDiffDisplayText) {
         _dueDisplay.setText(_getFormattedDueDateDisplayText(dueDateText, dueDiffDisplayText));
+    }
+
+    @Override
+    public void closeCreateScreen() {
+        getFragmentManager().popBackStack();
     }
 
     // -----------------------------------------------------------------------------------
