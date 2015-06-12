@@ -50,6 +50,11 @@ public class TaskCreateFragment
         return layout;
     }
 
+    @OnClick(R.id.btn_task_cancel)
+    public void onCancelButtonClicked() {
+        getFragmentManager().popBackStack();
+    }
+
     // -----------------------------------------------------------------------------------
     // Button click listeners
     // TODO: DRY this code up

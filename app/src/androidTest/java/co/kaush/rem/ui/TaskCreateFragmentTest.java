@@ -37,4 +37,11 @@ public class TaskCreateFragmentTest {
         onView(withId(R.id.menu_add)).perform(ViewActions.click());
         onView(withId(R.id.btn_task_due_date)).check(matches(isDisplayed()));
     }
+
+    @Test
+    public void cancellingOfTaskCreation() {
+        onView(withId(R.id.menu_add)).perform(ViewActions.click());
+        onView(withId(R.id.btn_task_cancel)).perform(ViewActions.click());
+        onView(withId(R.id.menu_add)).check(matches(isDisplayed()));
+    }
 }
