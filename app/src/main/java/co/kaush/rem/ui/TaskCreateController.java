@@ -145,7 +145,11 @@ public class TaskCreateController {
             }
         }
 
-        return _getPluralizedDiffText("Mt", diffValue);
+        if (diffValue == 0) {
+            return "now";
+        } else {
+            return _getPluralizedDiffText("Mt", diffValue);
+        }
     }
 
     /**

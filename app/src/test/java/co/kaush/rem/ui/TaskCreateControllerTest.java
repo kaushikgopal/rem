@@ -171,30 +171,15 @@ public class TaskCreateControllerTest {
 
 
     @Test
-    public void DueDateDiffText_ShouldShowNow_IfDifferenceIsLessThan5() {
-        _controller.changeDueDateBy(PLUS, TimeUnit.MINUTES, 5);
-
-        verify(_talkToTCSMock, times(2)).updateDueDateDisplay(anyString(),
-              dueDateDiffTextCaptor.capture());
-
-        assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("now");
-    }
-
-    @Test
-    public void DueDateDiffText_ShouldShowNow_IfDifferenceIsLessThan5_CrossingToNextOrPreviousHour() {
-        when(_coreDateUtils.now()).thenReturn(new DateTime(2015, 12, 25, 9, 0, 0, 0));
-        _controller = new TaskCreateController(_talkToTCSMock,
-              _coreDateUtils,
-              TaskCreateController.NEW_TASK);
-
-        _controller.changeDueDateBy(MINUS, TimeUnit.MINUTES, 4);
+    public void DueDateDiffText_ShouldShowNow_IfDifferenceIs0() {
+        _controller.changeDueDateBy(PLUS, TimeUnit.MINUTES, 15);
+        _controller.changeDueDateBy(MINUS, TimeUnit.MINUTES, 15);
 
         verify(_talkToTCSMock, times(3)).updateDueDateDisplay(anyString(),
               dueDateDiffTextCaptor.capture());
 
-        assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("(~15 Mts back)");
+        assertThat(dueDateDiffTextCaptor.getValue()).isEqualToIgnoringCase("now");
     }
-
 
     @Test
     public void DueDateDiffText_ShouldShow1Day_IfDecreasedBy24HrsExactly() {
