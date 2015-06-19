@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Modules {
-    public static List<Object> testModules = null;
+    //public static List<Object> testModules = null;
 
     private Modules() {
         // Don't allow instances.
@@ -17,9 +17,9 @@ public class Modules {
         modules.add(new DebugRemModule());
 
         // Injected from UI Tests
-        if (testModules != null) {
-            modules.addAll(testModules);
-        }
+        //if (testModules != null) {
+        //    modules.addAll(testModules);
+        //}
 
         return modules.toArray();
     }

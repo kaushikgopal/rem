@@ -9,7 +9,7 @@ import co.kaush.rem.R;
 import co.kaush.rem.RemModule;
 import co.kaush.rem.util.ColorFilterCache;
 import dagger.Module;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class LauncherActivity
@@ -41,7 +41,7 @@ public class LauncherActivity
 
     @Override
     protected List<Object> getActivitySpecificModules() {
-        return Arrays.<Object>asList(new LauncherModule());
+        return Collections.singletonList((Object) new LauncherModule());
     }
 
     // -----------------------------------------------------------------------------------
