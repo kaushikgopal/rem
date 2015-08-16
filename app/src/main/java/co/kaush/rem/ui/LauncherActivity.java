@@ -21,7 +21,7 @@ public class LauncherActivity
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                  .replace(android.R.id.content, new TaskListFragment())
+                  .replace(android.R.id.content, TaskListFragment.newInstance())
                   .commit();
         }
     }

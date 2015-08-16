@@ -33,6 +33,10 @@ public class TaskCreateFragment
 
     private TaskCreateController _taskCreateController;
 
+    public static TaskCreateFragment newInstance() {
+        return new TaskCreateFragment();
+    }
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
