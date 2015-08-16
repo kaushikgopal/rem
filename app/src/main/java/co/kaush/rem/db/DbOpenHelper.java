@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import co.kaush.rem.entity.Task;
+import timber.log.Timber;
 
 final class DbOpenHelper
       extends SQLiteOpenHelper {
@@ -15,6 +16,7 @@ final class DbOpenHelper
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        Timber.i("Creating DB tables first time");
         db.execSQL(""
                    + "CREATE TABLE " + Task.TABLE + "("
                    + Task.ID + " INTEGER NOT NULL PRIMARY KEY,"
@@ -29,6 +31,7 @@ final class DbOpenHelper
     }
 
     private void _seedData(SQLiteDatabase db) {
+        Timber.i("Seed data to database");
         db.execSQL("INSERT INTO "+Task.TABLE +
                    "(DESCRIPTION, DUE_DATE) VALUES ('Welcome to Remme', '04/03/2016');");
     }

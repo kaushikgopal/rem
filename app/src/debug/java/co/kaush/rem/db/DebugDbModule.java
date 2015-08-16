@@ -1,6 +1,5 @@
 package co.kaush.rem.db;
 
-import android.database.sqlite.SQLiteOpenHelper;
 import com.squareup.sqlbrite.SqlBrite;
 import dagger.Module;
 import dagger.Provides;
@@ -12,18 +11,14 @@ public final class DebugDbModule {
 
     @Provides
     @Singleton
-    SqlBrite provideSqlBrite(SQLiteOpenHelper openHelper) {
-        SqlBrite db = SqlBrite.create(openHelper);
-
-        db.setLogger(new SqlBrite.Logger() {
+    SqlBrite provideSqlBrite() {
+        Timber.d("provide SqlBrite");
+        return SqlBrite.create(new SqlBrite.Logger() {
             @Override
             public void log(String message) {
-                Timber.tag("Database").v(message);
+                Timber.tag("SqlBriteDB").v(message);
             }
         });
-        db.setLoggingEnabled(true);
-
-        return db;
     }
 }
 
