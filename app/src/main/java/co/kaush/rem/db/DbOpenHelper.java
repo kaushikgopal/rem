@@ -19,15 +19,22 @@ final class DbOpenHelper
                    + "CREATE TABLE " + Task.TABLE + "("
                    + Task.ID + " INTEGER NOT NULL PRIMARY KEY,"
                    + Task.DESCRIPTION + " TEXT NOT NULL,"
-                   + Task.STATUS + " INTEGER,"
+                   + Task.STATUS + " INTEGER DEFAULT "+ Task.STATUS_CREATED +","
                    + Task.DUE_DATE + " DATE NOT NULL,"
-                   + Task.SNOOZE_COUNT + " INTEGER,"
-                   + Task.SNOOZE_INTERVAL + " INTEGER"
+                   + Task.SNOOZE_COUNT + " INTEGER DEFAULT 0,"
+                   + Task.SNOOZE_INTERVAL + " INTEGER NULL"
                    + ")");
 
+        _seedData(db);
+    }
+
+    private void _seedData(SQLiteDatabase db) {
+        db.execSQL("INSERT INTO "+Task.TABLE +
+                   "(DESCRIPTION, DUE_DATE) VALUES ('Welcome to Remme', '04/03/2016');");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
     }
 }

@@ -10,6 +10,7 @@ public abstract class Task {
     @Retention(RetentionPolicy.SOURCE)
     public @interface Status {}
 
+    public static final int STATUS_CREATED = 0;
     public static final int STATUS_SNOOZED = 1;
     public static final int STATUS_COMPLETED = 2;
     public static final int STATUS_DELETED = 3;
@@ -21,4 +22,6 @@ public abstract class Task {
     public static final String DUE_DATE = "due_date";
     public static final String SNOOZE_INTERVAL = "snooze_interval";
     public static final String SNOOZE_COUNT = "snooze_count";
+
+
 }
