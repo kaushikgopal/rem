@@ -3,6 +3,7 @@ package co.kaush.rem.db;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import co.kaush.rem.entity.Task;
 
 final class DbOpenHelper
       extends SQLiteOpenHelper {
@@ -14,14 +15,16 @@ final class DbOpenHelper
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-    /*db.execSQL(""
-               + "CREATE TABLE " + TodoList.TABLE + "("
-               + TodoList.ID + " INTEGER NOT NULL PRIMARY KEY,"
-               + TodoList.NAME + " TEXT NOT NULL,"
-               + TodoList.ARCHIVED + " INTEGER NOT NULL DEFAULT 0"
-               + ")");
+        db.execSQL(""
+                   + "CREATE TABLE " + Task.TABLE + "("
+                   + Task.ID + " INTEGER NOT NULL PRIMARY KEY,"
+                   + Task.DESCRIPTION + " TEXT NOT NULL,"
+                   + Task.STATUS + " INTEGER,"
+                   + Task.DUE_DATE + " DATE NOT NULL,"
+                   + Task.SNOOZE_COUNT + " INTEGER,"
+                   + Task.SNOOZE_INTERVAL + " INTEGER"
+                   + ")");
 
-    db.execSQL("CREATE INDEX item_list_id ON " + TodoItem.TABLE + " (" + TodoItem.LIST_ID + ")");*/
     }
 
     @Override
