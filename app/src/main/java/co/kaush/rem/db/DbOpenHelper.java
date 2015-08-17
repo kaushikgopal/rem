@@ -32,8 +32,9 @@ final class DbOpenHelper
 
     private void _seedData(SQLiteDatabase db) {
         Timber.i("Seed data to database");
+
         db.execSQL("INSERT INTO "+Task.TABLE +
-                   "(DESCRIPTION, DUE_DATE) VALUES ('Welcome to Remme', '04/03/2016');");
+                   "(DESCRIPTION, DUE_DATE) VALUES ('Welcome to Remme', '2016-04-04 09:00:00');");
     }
 
     @Override

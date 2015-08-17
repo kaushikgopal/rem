@@ -1,6 +1,8 @@
 package co.kaush.rem.util;
 
 import hirondelle.date4j.DateTime;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -9,6 +11,8 @@ import org.jetbrains.annotations.NotNull;
 public class CoreDateUtils {
 
     private Locale _locale;
+    public static final String DATE_FORMAT_DB = "yyyy-MM-dd HH:mm:ss";
+
 
     public CoreDateUtils() {
         _locale = Locale.getDefault();
@@ -68,8 +72,12 @@ public class CoreDateUtils {
         return DateTime.now(TimeZone.getDefault());
     }
 
-    //  java.util.Date < -- > date4j.DateTime
-    public DateTime getDateTimeFor(Date dt) {
+    public static Date DateFrom(String dateAsString, String format) throws ParseException {
+        return new SimpleDateFormat(format).parse(dateAsString);
+    }
+
+    //  java.util.Date -- > date4j.DateTime
+    public DateTime DateTimeFor(Date dt) {
         return DateTime.forInstant(dt.getTime(), getUtcTimeZone());
     }
 
