@@ -2,6 +2,7 @@ package co.kaush.rem.ui;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -20,6 +21,10 @@ public class TaskListFragment
 
     @InjectView(R.id.toolbar) Toolbar toolbar;
     private TaskListController _taskListController;
+
+    public static TaskListFragment newInstance() {
+        return new TaskListFragment();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,7 +64,7 @@ public class TaskListFragment
         getActivity().getSupportFragmentManager()
               .beginTransaction()
               .hide(this)
-              .add(android.R.id.content, new TaskCreateFragment(), TaskCreateFragment.FRAG_TAG)
+              .add(android.R.id.content, TaskCreateFragment.newInstance(), TaskCreateFragment.FRAG_TAG)
               .addToBackStack(TaskCreateFragment.FRAG_TAG)
               .commit();
     }
