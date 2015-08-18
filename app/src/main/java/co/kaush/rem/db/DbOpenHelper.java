@@ -8,6 +8,7 @@ import timber.log.Timber;
 
 final class DbOpenHelper
       extends SQLiteOpenHelper {
+
     private static final int VERSION = 1;
 
     public DbOpenHelper(Context context) {

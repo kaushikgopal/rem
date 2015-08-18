@@ -11,7 +11,6 @@ import static co.kaush.rem.util.CoreDateUtils.IncreaseOrDecrease.MINUS;
 public class TaskCreateController {
 
     public static final int NEW_TASK = -1;
-    private static final String DUE_DATE_FORMAT = "MMM D [WWW] h12:mm a";
 
     private ITalkToTaskCreateScreen _talkToTaskCreate;
     private CoreDateUtils _coreDateUtils;
@@ -30,7 +29,7 @@ public class TaskCreateController {
 
     public void resetDueDateToNow() {
         _talkToTaskCreate.updateDueDateDisplay(//
-              _coreDateUtils.format(DUE_DATE_FORMAT, _coreDateUtils.now()), "now");
+              _coreDateUtils.format(CoreDateUtils.DUE_DATE_FORMAT, _coreDateUtils.now()), "now");
     }
 
     public void changeDueDateBy(IncreaseOrDecrease increaseOrDecrease,
@@ -62,7 +61,7 @@ public class TaskCreateController {
         }
 
         _talkToTaskCreate.updateDueDateDisplay(//
-              _coreDateUtils.format(DUE_DATE_FORMAT, _dueDateTime), _getDueDateDiffText());
+              _coreDateUtils.format(CoreDateUtils.DUE_DATE_FORMAT, _dueDateTime), _getDueDateDiffText());
     }
 
     public void setTimeTo(int hour, int minute) {
@@ -79,7 +78,7 @@ public class TaskCreateController {
               0);
 
         _talkToTaskCreate.updateDueDateDisplay(//
-              _coreDateUtils.format(DUE_DATE_FORMAT, _dueDateTime), _getDueDateDiffText());
+              _coreDateUtils.format(CoreDateUtils.DUE_DATE_FORMAT, _dueDateTime), _getDueDateDiffText());
     }
 
     public void onCancelButtonClicked() {

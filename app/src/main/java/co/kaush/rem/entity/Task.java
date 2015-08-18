@@ -3,6 +3,7 @@ package co.kaush.rem.entity;
 import android.database.Cursor;
 import android.support.annotation.IntDef;
 import co.kaush.rem.db.DbUtils;
+import co.kaush.rem.util.CoreDateUtils;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -11,7 +12,6 @@ import java.util.List;
 import rx.functions.Func1;
 
 import static com.squareup.sqlbrite.SqlBrite.Query;
-
 
 public class Task {
 
@@ -54,7 +54,8 @@ public class Task {
     }
 
     public static final Func1<Query, List<Task>> MAP = new Func1<Query, List<Task>>() {
-        @Override public List<Task> call(Query query) {
+        @Override
+        public List<Task> call(Query query) {
             Cursor cursor = query.run();
             try {
                 List<Task> values = new ArrayList<>(cursor.getCount());
@@ -84,6 +85,10 @@ public class Task {
             }
         }
     };
+
+    public boolean isOverdue() {
+        return CoreDateUtils.getDateTimeFor(dueDate).isInTheFuture(CoreDateUtils.getUtcTimeZone());
+    }
 
     public static class TaskBuilder {
         public Long id;

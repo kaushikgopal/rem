@@ -10,17 +10,11 @@ import org.jetbrains.annotations.NotNull;
 
 public class CoreDateUtils {
 
-    private Locale _locale;
+    public static final String DUE_DATE_FORMAT = "MMM D [WWW] h12:mm a";
     public static final String DATE_FORMAT_DB = "yyyy-MM-dd HH:mm:ss";
 
 
-    public CoreDateUtils() {
-        _locale = Locale.getDefault();
-    }
-
-    public CoreDateUtils(Locale locale) {
-        _locale = locale;
-    }
+    public CoreDateUtils() { }
 
     /**
      * This is a non-cached version of UTC (depending on the timezone of the user)
@@ -28,7 +22,7 @@ public class CoreDateUtils {
      *
      * @return DateTimeZone
      */
-    public TimeZone getUtcTimeZone() {
+    public static TimeZone getUtcTimeZone() {
         return TimeZone.getTimeZone("UTC");
     }
 
@@ -68,7 +62,7 @@ public class CoreDateUtils {
         return new Date(getTimeFor(dt));
     }
 
-    public DateTime now() {
+    public static DateTime now() {
         return DateTime.now(TimeZone.getDefault());
     }
 
@@ -77,15 +71,19 @@ public class CoreDateUtils {
     }
 
     //  java.util.Date -- > date4j.DateTime
-    public DateTime DateTimeFor(Date dt) {
+    public static DateTime getDateTimeFor(Date dt) {
         return DateTime.forInstant(dt.getTime(), getUtcTimeZone());
     }
 
     // -----------------------------------------------------------------------------------
     // String conversions
 
-    public String format(@NotNull String pattern, @NotNull DateTime dateTime) {
-        return dateTime.format(pattern, _locale);
+    public static String format(@NotNull String pattern, @NotNull Date date) {
+        return format(pattern, getDateTimeFor(date));
+    }
+
+    public static String format(@NotNull String pattern, @NotNull DateTime dateTime) {
+        return dateTime.format(pattern, Locale.getDefault());
     }
 
     public enum IncreaseOrDecrease {

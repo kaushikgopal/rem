@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/item_task_container"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <ImageView
+        android:id="@+id/item_task_complete"
+        android:src="@drawable/ic_done"
+        android:layout_height="@dimen/item_task_list_action_size"
+        android:layout_width="@dimen/item_task_list_action_size"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:padding="@dimen/spacing_medium"
+        />
+
+    <ImageView
+        android:id="@+id/item_task_delete"
+        android:src="@drawable/ic_cancel"
+        android:layout_height="@dimen/item_task_list_action_size"
+        android:layout_width="@dimen/item_task_list_action_size"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/item_task_complete"
+        android:layout_toStartOf="@id/item_task_complete"
+        android:padding="@dimen/spacing_medium"
+        />
+
+    <TextView
+        android:id="@+id/item_task_desc"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@id/item_task_delete"
+        android:layout_toStartOf="@id/item_task_delete"
+        android:layout_marginTop="@dimen/spacing_micro"
+        android:paddingLeft="@dimen/spacing_regular"
+        android:textSize="@dimen/text_size_small"
+        android:textColor="@color/gray_1"
+        android:ellipsize="end"
+        android:maxLines="2"
+        tools:text="Finish Woodpecker auto scheduling feature"
+        />
+
+    <TextView
+        android:id="@+id/item_task_due_display"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/item_task_desc"
+        android:layout_marginBottom="@dimen/spacing_micro"
+        android:paddingLeft="@dimen/spacing_regular"
+        android:paddingRight="@dimen/spacing_regular"
+        android:textSize="@dimen/text_size_xsmall"
+        android:textColor="@color/gray_2"
+        tools:text="Dec 5, 2014"
+        />
+
+    <View
+        android:layout_height="1dp"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        />
+</RelativeLayout>
