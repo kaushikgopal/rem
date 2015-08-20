@@ -29,7 +29,7 @@ public class TaskCreateController {
 
     public void resetDueDateToNow() {
         _talkToTaskCreate.updateDueDateDisplay(//
-              _coreDateUtils.format(CoreDateUtils.DUE_DATE_FORMAT, _coreDateUtils.now()), "now");
+              CoreDateUtils.format(CoreDateUtils.DUE_DATE_FORMAT, _coreDateUtils.now()), "now");
     }
 
     public void changeDueDateBy(IncreaseOrDecrease increaseOrDecrease,
@@ -61,7 +61,7 @@ public class TaskCreateController {
         }
 
         _talkToTaskCreate.updateDueDateDisplay(//
-              _coreDateUtils.format(CoreDateUtils.DUE_DATE_FORMAT, _dueDateTime), _getDueDateDiffText());
+              CoreDateUtils.format(CoreDateUtils.DUE_DATE_FORMAT, _dueDateTime), _getDueDateDiffText());
     }
 
     public void setTimeTo(int hour, int minute) {
@@ -78,7 +78,7 @@ public class TaskCreateController {
               0);
 
         _talkToTaskCreate.updateDueDateDisplay(//
-              _coreDateUtils.format(CoreDateUtils.DUE_DATE_FORMAT, _dueDateTime), _getDueDateDiffText());
+              CoreDateUtils.format(CoreDateUtils.DUE_DATE_FORMAT, _dueDateTime), _getDueDateDiffText());
     }
 
     public void onCancelButtonClicked() {
@@ -91,7 +91,7 @@ public class TaskCreateController {
         DateTime now = _coreDateUtils.now();
         int diffValue;
 
-        switch (_coreDateUtils.getDiffUnit(now, _dueDateTime)) {
+        switch (CoreDateUtils.getDiffUnit(now, _dueDateTime)) {
             case MONTH:
                 if (_coreDateUtils.isAfterNow(_dueDateTime)) {
                     diffValue = _dueDateTime.getMonth() - now.getMonth();
@@ -112,7 +112,7 @@ public class TaskCreateController {
                 if (_coreDateUtils.isAfterNow(_dueDateTime)) {
                     diffValue = _dueDateTime.getDayOfYear() - now.getDayOfYear();
                     if (diffValue < 0) {
-                        diffValue += _coreDateUtils.getLastDayOfTheYear(_dueDateTime);
+                        diffValue += CoreDateUtils.getLastDayOfTheYear(_dueDateTime);
                     }
                 } else {
                     diffValue = _dueDateTime.getDayOfYear() - now.getDayOfYear();

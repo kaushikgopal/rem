@@ -13,7 +13,6 @@ public class CoreDateUtils {
     public static final String DUE_DATE_FORMAT = "MMM D [WWW] h12:mm a";
     public static final String DATE_FORMAT_DB = "yyyy-MM-dd HH:mm:ss";
 
-
     public CoreDateUtils() { }
 
     /**
@@ -26,11 +25,7 @@ public class CoreDateUtils {
         return TimeZone.getTimeZone("UTC");
     }
 
-    public boolean isAfterNow(DateTime dt1) {
-        return dt1.getMilliseconds(getUtcTimeZone()) > now().getMilliseconds(getUtcTimeZone());
-    }
-
-    public TimeUnit getDiffUnit(DateTime fromDate, DateTime toDate) {
+    public static TimeUnit getDiffUnit(DateTime fromDate, DateTime toDate) {
         long diffInMs = Math.abs(toDate.getMilliseconds(getUtcTimeZone()) -
                                  fromDate.getMilliseconds(getUtcTimeZone()));
 
@@ -47,23 +42,19 @@ public class CoreDateUtils {
         }
     }
 
-    public int getLastDayOfTheYear(DateTime dt) {
+    public static int getLastDayOfTheYear(DateTime dt) {
         return new DateTime(dt.getYear(), 12, 31, 23, 59, 59, 59).getDayOfYear();
     }
 
     // -----------------------------------------------------------------------------------
     // Wrappers
 
-    public long getTimeFor(DateTime dt) {
+    public static long getTimeFor(DateTime dt) {
         return dt.getMilliseconds(getUtcTimeZone());
     }
 
-    public Date getDateFor(DateTime dt) {
+    public static Date getDateFor(DateTime dt) {
         return new Date(getTimeFor(dt));
-    }
-
-    public static DateTime now() {
-        return DateTime.now(TimeZone.getDefault());
     }
 
     public static Date DateFrom(String dateAsString, String format) throws ParseException {
@@ -84,6 +75,17 @@ public class CoreDateUtils {
 
     public static String format(@NotNull String pattern, @NotNull DateTime dateTime) {
         return dateTime.format(pattern, Locale.getDefault());
+    }
+
+    // -----------------------------------------------------------------------------------
+    // Current time - non-static to allow convenient testing
+
+    public DateTime now() {
+        return DateTime.now(TimeZone.getDefault());
+    }
+
+    public boolean isAfterNow(DateTime dt1) {
+        return dt1.getMilliseconds(getUtcTimeZone()) > now().getMilliseconds(getUtcTimeZone());
     }
 
     public enum IncreaseOrDecrease {
