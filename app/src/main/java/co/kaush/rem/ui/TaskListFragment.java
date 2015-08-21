@@ -16,8 +16,8 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import co.kaush.rem.R;
 import co.kaush.rem.entity.Task;
+import co.kaush.rem.service.TaskService;
 import co.kaush.rem.util.ColorFilterCache;
-import com.squareup.sqlbrite.BriteDatabase;
 import java.util.List;
 import javax.inject.Inject;
 
@@ -28,7 +28,7 @@ public class TaskListFragment
     @InjectView(R.id.toolbar) Toolbar toolbar;
     @InjectView(R.id.task_list) RecyclerView taskList;
 
-    @Inject BriteDatabase db;
+    @Inject TaskService _taskService;
 
     private TaskListController _taskListController;
     private TaskListAdapter _adapter;
@@ -46,7 +46,7 @@ public class TaskListFragment
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        _taskListController = new TaskListController(TaskListFragment.this, db);
+        _taskListController = new TaskListController(TaskListFragment.this, _taskService);
     }
 
     @Override

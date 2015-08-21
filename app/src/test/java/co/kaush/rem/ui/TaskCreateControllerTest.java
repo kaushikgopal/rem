@@ -4,7 +4,6 @@ import co.kaush.rem.util.CoreDateUtils;
 import hirondelle.date4j.DateTime;
 import java.util.concurrent.TimeUnit;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 

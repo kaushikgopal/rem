@@ -1,7 +1,7 @@
 package co.kaush.rem.ui;
 
 import co.kaush.rem.entity.Task;
-import com.squareup.sqlbrite.BriteDatabase;
+import co.kaush.rem.service.TaskService;
 import java.util.List;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -10,16 +10,12 @@ import timber.log.Timber;
 
 public class TaskListController {
 
-    private static final String LIST_QUERY = "SELECT * FROM " + Task.TABLE +
-                                             " ORDER BY " + Task.DUE_DATE +
-                                             " ASC";
-
     private ITalkToTaskListScreen _talkToTaskList;
-    private BriteDatabase _db;
+    private TaskService _taskService;
 
-    public TaskListController(ITalkToTaskListScreen talkToTaskList, BriteDatabase db) {
+    public TaskListController(ITalkToTaskListScreen talkToTaskList, TaskService taskService) {
         _talkToTaskList = talkToTaskList;
-        _db = db;
+        _taskService = taskService;
     }
 
     public void onAddTaskClicked() {
@@ -27,8 +23,7 @@ public class TaskListController {
     }
 
     public void refreshTaskList() {
-        _db.createQuery(Task.TABLE, LIST_QUERY)
-              .map(Task.MAP)
+        _taskService.getTaskList()
               .subscribeOn(Schedulers.io())
               .observeOn(AndroidSchedulers.mainThread())
               .subscribe(new Action1<List<Task>>() {
