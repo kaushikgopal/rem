@@ -15,7 +15,8 @@ public class TaskViewHolder
       extends RecyclerView.ViewHolder {
 
     @InjectView(R.id.item_task_desc) TextView _taskDescription;
-    @InjectView(R.id.item_task_due_display) TextView _dueDateDisplay;
+    @InjectView(R.id.item_task_due_display_day) TextView _dueDateDisplayDay;
+    @InjectView(R.id.item_task_due_display_month) TextView _dueDateDisplayMonth;
     @InjectView(R.id.item_task_delete) ImageView _btnDeleteTask;
     @InjectView(R.id.item_task_complete) ImageView _btnCompleteTask;
     @InjectView(R.id.item_task_container) RelativeLayout _taskContainer;
@@ -28,13 +29,14 @@ public class TaskViewHolder
     public void bindContent(final Task t, final TaskListHandler handler) {
 
         _taskDescription.setText(t.description);
-        _dueDateDisplay.setText(CoreDateUtils.format(CoreDateUtils.DUE_DATE_FORMAT, t.dueDate));
+        _dueDateDisplayDay.setText(CoreDateUtils.format(CoreDateUtils.DUE_DATE_DAY, t.dueDate));
+        _dueDateDisplayMonth.setText(CoreDateUtils.format(CoreDateUtils.DUE_DATE_MONTH, t.dueDate));
 
-        if (t.isOverdue()) {
-            _dueDateDisplay.setTextColor(_dueDateDisplay.getResources().getColor(R.color.orange_1));
-        } else {
-            _dueDateDisplay.setTextColor(_dueDateDisplay.getResources().getColor(R.color.gray_2));
-        }
+        //if (t.isOverdue()) {
+        //    _dueDateDisplay.setTextColor(_dueDateDisplay.getResources().getColor(R.color.orange_1));
+        //} else {
+        //    _dueDateDisplay.setTextColor(_dueDateDisplay.getResources().getColor(R.color.gray_2));
+        //}
 
         _btnDeleteTask.setOnClickListener(new View.OnClickListener() {
             @Override

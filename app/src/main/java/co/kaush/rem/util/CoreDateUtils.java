@@ -11,6 +11,8 @@ import org.jetbrains.annotations.NotNull;
 public class CoreDateUtils {
 
     public static final String DUE_DATE_FORMAT = "MMM D [WWW] h12:mm a";
+    public static final String DUE_DATE_DAY = "D";
+    public static final String DUE_DATE_MONTH = "MMM";
     public static final String DATE_FORMAT_DB = "yyyy-MM-dd HH:mm:ss";
 
     public CoreDateUtils() { }
