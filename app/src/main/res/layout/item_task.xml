@@ -29,40 +29,30 @@
         android:padding="@dimen/spacing_medium"
         />
 
-    <TextView
-        android:id="@+id/item_task_desc"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-
-        android:layout_toLeftOf="@id/item_task_delete"
-        android:layout_toStartOf="@id/item_task_delete"
-        android:layout_marginTop="@dimen/spacing_micro"
-        android:paddingLeft="@dimen/spacing_regular"
-        android:textSize="@dimen/text_size_small"
-        android:textColor="@color/gray_1"
-        android:ellipsize="end"
-        android:maxLines="2"
-        tools:text="Finish Woodpecker auto scheduling feature"
-        />
 
     <LinearLayout
         android:id="@+id/item_task_due_display"
         android:orientation="vertical"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_width="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:paddingLeft="@dimen/spacing_regular"
         android:paddingTop="@dimen/spacing_micro"
+        android:paddingBottom="@dimen/spacing_micro"
+        android:paddingLeft="@dimen/spacing_medium"
+        android:paddingRight="@dimen/spacing_medium"
         android:gravity="center"
+        android:minWidth="@dimen/item_task_list_due_display_width"
+        style="@style/due_display"
         >
 
         <TextView
-            android:id="@+id/item_task_due_display_day"
+            android:id="@+id/item_task_due_display_date"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:textSize="@dimen/text_size_regular"
-            android:text="4"
+            android:textColor="@color/white"
+            tools:text="4"
             />
 
         <TextView
@@ -70,24 +60,40 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:textSize="@dimen/text_size_xsmall"
-            android:text="Apr"
+            android:textColor="@color/white"
+            tools:text="Apr"
             />
     </LinearLayout>
 
-    <!-- -->
-    <!--<TextView-->
-        <!--android:id="@+id/item_task_due_display"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_below="@id/item_task_desc"-->
-        <!--android:layout_marginBottom="@dimen/spacing_micro"-->
-        <!--android:paddingLeft="@dimen/spacing_regular"-->
-        <!--android:paddingRight="@dimen/spacing_regular"-->
-        <!--android:textSize="@dimen/text_size_xsmall"-->
-        <!--android:textColor="@color/gray_2"-->
-        <!--tools:text="Dec 5, 2014"-->
-        <!--/>-->
+    <TextView
+        android:id="@+id/item_task_desc"
+        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_toEndOf="@id/item_task_due_display"
+        android:layout_toLeftOf="@id/item_task_delete"
+        android:layout_toRightOf="@id/item_task_due_display"
+        android:layout_toStartOf="@id/item_task_delete"
+        android:paddingLeft="@dimen/spacing_regular"
+        android:layout_marginTop="@dimen/spacing_micro"
+        android:gravity="center_vertical"
+        android:textSize="@dimen/text_size_regular"
+        android:textColor="@color/gray_1"
+        android:ellipsize="end"
+        android:maxLines="1"
+        tools:text="Welcome to Remme Yo! asdfadfa sdfas dfasdfasdf asd fasdfa sdfasdf"
+        />
 
-
-
+    <TextView
+        android:id="@+id/item_task_due_display_day_time"
+        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/item_task_desc"
+        android:layout_toEndOf="@id/item_task_due_display"
+        android:layout_toRightOf="@id/item_task_due_display"
+        android:paddingLeft="@dimen/spacing_regular"
+        android:paddingRight="@dimen/spacing_regular"
+        android:textSize="@dimen/text_size_xsmall"
+        android:textColor="@color/gray_2"
+        android:text="[Fri] 05:13am"
+        />
 </RelativeLayout>

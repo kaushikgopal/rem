@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="due_display">
+        <item name="android:background">@color/accent</item>
+        <item name="fontPath">fonts/SourceSansPro-Bold.ttf"</item>
+    </style>
+
     <style name="btn_quick_create_time">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>

@@ -13,6 +13,7 @@
     <dimen name="text_size_large">16sp</dimen>
     <dimen name="text_size_xlarge">18sp</dimen>
 
+    <dimen name="item_task_list_due_display_width">50dp</dimen>
     <dimen name="item_task_list_action_size">44dp</dimen>
 
     <dimen name="elevation_default">4dp</dimen>

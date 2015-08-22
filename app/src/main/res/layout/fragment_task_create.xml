@@ -39,7 +39,6 @@
 
         <TextView
             android:id="@+id/btn_task_due_date_display"
-            android:background="@color/accent"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:layout_marginLeft="@dimen/spacing_micro"
@@ -48,9 +47,8 @@
             android:gravity="center"
             android:textSize="@dimen/text_size_small"
             android:textColor="@color/white_2"
-            fontPath="fonts/SourceSansPro-Bold.ttf"
-            tools:ignore="MissingPrefix"
             android:layout_span="3"
+            style="@style/due_display"
             tools:text="17 Dec 9:00 AM in 3 hours"
             />
 

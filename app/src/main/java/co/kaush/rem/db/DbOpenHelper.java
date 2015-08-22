@@ -35,7 +35,17 @@ final class DbOpenHelper
         Timber.i("Seed data to database");
 
         db.execSQL("INSERT INTO "+Task.TABLE +
+                   "(DESCRIPTION, DUE_DATE) VALUES ('I need a reminder app', '2014-04-04 09:00:00');");
+        db.execSQL("INSERT INTO "+Task.TABLE +
                    "(DESCRIPTION, DUE_DATE) VALUES ('Welcome to Remme', '2016-04-04 09:00:00');");
+        db.execSQL("INSERT INTO "+Task.TABLE +
+                   "(DESCRIPTION, DUE_DATE) VALUES ('Make DroidCon NYC', '2016-03-20 09:00:00');");
+        db.execSQL("INSERT INTO "+Task.TABLE +
+                   "(DESCRIPTION, DUE_DATE) VALUES ('Panic that DroidCon talk not made', '2016-11-03 09:00:00');");
+        db.execSQL("INSERT INTO "+Task.TABLE +
+                   "(DESCRIPTION, DUE_DATE) VALUES ('Really make talk', '2016-12-17 09:00:00');");
+        db.execSQL("INSERT INTO "+Task.TABLE +
+                   "(DESCRIPTION, DUE_DATE) VALUES ('Give actual talk', '2016-12-20 09:00:00');");
     }
 
     @Override

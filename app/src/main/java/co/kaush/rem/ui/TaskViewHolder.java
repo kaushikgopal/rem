@@ -15,7 +15,7 @@ public class TaskViewHolder
       extends RecyclerView.ViewHolder {
 
     @InjectView(R.id.item_task_desc) TextView _taskDescription;
-    @InjectView(R.id.item_task_due_display_day) TextView _dueDateDisplayDay;
+    @InjectView(R.id.item_task_due_display_date) TextView _dueDateDisplayDay;
     @InjectView(R.id.item_task_due_display_month) TextView _dueDateDisplayMonth;
     @InjectView(R.id.item_task_delete) ImageView _btnDeleteTask;
     @InjectView(R.id.item_task_complete) ImageView _btnCompleteTask;
