@@ -50,6 +50,18 @@ public class TaskListController {
 
     }
 
+    public void removeTask(final int position) {
+        Timber.d("TODO: remove task");
+    }
+
+    public void completeTask(int position) {
+        Timber.d("TODO: complete task");
+    }
+
+    public void editTask(Task task) {
+        Timber.d("TODO: edit task");
+    }
+
     public String getDueDayTextFor(Task task) {
         return _taskListPresenter.getDueDateTextFor(task);
     }

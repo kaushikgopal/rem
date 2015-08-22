@@ -27,9 +27,7 @@ public class TaskViewHolder
         ButterKnife.inject(this, parentView);
     }
 
-    public void bindContent(final Task t,
-                            final TaskListHandler handler,
-                            final TaskListController controller) {
+    public void bindContent(final Task t, final TaskListController controller) {
 
         _taskDescription.setText(t.description);
         _dueDateDisplayDay.setText(CoreDateUtils.format(CoreDateUtils.DUE_DATE_DAY, t.dueDate));
@@ -45,30 +43,22 @@ public class TaskViewHolder
         _btnDeleteTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                handler.removeTask(getPosition());
+                controller.removeTask(getPosition());
             }
         });
 
         _btnCompleteTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                handler.completeTask(getPosition());
+                controller.completeTask(getPosition());
             }
         });
 
         _taskContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                handler.editTask(t);
+                controller.editTask(t);
             }
         });
-    }
-
-    public interface TaskListHandler {
-        void removeTask(int position);
-
-        void completeTask(int position);
-
-        void editTask(Task task);
     }
 }
