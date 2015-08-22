@@ -36,6 +36,10 @@ public class TaskListController {
         return _taskListPresenter;
     }
 
+    public List<Task> getTasks() {
+        return _tasks;
+    }
+
     public int getTaskListSize() {
         return _tasks.size();
     }

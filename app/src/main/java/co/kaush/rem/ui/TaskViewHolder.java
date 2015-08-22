@@ -40,7 +40,7 @@ public class TaskViewHolder
 
         _dueDayTime.setText(presenter.getDueDayTimeTextFor(task));
         _dueDayTime.setTextColor(_dueDayTime.getResources()
-              .getColor(presenter.getDueDayTimeColorIdFor(task)));
+              .getColor(presenter.getDueDayTimeColorIdFor(controller.getTasks(), getPosition())));
 
         _btnDeleteTask.setOnClickListener(new View.OnClickListener() {
             @Override

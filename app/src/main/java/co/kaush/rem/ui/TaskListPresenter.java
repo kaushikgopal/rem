@@ -5,6 +5,7 @@ import co.kaush.rem.R;
 import co.kaush.rem.entity.Task;
 import co.kaush.rem.util.CoreDateUtils;
 import hirondelle.date4j.DateTime;
+import java.util.List;
 
 import static co.kaush.rem.util.CoreDateUtils.DUE_DATE_DAYTIME;
 import static co.kaush.rem.util.CoreDateUtils.DUE_DATE_DAYTIME_WITH_YEAR;
@@ -28,7 +29,9 @@ public class TaskListPresenter {
     }
 
     @ColorRes
-    public int getDueDayTimeColorIdFor(Task task) {
+    public int getDueDayTimeColorIdFor(List<Task> tasks, int position) {
+        Task task = tasks.get(position);
+
         if (task.isOverdue(_coreDateUtils)) {
             return R.color.orange_1;
         }

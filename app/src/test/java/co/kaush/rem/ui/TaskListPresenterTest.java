@@ -4,6 +4,8 @@ import co.kaush.rem.R;
 import co.kaush.rem.entity.Task;
 import co.kaush.rem.util.CoreDateUtils;
 import hirondelle.date4j.DateTime;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -44,8 +46,12 @@ public class TaskListPresenterTest {
 
     @Test
     public void DueDateTimeColor_ShouldBeRed_WhenTaskIsOverdue() {
-        assertThat(_presenter.getDueDayTimeColorIdFor(getTaskOverdue())).isEqualTo(R.color.orange_1);
-        assertThat(_presenter.getDueDayTimeColorIdFor(getTaskDueToday())).isEqualTo(R.color.gray_2);
+        List<Task> tasks = new ArrayList<>();
+        tasks.add(getTaskOverdue());
+        tasks.add(getTaskDueToday());
+
+        assertThat(_presenter.getDueDayTimeColorIdFor(tasks, 0)).isEqualTo(R.color.orange_1);
+        assertThat(_presenter.getDueDayTimeColorIdFor(tasks, 1)).isEqualTo(R.color.gray_2);
     }
 
     // -----------------------------------------------------------------------------------
