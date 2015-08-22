@@ -37,6 +37,8 @@ final class DbOpenHelper
         db.execSQL("INSERT INTO "+Task.TABLE +
                    "(DESCRIPTION, DUE_DATE) VALUES ('I need a reminder app', '2014-04-04 09:00:00');");
         db.execSQL("INSERT INTO "+Task.TABLE +
+                   "(DESCRIPTION, DUE_DATE) VALUES ('Welcome to Remme Today', '2015-04-04 09:00:00');");
+        db.execSQL("INSERT INTO "+Task.TABLE +
                    "(DESCRIPTION, DUE_DATE) VALUES ('Welcome to Remme', '2016-04-04 09:00:00');");
         db.execSQL("INSERT INTO "+Task.TABLE +
                    "(DESCRIPTION, DUE_DATE) VALUES ('Make DroidCon NYC', '2016-03-20 09:00:00');");

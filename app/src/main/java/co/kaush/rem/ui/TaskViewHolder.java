@@ -17,6 +17,7 @@ public class TaskViewHolder
     @InjectView(R.id.item_task_desc) TextView _taskDescription;
     @InjectView(R.id.item_task_due_display_date) TextView _dueDateDisplayDay;
     @InjectView(R.id.item_task_due_display_month) TextView _dueDateDisplayMonth;
+    @InjectView(R.id.item_task_due_display_day_time) TextView _dueDayTime;
     @InjectView(R.id.item_task_delete) ImageView _btnDeleteTask;
     @InjectView(R.id.item_task_complete) ImageView _btnCompleteTask;
     @InjectView(R.id.item_task_container) RelativeLayout _taskContainer;
@@ -26,11 +27,14 @@ public class TaskViewHolder
         ButterKnife.inject(this, parentView);
     }
 
-    public void bindContent(final Task t, final TaskListHandler handler) {
+    public void bindContent(final Task t,
+                            final TaskListHandler handler,
+                            final TaskListController controller) {
 
         _taskDescription.setText(t.description);
         _dueDateDisplayDay.setText(CoreDateUtils.format(CoreDateUtils.DUE_DATE_DAY, t.dueDate));
         _dueDateDisplayMonth.setText(CoreDateUtils.format(CoreDateUtils.DUE_DATE_MONTH, t.dueDate));
+        _dueDayTime.setText(controller.getDueDayTextFor(t));
 
         //if (t.isOverdue()) {
         //    _dueDateDisplay.setTextColor(_dueDateDisplay.getResources().getColor(R.color.orange_1));
@@ -61,10 +65,10 @@ public class TaskViewHolder
     }
 
     public interface TaskListHandler {
-        public void removeTask(int position);
+        void removeTask(int position);
 
-        public void completeTask(int position);
+        void completeTask(int position);
 
-        public void editTask(Task task);
+        void editTask(Task task);
     }
 }

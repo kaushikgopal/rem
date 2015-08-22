@@ -15,8 +15,11 @@ public class TaskListAdapter
       implements TaskViewHolder.TaskListHandler {
 
     private List<Task> _tasks = new ArrayList<>();
+    private final TaskListController _controller;
 
-    public TaskListAdapter() { }
+    public TaskListAdapter(TaskListController taskListController) {
+        _controller = taskListController;
+    }
 
     @Override
     public TaskViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -27,7 +30,8 @@ public class TaskListAdapter
 
     @Override
     public void onBindViewHolder(TaskViewHolder holder, int position) {
-        holder.bindContent(_tasks.get(position), TaskListAdapter.this);
+        // TODO: remove taskListAdapter, and just send it to the controller
+        holder.bindContent(_tasks.get(position), TaskListAdapter.this, _controller);
     }
 
     @Override

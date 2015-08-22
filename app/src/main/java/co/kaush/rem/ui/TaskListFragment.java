@@ -16,7 +16,6 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import co.kaush.rem.R;
 import co.kaush.rem.entity.Task;
-import co.kaush.rem.service.TaskService;
 import co.kaush.rem.util.ColorFilterCache;
 import java.util.List;
 import javax.inject.Inject;
@@ -69,7 +68,7 @@ public class TaskListFragment
     public void onResume() {
         super.onResume();
 
-        _adapter = new TaskListAdapter();
+        _adapter = new TaskListAdapter(_taskListController);
         taskList.setAdapter(_adapter);
         taskList.setHasFixedSize(true);
         taskList.setLayoutManager(new LinearLayoutManager(getActivity()));

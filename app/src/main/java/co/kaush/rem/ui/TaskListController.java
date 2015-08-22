@@ -50,6 +50,10 @@ public class TaskListController {
 
     }
 
+    public String getDueDayTextFor(Task task) {
+        return _taskListPresenter.getDueDateTextFor(task);
+    }
+
     public interface ITalkToTaskListScreen {
         void moveToCreateNewTask();
 
