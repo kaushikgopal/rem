@@ -9,11 +9,16 @@ import co.kaush.rem.R;
 import co.kaush.rem.RemModule;
 import co.kaush.rem.util.ColorFilterCache;
 import dagger.Module;
+import dagger.Provides;
 import java.util.Collections;
 import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
 public class LauncherActivity
       extends BaseActivity {
+
+    @Inject TaskListFragment _taskListFragment;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -21,7 +26,7 @@ public class LauncherActivity
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                  .replace(android.R.id.content, TaskListFragment.newInstance())
+                  .replace(android.R.id.content, _taskListFragment)
                   .commit();
         }
     }
@@ -51,8 +56,23 @@ public class LauncherActivity
         add.setColorFilter(ColorFilterCache.getWhiteColorFilter());
     }
 
-    @Module(injects = { LauncherActivity.class, TaskListFragment.class, TaskCreateFragment.class },
+    @Module(injects = { LauncherActivity.class,
+                        TaskListFragment.class,
+                        TaskCreateFragment.class },
           addsTo = RemModule.class,
           library = true)
-    public class LauncherModule {}
+    public class LauncherModule {
+
+        @Provides
+        @Singleton
+        public TaskListFragment provideTaskListFragment() {
+            return TaskListFragment.newInstance();
+        }
+
+        @Provides
+        @Singleton
+        public TaskListController.ITalkToTaskListScreen provideTaskListTalker(TaskListFragment fragment) {
+            return fragment;
+        }
+    }
 }

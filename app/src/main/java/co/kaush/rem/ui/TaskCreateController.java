@@ -5,9 +5,12 @@ import co.kaush.rem.util.CoreDateUtils.IncreaseOrDecrease;
 import hirondelle.date4j.DateTime;
 import hirondelle.date4j.DateTime.DayOverflow;
 import java.util.concurrent.TimeUnit;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import static co.kaush.rem.util.CoreDateUtils.IncreaseOrDecrease.MINUS;
 
+@Singleton
 public class TaskCreateController {
 
     public static final int NEW_TASK = -1;
@@ -16,6 +19,7 @@ public class TaskCreateController {
     private CoreDateUtils _coreDateUtils;
     private DateTime _dueDateTime = null;
 
+    @Inject
     public TaskCreateController(ITalkToTaskCreateScreen talkToTaskList,
                                 CoreDateUtils coreDateUtils,
                                 int initialTaskId) {

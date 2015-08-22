@@ -28,9 +28,8 @@ public class TaskListFragment
     @InjectView(R.id.toolbar) Toolbar toolbar;
     @InjectView(R.id.task_list) RecyclerView taskList;
 
-    @Inject TaskService _taskService;
+    @Inject TaskListController _taskListController;
 
-    private TaskListController _taskListController;
     private TaskListAdapter _adapter;
 
     public static TaskListFragment newInstance() {
@@ -41,12 +40,6 @@ public class TaskListFragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);  // enable action bar items
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        _taskListController = new TaskListController(TaskListFragment.this, _taskService);
     }
 
     @Override

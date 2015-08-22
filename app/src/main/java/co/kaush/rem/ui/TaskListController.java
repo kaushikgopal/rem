@@ -3,16 +3,20 @@ package co.kaush.rem.ui;
 import co.kaush.rem.entity.Task;
 import co.kaush.rem.service.TaskService;
 import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
+@Singleton
 public class TaskListController {
 
     private ITalkToTaskListScreen _talkToTaskList;
     private TaskService _taskService;
 
+    @Inject
     public TaskListController(ITalkToTaskListScreen talkToTaskList, TaskService taskService) {
         _talkToTaskList = talkToTaskList;
         _taskService = taskService;
