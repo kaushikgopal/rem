@@ -1,5 +1,6 @@
 package co.kaush.rem.ui;
 
+import android.support.annotation.ColorRes;
 import co.kaush.rem.R;
 import co.kaush.rem.entity.Task;
 import co.kaush.rem.util.CoreDateUtils;
@@ -17,7 +18,7 @@ public class TaskListPresenter {
         _coreDateUtils = coreDateUtils;
     }
 
-    public String getDueDateTextFor(Task task) {
+    public String getDueDayTimeTextFor(Task task) {
         DateTime dueDate = getDateTimeFor(task.dueDate);
         if (dueDate.getYear().intValue() == _coreDateUtils.now().getYear().intValue()) {
             return format(DUE_DATE_DAYTIME, dueDate);
@@ -26,6 +27,7 @@ public class TaskListPresenter {
         }
     }
 
+    @ColorRes
     public int getDueDayTimeColorIdFor(Task task) {
         if (task.isOverdue(_coreDateUtils)) {
             return R.color.orange_1;

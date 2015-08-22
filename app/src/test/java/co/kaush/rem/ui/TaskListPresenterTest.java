@@ -33,13 +33,13 @@ public class TaskListPresenterTest {
     @Test
     public void DueDayTimeText_ShouldShowYear_WhenYearNotCurrent() {
 
-        assertThat(_presenter.getDueDateTextFor(getTaskOverdue())).isEqualTo("[Wed] 9:00 AM [1985]");
+        assertThat(_presenter.getDueDayTimeTextFor(getTaskOverdue())).isEqualTo("[Wed] 9:00 AM [1985]");
 
         Task task = getTaskDueToday();
-        assertThat(_presenter.getDueDateTextFor(task)).isEqualTo("[Sat] 11:12 PM");
+        assertThat(_presenter.getDueDayTimeTextFor(task)).isEqualTo("[Sat] 11:12 PM");
 
         task = aTask().withDueDate(getDateFor(new DateTime(2015, 3, 20, 9, 0, 0, 0))).build();
-        assertThat(_presenter.getDueDateTextFor(task)).isEqualTo("[Fri] 9:00 AM [2015]");
+        assertThat(_presenter.getDueDayTimeTextFor(task)).isEqualTo("[Fri] 9:00 AM [2015]");
     }
 
     @Test

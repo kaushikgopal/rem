@@ -29,14 +29,16 @@ public class TaskViewHolder
 
     public void bindContent(final Task t, final TaskListController controller) {
 
-        _taskDescription.setText(t.description);
+        TaskListPresenter presenter = controller.getTaskListPresenter();
 
+        //TODO: move below 3 to presenter (for cleanliness)
+        _taskDescription.setText(t.description);
         _dueDateDisplayDay.setText(CoreDateUtils.format(CoreDateUtils.DUE_DATE_DAY, t.dueDate));
         _dueDateDisplayMonth.setText(CoreDateUtils.format(CoreDateUtils.DUE_DATE_MONTH, t.dueDate));
 
-        _dueDayTime.setText(controller.getDueDayTextFor(t));
+        _dueDayTime.setText(presenter.getDueDayTimeTextFor(t));
         _dueDayTime.setTextColor(_dueDayTime.getResources()
-              .getColor(controller.getDueDayTimeColorIdFor(t)));
+              .getColor(presenter.getDueDayTimeColorIdFor(t)));
 
         _btnDeleteTask.setOnClickListener(new View.OnClickListener() {
             @Override
