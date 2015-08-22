@@ -5,14 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import co.kaush.rem.R;
-import co.kaush.rem.entity.Task;
-import java.util.ArrayList;
-import java.util.List;
 
 public class TaskListAdapter
-      extends RecyclerView.Adapter<TaskViewHolder>{
+      extends RecyclerView.Adapter<TaskViewHolder> {
 
-    private List<Task> _tasks = new ArrayList<>();
     private final TaskListController _controller;
 
     public TaskListAdapter(TaskListController taskListController) {
@@ -28,16 +24,11 @@ public class TaskListAdapter
 
     @Override
     public void onBindViewHolder(TaskViewHolder holder, int position) {
-        holder.bindContent(_tasks.get(position), _controller);
+        holder.bindContent(_controller);
     }
 
     @Override
     public int getItemCount() {
-        return _tasks.size();
-    }
-
-    public void updateTasks(List<Task> tasks) {
-        _tasks = tasks;
-        notifyDataSetChanged();
+        return _controller.getTaskListSize();
     }
 }

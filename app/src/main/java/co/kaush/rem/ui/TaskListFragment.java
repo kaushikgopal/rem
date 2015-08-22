@@ -69,6 +69,7 @@ public class TaskListFragment
         super.onResume();
 
         _adapter = new TaskListAdapter(_taskListController);
+
         taskList.setAdapter(_adapter);
         taskList.setHasFixedSize(true);
         taskList.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -83,7 +84,7 @@ public class TaskListFragment
 
     @Override
     public void updateTaskList(List<Task> tasks) {
-        _adapter.updateTasks(tasks);
+        _adapter.notifyDataSetChanged();
     }
 
     @Override

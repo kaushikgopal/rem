@@ -3,6 +3,7 @@ package co.kaush.rem.ui;
 import co.kaush.rem.entity.Task;
 import co.kaush.rem.service.TaskService;
 import co.kaush.rem.util.CoreDateUtils;
+import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -18,6 +19,8 @@ public class TaskListController {
     private TaskService _taskService;
     private TaskListPresenter _taskListPresenter;
 
+    private List<Task> _tasks = new ArrayList<>();
+
     @Inject
     public TaskListController(ITalkToTaskListScreen talkToTaskList,
                               TaskService taskService,
@@ -27,9 +30,22 @@ public class TaskListController {
         _taskListPresenter = new TaskListPresenter(coreDateUtils);
     }
 
+    // -----------------------------------------------------------------------------------
+
     public TaskListPresenter getTaskListPresenter() {
         return _taskListPresenter;
     }
+
+    public int getTaskListSize() {
+        return _tasks.size();
+    }
+
+    public Task getTask(int position) {
+        return _tasks.get(position);
+    }
+
+    // -----------------------------------------------------------------------------------
+    // actions
 
     public void onAddTaskClicked() {
         _talkToTaskList.moveToCreateNewTask();
@@ -43,6 +59,7 @@ public class TaskListController {
                   @Override
                   public void call(List<Task> tasks) {
                       Timber.d("%d tasks", tasks.size());
+                      _tasks = tasks;
                       _talkToTaskList.updateTaskList(tasks);
                   }
               }, new Action1<Throwable>() {

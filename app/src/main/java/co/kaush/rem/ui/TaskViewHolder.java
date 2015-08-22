@@ -27,18 +27,20 @@ public class TaskViewHolder
         ButterKnife.inject(this, parentView);
     }
 
-    public void bindContent(final Task t, final TaskListController controller) {
+    public void bindContent(final TaskListController controller) {
 
+        final Task task = controller.getTask(getPosition());
         TaskListPresenter presenter = controller.getTaskListPresenter();
 
         //TODO: move below 3 to presenter (for cleanliness)
-        _taskDescription.setText(t.description);
-        _dueDateDisplayDay.setText(CoreDateUtils.format(CoreDateUtils.DUE_DATE_DAY, t.dueDate));
-        _dueDateDisplayMonth.setText(CoreDateUtils.format(CoreDateUtils.DUE_DATE_MONTH, t.dueDate));
+        _taskDescription.setText(task.description);
+        _dueDateDisplayDay.setText(CoreDateUtils.format(CoreDateUtils.DUE_DATE_DAY, task.dueDate));
+        _dueDateDisplayMonth.setText(CoreDateUtils.format(CoreDateUtils.DUE_DATE_MONTH,
+              task.dueDate));
 
-        _dueDayTime.setText(presenter.getDueDayTimeTextFor(t));
+        _dueDayTime.setText(presenter.getDueDayTimeTextFor(task));
         _dueDayTime.setTextColor(_dueDayTime.getResources()
-              .getColor(presenter.getDueDayTimeColorIdFor(t)));
+              .getColor(presenter.getDueDayTimeColorIdFor(task)));
 
         _btnDeleteTask.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +59,7 @@ public class TaskViewHolder
         _taskContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                controller.editTask(t);
+                controller.editTask(task);
             }
         });
     }
