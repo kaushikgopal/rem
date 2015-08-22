@@ -42,7 +42,7 @@ public class TaskCreateControllerTest {
 
     @Test
     public void DueDateDiffText_ShouldBe_CurrentInstantDateTime_AndDiffTextNow_WhenNewTaskIdPassed() {
-        verify(_talkToTCSMock, atLeastOnce()).updateDueDateDisplay("Apr 3 [Tue] 7:12 PM", "now");
+        verify(_talkToTCSMock).updateDueDateDisplay("Apr 3 [Tue] 7:12 PM", "now");
     }
 
     // -----------------------------------------------------------------------------------

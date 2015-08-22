@@ -6,14 +6,10 @@ import hirondelle.date4j.DateTime;
 import hirondelle.date4j.DateTime.DayOverflow;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
 import static co.kaush.rem.util.CoreDateUtils.IncreaseOrDecrease.MINUS;
 
-@Singleton
 public class TaskCreateController {
-
-    public static final int NEW_TASK = -1;
 
     private ITalkToTaskCreateScreen _talkToTaskCreate;
     private CoreDateUtils _coreDateUtils;
@@ -24,6 +20,7 @@ public class TaskCreateController {
                                 CoreDateUtils coreDateUtils) {
         _talkToTaskCreate = talkToTaskList;
         _coreDateUtils = coreDateUtils;
+        resetDueDateToNow();
     }
 
     public void resetDueDateToNow() {
