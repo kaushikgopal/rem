@@ -15,6 +15,9 @@ public class CoreDateUtils {
     public static final String DUE_DATE_MONTH = "MMM";
     public static final String DATE_FORMAT_DB = "yyyy-MM-dd HH:mm:ss";
 
+    public static final String DUE_DATE_DAYTIME = "[WWW] h12:mm a";
+    public static final String DUE_DATE_DAYTIME_WITH_YEAR = "[WWW] h12:mm a [YYYY]";
+
     public CoreDateUtils() { }
 
     /**

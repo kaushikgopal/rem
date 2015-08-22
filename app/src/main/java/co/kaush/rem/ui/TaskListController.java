@@ -2,6 +2,7 @@ package co.kaush.rem.ui;
 
 import co.kaush.rem.entity.Task;
 import co.kaush.rem.service.TaskService;
+import co.kaush.rem.util.CoreDateUtils;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -15,11 +16,15 @@ public class TaskListController {
 
     private ITalkToTaskListScreen _talkToTaskList;
     private TaskService _taskService;
+    private TaskListPresenter _taskListPresenter;
 
     @Inject
-    public TaskListController(ITalkToTaskListScreen talkToTaskList, TaskService taskService) {
+    public TaskListController(ITalkToTaskListScreen talkToTaskList,
+                              TaskService taskService,
+                              CoreDateUtils coreDateUtils) {
         _talkToTaskList = talkToTaskList;
         _taskService = taskService;
+        _taskListPresenter = new TaskListPresenter(coreDateUtils);
     }
 
     public void onAddTaskClicked() {
@@ -47,6 +52,7 @@ public class TaskListController {
 
     public interface ITalkToTaskListScreen {
         void moveToCreateNewTask();
+
         void updateTaskList(List<Task> tasks);
     }
 }
