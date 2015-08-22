@@ -89,7 +89,7 @@ public class TaskCreateController {
 
         switch (CoreDateUtils.getDiffUnit(now, _dueDateTime)) {
             case MONTH:
-                if (_coreDateUtils.isAfterNow(_dueDateTime)) {
+                if (_coreDateUtils.isInTheFuture(_dueDateTime)) {
                     diffValue = _dueDateTime.getMonth() - now.getMonth();
                     if (diffValue < 0) {
                         diffValue += 12;
@@ -105,7 +105,7 @@ public class TaskCreateController {
                 return _getPluralizedDiffText("Week", diffValue);
 
             case DAY:
-                if (_coreDateUtils.isAfterNow(_dueDateTime)) {
+                if (_coreDateUtils.isInTheFuture(_dueDateTime)) {
                     diffValue = _dueDateTime.getDayOfYear() - now.getDayOfYear();
                     if (diffValue < 0) {
                         diffValue += CoreDateUtils.getLastDayOfTheYear(_dueDateTime);
@@ -117,7 +117,7 @@ public class TaskCreateController {
                 return _getPluralizedDiffText("Dy", diffValue);
 
             case HOUR:
-                if (_coreDateUtils.isAfterNow(_dueDateTime)) {
+                if (_coreDateUtils.isInTheFuture(_dueDateTime)) {
                     diffValue = _dueDateTime.getHour() - now.getHour();
                     if (diffValue < 0) {
                         diffValue += 24;
@@ -137,7 +137,7 @@ public class TaskCreateController {
 
         if (!_dueDateTime.getHour().equals(now.getHour())) {
 
-            if (_coreDateUtils.isAfterNow(_dueDateTime)) {
+            if (_coreDateUtils.isInTheFuture(_dueDateTime)) {
                 diffValue += 60;
             } else {
                 diffValue -= 60;

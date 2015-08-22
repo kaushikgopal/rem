@@ -89,7 +89,11 @@ public class CoreDateUtils {
         return DateTime.now(TimeZone.getDefault());
     }
 
-    public boolean isAfterNow(DateTime dt1) {
+    public boolean isInTheFuture(Date date) {
+        return isInTheFuture(getDateTimeFor(date));
+    }
+
+    public boolean isInTheFuture(DateTime dt1) {
         return dt1.getMilliseconds(getUtcTimeZone()) > now().getMilliseconds(getUtcTimeZone());
     }
 

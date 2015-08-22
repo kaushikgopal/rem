@@ -86,8 +86,8 @@ public class Task {
         }
     };
 
-    public boolean isOverdue() {
-        return CoreDateUtils.getDateTimeFor(dueDate).isInTheFuture(CoreDateUtils.getUtcTimeZone());
+    public boolean isOverdue(CoreDateUtils coreDateUtils) {
+        return !coreDateUtils.isInTheFuture(dueDate);
     }
 
     public static class TaskBuilder {
