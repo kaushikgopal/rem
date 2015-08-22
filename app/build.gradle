@@ -86,8 +86,8 @@ dependencies {
     // TESTING
 
     testCompile 'junit:junit:4.12'
-    testCompile 'org.assertj:assertj-core:1.7.0'
     testCompile "org.mockito:mockito-core:1.9.5"
+    testCompile 'com.google.truth:truth:0.27'
 
     // Set this dependency to use JUnit 4 rules
     androidTestCompile('com.android.support.test:rules:0.2') {

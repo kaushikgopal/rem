@@ -7,7 +7,7 @@ import org.junit.Test;
 import static co.kaush.rem.util.CoreDateUtils.TimeUnit.DAY;
 import static co.kaush.rem.util.CoreDateUtils.TimeUnit.MONTH;
 import static co.kaush.rem.util.CoreDateUtils.TimeUnit.WEEK;
-import static org.assertj.core.api.Assertions.assertThat;
+import static com.google.common.truth.Truth.assertThat;
 
 @SmallTest
 public class CoreDateUtilsTest {
@@ -15,7 +15,7 @@ public class CoreDateUtilsTest {
     @Test
     public void DateFormatting_WhenPatternProvidedForDate() {
         DateTime dt = DateTime.forDateOnly(1979, 4, 3);
-        assertThat(CoreDateUtils.format("MMM D [WWW]", dt)).isEqualToIgnoringCase("Apr 3 [Tue]");
+        assertThat(CoreDateUtils.format("MMM D [WWW]", dt)).isEqualTo("Apr 3 [Tue]");
     }
 
     @Test
