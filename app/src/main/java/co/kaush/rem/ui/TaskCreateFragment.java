@@ -41,8 +41,7 @@ public class TaskCreateFragment
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         _taskCreateController = new TaskCreateController(TaskCreateFragment.this,
-              _coreDateUtils,
-              TaskCreateController.NEW_TASK);
+              _coreDateUtils);
     }
 
     @Override

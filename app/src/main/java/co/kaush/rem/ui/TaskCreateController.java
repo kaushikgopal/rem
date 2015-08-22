@@ -21,14 +21,9 @@ public class TaskCreateController {
 
     @Inject
     public TaskCreateController(ITalkToTaskCreateScreen talkToTaskList,
-                                CoreDateUtils coreDateUtils,
-                                int initialTaskId) {
+                                CoreDateUtils coreDateUtils) {
         _talkToTaskCreate = talkToTaskList;
         _coreDateUtils = coreDateUtils;
-
-        if (initialTaskId == NEW_TASK) {
-            resetDueDateToNow();
-        }
     }
 
     public void resetDueDateToNow() {
