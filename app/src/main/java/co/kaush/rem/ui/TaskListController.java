@@ -1,5 +1,6 @@
 package co.kaush.rem.ui;
 
+import android.support.annotation.ColorRes;
 import co.kaush.rem.entity.Task;
 import co.kaush.rem.service.TaskService;
 import co.kaush.rem.util.CoreDateUtils;
@@ -62,9 +63,18 @@ public class TaskListController {
         Timber.d("TODO: edit task");
     }
 
+    // -----------------------------------------------------------------------------------
+    // Delegate these to presenter
+
     public String getDueDayTextFor(Task task) {
         return _taskListPresenter.getDueDateTextFor(task);
     }
+
+    @ColorRes public int getDueDayTimeColorIdFor(Task task) {
+        return _taskListPresenter.getDueDayTimeColorIdFor(task);
+    }
+
+    // -----------------------------------------------------------------------------------
 
     public interface ITalkToTaskListScreen {
         void moveToCreateNewTask();

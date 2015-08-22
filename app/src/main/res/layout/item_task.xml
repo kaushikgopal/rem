@@ -93,6 +93,5 @@
         android:paddingLeft="@dimen/spacing_regular"
         android:paddingRight="@dimen/spacing_regular"
         android:textSize="@dimen/text_size_xsmall"
-        android:textColor="@color/gray_2"
         />
 </RelativeLayout>

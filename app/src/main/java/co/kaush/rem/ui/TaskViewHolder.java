@@ -30,15 +30,13 @@ public class TaskViewHolder
     public void bindContent(final Task t, final TaskListController controller) {
 
         _taskDescription.setText(t.description);
+
         _dueDateDisplayDay.setText(CoreDateUtils.format(CoreDateUtils.DUE_DATE_DAY, t.dueDate));
         _dueDateDisplayMonth.setText(CoreDateUtils.format(CoreDateUtils.DUE_DATE_MONTH, t.dueDate));
-        _dueDayTime.setText(controller.getDueDayTextFor(t));
 
-        //if (t.isOverdue()) {
-        //    _dueDateDisplay.setTextColor(_dueDateDisplay.getResources().getColor(R.color.orange_1));
-        //} else {
-        //    _dueDateDisplay.setTextColor(_dueDateDisplay.getResources().getColor(R.color.gray_2));
-        //}
+        _dueDayTime.setText(controller.getDueDayTextFor(t));
+        _dueDayTime.setTextColor(_dueDayTime.getResources()
+              .getColor(controller.getDueDayTimeColorIdFor(t)));
 
         _btnDeleteTask.setOnClickListener(new View.OnClickListener() {
             @Override
