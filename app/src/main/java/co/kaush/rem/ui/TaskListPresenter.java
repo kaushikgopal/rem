@@ -36,23 +36,23 @@ public class TaskListPresenter {
             return R.color.orange_1;
         }
 
-        int zebraColorCounter = -1;
+        boolean zebraColorFlag = false;
         int lastWeekIndex = -1;
 
         DateTime dateRefForWeekIndex = getDateTimeFrom(tasks.get(0).dueDate);
-        DateTime dueDateForPrevTask;
+        DateTime dueDateForTaskInLoop;
 
         for (int i = position; i >= 0; i--) {
-            dueDateForPrevTask = getDateTimeFrom(tasks.get(i).dueDate);
+            dueDateForTaskInLoop = getDateTimeFrom(tasks.get(i).dueDate);
 
-            int weekIndexForThisTaskDueDate = dueDateForPrevTask.getWeekIndex(dateRefForWeekIndex);
+            int weekIndexForThisTaskDueDate = dueDateForTaskInLoop.getWeekIndex(dateRefForWeekIndex);
             if (lastWeekIndex != weekIndexForThisTaskDueDate) {
                 lastWeekIndex = weekIndexForThisTaskDueDate;
-                zebraColorCounter++;
+                zebraColorFlag = !zebraColorFlag;
             }
         }
 
-        if (zebraColorCounter % 2 == 0) {
+        if (!zebraColorFlag) {
             return R.color.blue;
         }
 
