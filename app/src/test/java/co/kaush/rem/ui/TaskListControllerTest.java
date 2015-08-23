@@ -50,31 +50,14 @@ public class TaskListControllerTest {
     public void setUp() throws Exception {
         _talkToTLSMock = mock(ITalkToTaskListScreen.class);
         _taskService = mock(TaskService.class);
-
         when(_taskService.getTaskList()).thenReturn(Observable.just(_tasks));
     }
 
+    @Test
+    public void refreshingTaskList_ShouldUpdateTasksOnView() {
+        _controller = new TaskListController(_talkToTLSMock, _taskService, new CoreDateUtils());
+        _controller.refreshTaskList();
 
-    //@Before
-    //public void setUp() throws Exception {
-    //    _talkToTLSMock = mock(ITalkToTaskListScreen.class);
-    //    _db = mock(BriteDatabase.class);
-    //
-    //    when(_db.createQuery(Task.TABLE, TaskListController.LIST_QUERY).map(Task.MAP))//
-    //          .thenReturn(Observable.just(_tasks));
-    //}
-    //
-    //@Test
-    //public void refreshingTaskList_ShouldUpdateTasksOnView() {
-    //    _controller = new TaskListController(_talkToTLSMock, _db);
-    //    _controller.refreshTaskList();
-    //    verify(_talkToTLSMock, times(1)).updateTaskList(_tasks);
-    //}
-    //@Test
-    //public void refreshingTaskList_ShouldUpdateTasksOnView() {
-    //    _controller = new TaskListController(_talkToTLSMock, _taskService);
-    //    _controller.refreshTaskList();
-    //    verify(_talkToTLSMock, times(1)).updateTaskList(_tasks);
-    //}
-
+        verify(_talkToTLSMock, times(1)).updateTaskList(_tasks);
+    }
 }
