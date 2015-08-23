@@ -14,8 +14,8 @@ import static co.kaush.rem.util.CoreDateUtils.getDateTimeFrom;
 
 public class TaskListPresenter {
 
-    private CoreDateUtils _coreDateUtils;
     int cachedTodayLineSeparatorPosition = -1;
+    private CoreDateUtils _coreDateUtils;
 
     TaskListPresenter(CoreDateUtils coreDateUtils) {
         _coreDateUtils = coreDateUtils;
@@ -83,7 +83,8 @@ public class TaskListPresenter {
             int todaySeparatorPosition = 0;
 
             for (Task task : sortedTaskList) {
-                if (_coreDateUtils.isInTheFuture(task.dueDate)) {
+                if (_coreDateUtils.isInTheFuture(task.dueDate) ||
+                    _coreDateUtils.isSameDayAsToday(task.dueDate)) {
                     break;
                 } else {
                     todaySeparatorPosition++;

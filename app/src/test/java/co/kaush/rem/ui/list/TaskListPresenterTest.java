@@ -125,11 +125,20 @@ public class TaskListPresenterTest {
     }
 
     @Test
-    public void TodaySeparatorPosition_ShouldBe1_WhenPastAndFutureTaksPresent() {
+    public void TodaySeparatorPosition_ShouldBe1_WhenPastAndFutureTasksPresent() {
         List<Task> tasks = new ArrayList<>();
         tasks.add(getTaskOverdue());
         tasks.add(getFutureTask());
         assertThat(_presenter.getPositionForTodaySeparator(tasks)).isEqualTo(1);
+    }
+
+    @Test
+    public void TodaySeparatorPosition_ShouldBe0_WhenAllTasksAreDueToday() {
+        List<Task> tasks = new ArrayList<>();
+        tasks.add(aTask().withDueDate(getDateFor(_coreDateUtils.now())).build());
+        tasks.add(aTask().withDueDate(getDateFor(_coreDateUtils.now())).build());
+
+        assertThat(_presenter.getPositionForTodaySeparator(tasks)).isEqualTo(0);
     }
 
     // -----------------------------------------------------------------------------------
