@@ -10,11 +10,14 @@ import org.jetbrains.annotations.NotNull;
 
 public class CoreDateUtils {
 
-    public static final String DUE_DATE_FORMAT = "MMM D [WWW] h12:mm a";
-    public static final String DUE_DATE_DAY = "D";
-    public static final String DUE_DATE_MONTH = "MMM";
+    // Date
     public static final String DATE_FORMAT_DB = "yyyy-MM-dd HH:mm:ss";
 
+    // DateTime
+    public static final String DATETIME_FORMAT_DB = "YYYY-MM-DD h24:mm:ss";
+    public static final String DUE_DATE_MONTH = "MMM";
+    public static final String DUE_DATE_FORMAT = "MMM D [WWW] h12:mm a";
+    public static final String DUE_DATE_DAY = "D";
     public static final String DUE_DATE_DAYTIME = "[WWW] h12:mm a";
     public static final String DUE_DATE_DAYTIME_WITH_YEAR = "[WWW] h12:mm a [YYYY]";
 
@@ -67,7 +70,7 @@ public class CoreDateUtils {
     }
 
     //  java.util.Date -- > date4j.DateTime
-    public static DateTime getDateTimeFor(Date dt) {
+    public static DateTime getDateTimeFrom(Date dt) {
         return DateTime.forInstant(dt.getTime(), getUtcTimeZone());
     }
 
@@ -75,7 +78,7 @@ public class CoreDateUtils {
     // String conversions
 
     public static String format(@NotNull String pattern, @NotNull Date date) {
-        return format(pattern, getDateTimeFor(date));
+        return format(pattern, getDateTimeFrom(date));
     }
 
     public static String format(@NotNull String pattern, @NotNull DateTime dateTime) {
@@ -90,7 +93,7 @@ public class CoreDateUtils {
     }
 
     public boolean isInTheFuture(Date date) {
-        return isInTheFuture(getDateTimeFor(date));
+        return isInTheFuture(getDateTimeFrom(date));
     }
 
     public boolean isInTheFuture(DateTime dt1) {
