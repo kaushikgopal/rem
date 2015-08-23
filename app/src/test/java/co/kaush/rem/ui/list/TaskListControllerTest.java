@@ -95,26 +95,17 @@ public class TaskListControllerTest {
 
     @Ignore
     @Test
-    public void addingTask_ShouldResetCachedLineSeparatorPosition() {
-
-    }
-
-    @Ignore
-    @Test
     public void editingTask_ShouldResetCachedLineSeparatorPosition() {
-
     }
 
     @Ignore
     @Test
     public void removingTask_ShouldResetCachedLineSeparatorPosition() {
-
     }
 
     @Ignore
     @Test
     public void completingTask_ShouldResetCachedLineSeparatorPosition() {
-
     }
 
     private static class RxAndroidTestSchedulerHook
