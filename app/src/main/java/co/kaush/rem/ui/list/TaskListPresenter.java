@@ -13,10 +13,19 @@ import static co.kaush.rem.util.CoreDateUtils.format;
 import static co.kaush.rem.util.CoreDateUtils.getDateTimeFrom;
 
 public class TaskListPresenter {
+
     private CoreDateUtils _coreDateUtils;
 
     TaskListPresenter(CoreDateUtils coreDateUtils) {
         _coreDateUtils = coreDateUtils;
+    }
+
+    public String getTaskDescription(Task task) {
+        return task.description;
+    }
+
+    public String getDueDayTextFor(Task task) {
+        return CoreDateUtils.format(CoreDateUtils.DUE_DATE_DAY, task.dueDate);
     }
 
     public String getDueDayTimeTextFor(Task task) {
@@ -57,5 +66,9 @@ public class TaskListPresenter {
         }
 
         return R.color.gray_2;
+    }
+
+    public String getDueMonthTextFor(Task task) {
+        return CoreDateUtils.format(CoreDateUtils.DUE_DATE_MONTH, task.dueDate);
     }
 }

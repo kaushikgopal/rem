@@ -9,7 +9,6 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import co.kaush.rem.R;
 import co.kaush.rem.entity.Task;
-import co.kaush.rem.util.CoreDateUtils;
 
 public class TaskViewHolder
       extends RecyclerView.ViewHolder {
@@ -32,15 +31,13 @@ public class TaskViewHolder
         final Task task = controller.getTask(getPosition());
         TaskListPresenter presenter = controller.getTaskListPresenter();
 
-        //TODO: move below 3 to presenter (for cleanliness)
-        _taskDescription.setText(task.description);
-        _dueDateDisplayDay.setText(CoreDateUtils.format(CoreDateUtils.DUE_DATE_DAY, task.dueDate));
-        _dueDateDisplayMonth.setText(CoreDateUtils.format(CoreDateUtils.DUE_DATE_MONTH,
-              task.dueDate));
+        int colorId = presenter.getDueDayTimeColorIdFor(controller.getTasks(), getPosition());
 
         _dueDayTime.setText(presenter.getDueDayTimeTextFor(task));
-        _dueDayTime.setTextColor(_dueDayTime.getResources()
-              .getColor(presenter.getDueDayTimeColorIdFor(controller.getTasks(), getPosition())));
+        _dueDayTime.setTextColor(_dueDayTime.getResources().getColor(colorId));
+        _taskDescription.setText(presenter.getTaskDescription(task));
+        _dueDateDisplayDay.setText(presenter.getDueDayTextFor(task));
+        _dueDateDisplayMonth.setText(presenter.getDueMonthTextFor(task));
 
         _btnDeleteTask.setOnClickListener(new View.OnClickListener() {
             @Override
