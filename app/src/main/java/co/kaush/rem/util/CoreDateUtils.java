@@ -15,6 +15,7 @@ public class CoreDateUtils {
 
     // DateTime
     public static final String DATETIME_FORMAT_DB = "YYYY-MM-DD h24:mm:ss";
+    public static final String DATETIME_FORMAT_DATE_ONLY = "YYYY-MM-DD";
     public static final String DUE_DATE_MONTH = "MMM";
     public static final String DUE_DATE_FORMAT = "MMM D [WWW] h12:mm a";
     public static final String DUE_DATE_DAY = "D";
@@ -88,6 +89,11 @@ public class CoreDateUtils {
     // -----------------------------------------------------------------------------------
     // Current time - non-static to allow convenient testing
 
+    public static boolean isSameDay(@NotNull DateTime dt1, @NotNull DateTime dt2) {
+        return format(DATETIME_FORMAT_DATE_ONLY, dt1)//
+              .equalsIgnoreCase(format(DATETIME_FORMAT_DATE_ONLY, dt2));
+    }
+
     public DateTime now() {
         return DateTime.now(TimeZone.getDefault());
     }
@@ -98,6 +104,10 @@ public class CoreDateUtils {
 
     public boolean isInTheFuture(DateTime dt1) {
         return dt1.getMilliseconds(getUtcTimeZone()) > now().getMilliseconds(getUtcTimeZone());
+    }
+
+    public boolean isSameDayAsToday(Date dt) {
+        return isSameDay(now(), getDateTimeFrom(dt));
     }
 
     public enum IncreaseOrDecrease {

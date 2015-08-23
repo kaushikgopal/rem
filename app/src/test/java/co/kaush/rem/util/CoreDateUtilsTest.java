@@ -7,6 +7,7 @@ import org.junit.Test;
 import static co.kaush.rem.util.CoreDateUtils.TimeUnit.DAY;
 import static co.kaush.rem.util.CoreDateUtils.TimeUnit.MONTH;
 import static co.kaush.rem.util.CoreDateUtils.TimeUnit.WEEK;
+import static co.kaush.rem.util.CoreDateUtils.isSameDay;
 import static com.google.common.truth.Truth.assertThat;
 
 @SmallTest
@@ -50,5 +51,33 @@ public class CoreDateUtilsTest {
 
         assertThat(CoreDateUtils.getDiffUnit(dt, dt.plusDays(6))).isEqualTo(DAY);
         assertThat(CoreDateUtils.getDiffUnit(dt, dt.minusDays(6))).isEqualTo(DAY);
+    }
+
+    @Test
+    public void SameDayComparison_ShouldReturnTrue_IfSameDayRegardlessOfTime() {
+        DateTime dt1 = new DateTime(1985, 3, 20, 9, 0, 0, 0);
+        DateTime dt2 = new DateTime(1985, 3, 20, 11, 0, 0, 0);
+
+        assertThat(isSameDay(dt1, dt2)).isTrue();
+
+        dt2 = new DateTime(1985, 3, 20, 5, 0, 0, 0);
+        assertThat(isSameDay(dt1, dt2)).isTrue();
+
+        dt2 = new DateTime(1985, 3, 20, 9, 0, 0, 0);
+        assertThat(isSameDay(dt1, dt2)).isTrue();
+    }
+
+    @Test
+    public void SameDayComparison_ShouldReturnFalse_IfNotSameDay() {
+        DateTime dt1 = new DateTime(1985, 3, 20, 9, 0, 0, 0);
+
+        DateTime dt2 = new DateTime(1985, 3, 19, 9, 0, 0, 0);
+        assertThat(isSameDay(dt1, dt2)).isFalse();
+
+        dt2 = new DateTime(1985, 4, 20, 9, 0, 0, 0);
+        assertThat(isSameDay(dt1, dt2)).isFalse();
+
+        dt2 = new DateTime(1986, 3, 20, 9, 0, 0, 0);
+        assertThat(isSameDay(dt1, dt2)).isFalse();
     }
 }
