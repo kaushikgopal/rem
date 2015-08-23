@@ -1,4 +1,4 @@
-package co.kaush.rem.ui;
+package co.kaush.rem.ui.list;
 
 import android.support.annotation.ColorRes;
 import co.kaush.rem.R;

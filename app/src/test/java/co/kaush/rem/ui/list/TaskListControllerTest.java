@@ -1,9 +1,9 @@
-package co.kaush.rem.ui;
+package co.kaush.rem.ui.list;
 
 import co.kaush.rem.entity.Task;
 import co.kaush.rem.entity.Task.TaskBuilder;
 import co.kaush.rem.service.TaskService;
-import co.kaush.rem.ui.TaskListController.ITalkToTaskListScreen;
+import co.kaush.rem.ui.list.TaskListController.ITalkToTaskListScreen;
 import co.kaush.rem.util.CoreDateUtils;
 import java.util.ArrayList;
 import java.util.List;

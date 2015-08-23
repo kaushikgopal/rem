@@ -1,7 +1,8 @@
-package co.kaush.rem.ui;
+package co.kaush.rem.ui.list;
 
 import co.kaush.rem.R;
 import co.kaush.rem.entity.Task;
+import co.kaush.rem.ui.list.TaskListPresenter;
 import co.kaush.rem.util.CoreDateUtils;
 import hirondelle.date4j.DateTime;
 import java.util.ArrayList;

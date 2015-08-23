@@ -1,4 +1,4 @@
-package co.kaush.rem.ui;
+package co.kaush.rem.ui.create;
 
 import co.kaush.rem.util.CoreDateUtils;
 import co.kaush.rem.util.CoreDateUtils.IncreaseOrDecrease;
@@ -11,10 +11,12 @@ import static co.kaush.rem.util.CoreDateUtils.IncreaseOrDecrease.MINUS;
 
 public class TaskCreateController {
 
-    private ITalkToTaskCreateScreen _talkToTaskCreate;
     private CoreDateUtils _coreDateUtils;
-    private DateTime _dueDateTime = null;
+
+    private ITalkToTaskCreateScreen _talkToTaskCreate;
     private TaskCreatePresenter _taskCreatePresenter;
+
+    private DateTime _dueDateTime = null;
 
     @Inject
     public TaskCreateController(ITalkToTaskCreateScreen talkToTaskList,

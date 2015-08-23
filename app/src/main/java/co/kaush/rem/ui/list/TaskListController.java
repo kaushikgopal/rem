@@ -1,4 +1,4 @@
-package co.kaush.rem.ui;
+package co.kaush.rem.ui.list;
 
 import co.kaush.rem.entity.Task;
 import co.kaush.rem.service.TaskService;
@@ -15,8 +15,9 @@ import timber.log.Timber;
 @Singleton
 public class TaskListController {
 
-    private ITalkToTaskListScreen _talkToTaskList;
     private TaskService _taskService;
+
+    private ITalkToTaskListScreen _talkToTaskList;
     private TaskListPresenter _taskListPresenter;
 
     private List<Task> _tasks = new ArrayList<>();

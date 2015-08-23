@@ -13,7 +13,6 @@ public class TaskService {
                                             " ORDER BY " + Task.DUE_DATE +
                                             " ASC";
 
-
     private BriteDatabase _db;
 
     @Inject

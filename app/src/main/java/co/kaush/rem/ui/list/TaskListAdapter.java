@@ -1,4 +1,4 @@
-package co.kaush.rem.ui;
+package co.kaush.rem.ui.list;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

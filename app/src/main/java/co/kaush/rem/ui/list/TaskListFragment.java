@@ -1,4 +1,4 @@
-package co.kaush.rem.ui;
+package co.kaush.rem.ui.list;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -16,6 +16,8 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import co.kaush.rem.R;
 import co.kaush.rem.entity.Task;
+import co.kaush.rem.ui.BaseFragment;
+import co.kaush.rem.ui.create.TaskCreateFragment;
 import co.kaush.rem.util.ColorFilterCache;
 import java.util.List;
 import javax.inject.Inject;

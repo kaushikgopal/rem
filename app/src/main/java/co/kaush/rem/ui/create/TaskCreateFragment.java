@@ -1,4 +1,4 @@
-package co.kaush.rem.ui;
+package co.kaush.rem.ui.create;
 
 import android.os.Bundle;
 import android.text.Spannable;
@@ -12,6 +12,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import co.kaush.rem.R;
+import co.kaush.rem.ui.BaseFragment;
 import co.kaush.rem.util.CoreDateUtils;
 import javax.inject.Inject;
 
@@ -25,7 +26,7 @@ public class TaskCreateFragment
       extends BaseFragment
       implements TaskCreateController.ITalkToTaskCreateScreen {
 
-    public static final String FRAG_TAG = "co.kaush.rem.ui.TaskCreateFragment";
+    public static final String FRAG_TAG = "co.kaush.rem.ui.create.TaskCreateFragment";
 
     @InjectView(R.id.btn_task_due_date_display) TextView _dueDisplay;
 
