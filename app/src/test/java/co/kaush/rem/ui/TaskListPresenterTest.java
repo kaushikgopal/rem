@@ -35,7 +35,8 @@ public class TaskListPresenterTest {
     @Test
     public void DueDayTimeText_ShouldShowYear_WhenYearNotCurrent() {
 
-        assertThat(_presenter.getDueDayTimeTextFor(getTaskOverdue())).isEqualTo("[Wed] 9:00 AM [1985]");
+        assertThat(_presenter.getDueDayTimeTextFor(getTaskOverdue())).isEqualTo(
+              "[Wed] 9:00 AM [1985]");
 
         Task task = getTaskDueToday();
         assertThat(_presenter.getDueDayTimeTextFor(task)).isEqualTo("[Sat] 11:12 PM");
@@ -51,7 +52,60 @@ public class TaskListPresenterTest {
         tasks.add(getTaskDueToday());
 
         assertThat(_presenter.getDueDayTimeColorIdFor(tasks, 0)).isEqualTo(R.color.orange_1);
-        assertThat(_presenter.getDueDayTimeColorIdFor(tasks, 1)).isEqualTo(R.color.gray_2);
+        assertThat(_presenter.getDueDayTimeColorIdFor(tasks, 1)).isNotEqualTo(R.color.orange_1);
+    }
+
+    @Test
+    public void DueDateTimeColor_ShouldAlternateBetweenConsecutiveWeeks() {
+        DateTime someFutureDate = new DateTime(2013, 3, 23, 23, 12, 20, 0);
+
+        List<Task> tasks = new ArrayList<>();
+
+        tasks.add(aTask().withDueDate(getDateFor(someFutureDate)).build());
+        tasks.add(aTask().withDueDate(getDateFor(someFutureDate.plusDays(8))).build());
+
+        int firstColor = _presenter.getDueDayTimeColorIdFor(tasks, 0);
+        assertThat(_presenter.getDueDayTimeColorIdFor(tasks, 1)).isNotEqualTo(firstColor);
+    }
+
+    @Test
+    public void DueDateTimeColor_ShouldAlternateBetweenDifferent_NotNecessarilyConsecutiveWeeks() {
+        DateTime someFutureDate = new DateTime(2013, 3, 23, 23, 12, 20, 0);
+
+        List<Task> tasks = new ArrayList<>();
+
+        tasks.add(aTask().withDueDate(getDateFor(someFutureDate)).build());             // t1
+        tasks.add(aTask().withDueDate(getDateFor(someFutureDate.plusDays(6))).build()); // t2
+        tasks.add(aTask().withDueDate(getDateFor(someFutureDate.plusDays(7))).build()); // t3
+        tasks.add(aTask().withDueDate(getDateFor(someFutureDate.plusDays(8))).build()); // t4
+        tasks.add(aTask().withDueDate(getDateFor(someFutureDate.plusDays(9))).build()); // t5
+        tasks.add(aTask().withDueDate(getDateFor(someFutureDate.plusDays(12))).build());// t6
+        tasks.add(aTask().withDueDate(getDateFor(someFutureDate.plusDays(13))).build());// t7
+        tasks.add(aTask().withDueDate(getDateFor(someFutureDate.plusDays(14))).build());// t8
+        tasks.add(aTask().withDueDate(getDateFor(someFutureDate.plusDays(28))).build());// t9
+
+        int taskColor1 = _presenter.getDueDayTimeColorIdFor(tasks, 0);
+        int taskColor2 = _presenter.getDueDayTimeColorIdFor(tasks, 1);
+        int taskColor3 = _presenter.getDueDayTimeColorIdFor(tasks, 2);
+        int taskColor4 = _presenter.getDueDayTimeColorIdFor(tasks, 3);
+        int taskColor5 = _presenter.getDueDayTimeColorIdFor(tasks, 4);
+        int taskColor6 = _presenter.getDueDayTimeColorIdFor(tasks, 5);
+        int taskColor7 = _presenter.getDueDayTimeColorIdFor(tasks, 6);
+        int taskColor8 = _presenter.getDueDayTimeColorIdFor(tasks, 7);
+        int taskColor9 = _presenter.getDueDayTimeColorIdFor(tasks, 8);
+
+        assertThat(taskColor1).isEqualTo(taskColor2);
+
+        assertThat(taskColor2).isNotEqualTo(taskColor3);
+
+        assertThat(taskColor3).isEqualTo(taskColor4);
+        assertThat(taskColor4).isEqualTo(taskColor5);
+        assertThat(taskColor5).isEqualTo(taskColor6);
+        assertThat(taskColor6).isEqualTo(taskColor7);
+
+        assertThat(taskColor7).isNotEqualTo(taskColor8);
+
+        assertThat(taskColor8).isNotEqualTo(taskColor9);
     }
 
     // -----------------------------------------------------------------------------------
