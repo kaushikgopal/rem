@@ -66,6 +66,8 @@ public class TaskListControllerTest {
         when(_taskService.getTaskList()).thenReturn(Observable.just(_tasks));
     }
 
+    // -----------------------------------------------------------------------------------
+
     @Test
     public void refreshingTaskList_ShouldUpdateTasksOnView() {
         _controller = new TaskListController(_talkToTLSMock, _taskService, new CoreDateUtils());
@@ -75,6 +77,8 @@ public class TaskListControllerTest {
         // cool but possibly flaky for future (checking that the only method called was updateTaskList)
         verify(_talkToTLSMock, only()).updateTaskList(_tasks);
     }
+
+    // -----------------------------------------------------------------------------------
 
     @Test
     public void refreshingTaskList_ShouldResetCachedLineSeparatorPosition() {

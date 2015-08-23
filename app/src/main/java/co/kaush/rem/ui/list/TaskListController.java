@@ -46,7 +46,9 @@ public class TaskListController {
     }
 
     public Task getTask(int position) {
-        return _tasks.get(position);
+        int positionInTaskList = _taskListPresenter.getPositionInTaskListFromViewPosition(_tasks,
+              position);
+        return _tasks.get(positionInTaskList);
     }
 
     public int getPositionForTodaySeparator() {

@@ -38,6 +38,13 @@ public class TaskListPresenter {
         }
     }
 
+    public int getPositionInTaskListFromViewPosition(List<Task> tasks, int viewPosition) {
+        if (viewPosition > getPositionForTodaySeparator(tasks)) {
+            return viewPosition - 1;
+        }
+        return viewPosition;
+    }
+
     @ColorRes
     public int getDueDayTimeColorIdFor(List<Task> tasks, int position) {
         Task task = tasks.get(position);

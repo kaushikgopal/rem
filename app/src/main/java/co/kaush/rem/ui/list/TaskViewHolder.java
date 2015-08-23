@@ -27,11 +27,13 @@ public class TaskViewHolder
     }
 
     public void bindContent(final TaskListController controller) {
-
         final Task task = controller.getTask(getPosition());
         TaskListPresenter presenter = controller.getTaskListPresenter();
 
-        int colorId = presenter.getDueDayTimeColorIdFor(controller.getTasks(), getPosition());
+        int realPositionInTaskList = presenter.getPositionInTaskListFromViewPosition(//
+              controller.getTasks(), getPosition());
+        int colorId = presenter.getDueDayTimeColorIdFor(controller.getTasks(),
+              realPositionInTaskList);
 
         _dueDayTime.setText(presenter.getDueDayTimeTextFor(task));
         _dueDayTime.setTextColor(_dueDayTime.getResources().getColor(colorId));

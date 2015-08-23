@@ -20,6 +20,11 @@ public class TaskListAdapter
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if (viewType == LIST_VIEW_TYPE_TODAY_SEPARATOR) {
+            return new TodaySeparatorViewHolder(LayoutInflater.from(parent.getContext())
+                  .inflate(R.layout.item_today_separator, parent, false));
+        }
+
         View itemRowView = LayoutInflater.from(parent.getContext())
               .inflate(R.layout.item_task, parent, false);
         return new TaskViewHolder(itemRowView);
