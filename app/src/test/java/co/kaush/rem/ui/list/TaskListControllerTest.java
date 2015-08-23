@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import rx.Observable;
 import rx.Scheduler;
@@ -19,6 +20,7 @@ import rx.plugins.RxJavaSchedulersHook;
 import rx.schedulers.Schedulers;
 
 import static co.kaush.rem.util.CoreDateUtils.getDateFor;
+import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.only;
 import static org.mockito.Mockito.times;
@@ -72,6 +74,47 @@ public class TaskListControllerTest {
         verify(_talkToTLSMock, times(1)).updateTaskList(_tasks);
         // cool but possibly flaky for future (checking that the only method called was updateTaskList)
         verify(_talkToTLSMock, only()).updateTaskList(_tasks);
+    }
+
+    @Test
+    public void refreshingTaskList_ShouldResetCachedLineSeparatorPosition() {
+        _controller = new TaskListController(_talkToTLSMock, _taskService, new CoreDateUtils());
+
+        assertThat(_controller.getTaskListPresenter().cachedTodayLineSeparatorPosition)//
+              .isEqualTo(-1);
+
+        _controller.refreshTaskList();
+        assertThat(_controller.getTaskListPresenter().getPositionForTodaySeparator(_tasks))//
+              .isNotEqualTo(-1);
+        assertThat(_controller.getTaskListPresenter().cachedTodayLineSeparatorPosition)//
+              .isNotEqualTo(-1);
+        _controller.refreshTaskList();
+        assertThat(_controller.getTaskListPresenter().cachedTodayLineSeparatorPosition)//
+              .isEqualTo(-1);
+    }
+
+    @Ignore
+    @Test
+    public void addingTask_ShouldResetCachedLineSeparatorPosition() {
+
+    }
+
+    @Ignore
+    @Test
+    public void editingTask_ShouldResetCachedLineSeparatorPosition() {
+
+    }
+
+    @Ignore
+    @Test
+    public void removingTask_ShouldResetCachedLineSeparatorPosition() {
+
+    }
+
+    @Ignore
+    @Test
+    public void completingTask_ShouldResetCachedLineSeparatorPosition() {
+
     }
 
     private static class RxAndroidTestSchedulerHook

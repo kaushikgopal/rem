@@ -15,6 +15,7 @@ import static co.kaush.rem.util.CoreDateUtils.getDateTimeFrom;
 public class TaskListPresenter {
 
     private CoreDateUtils _coreDateUtils;
+    int cachedTodayLineSeparatorPosition = -1;
 
     TaskListPresenter(CoreDateUtils coreDateUtils) {
         _coreDateUtils = coreDateUtils;
@@ -72,17 +73,26 @@ public class TaskListPresenter {
         return CoreDateUtils.format(CoreDateUtils.DUE_DATE_MONTH, task.dueDate);
     }
 
-    public int getPositionForTodaySeparator(List<Task> sortedTaskList) {
-        int todaySeparatorPosition = 0;
+    public void resetCachedSeparator() {
+        cachedTodayLineSeparatorPosition = -1;
+    }
 
-        for (Task task : sortedTaskList) {
-            if (_coreDateUtils.isInTheFuture(task.dueDate)) {
-                break;
-            } else {
-                todaySeparatorPosition++;
+    public int getPositionForTodaySeparator(List<Task> sortedTaskList) {
+
+        if (cachedTodayLineSeparatorPosition == -1) {
+            int todaySeparatorPosition = 0;
+
+            for (Task task : sortedTaskList) {
+                if (_coreDateUtils.isInTheFuture(task.dueDate)) {
+                    break;
+                } else {
+                    todaySeparatorPosition++;
+                }
             }
+
+            cachedTodayLineSeparatorPosition = todaySeparatorPosition;
         }
 
-        return todaySeparatorPosition;
+        return cachedTodayLineSeparatorPosition;
     }
 }

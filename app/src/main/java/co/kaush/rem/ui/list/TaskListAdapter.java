@@ -7,28 +7,44 @@ import android.view.ViewGroup;
 import co.kaush.rem.R;
 
 public class TaskListAdapter
-      extends RecyclerView.Adapter<TaskViewHolder> {
+      extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private final TaskListController _controller;
+
+    private static final int LIST_VIEW_TYPE_TASK = 0;
+    private static final int LIST_VIEW_TYPE_TODAY_SEPARATOR = 1;
 
     public TaskListAdapter(TaskListController taskListController) {
         _controller = taskListController;
     }
 
     @Override
-    public TaskViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemRowView = LayoutInflater.from(parent.getContext())
               .inflate(R.layout.item_task, parent, false);
         return new TaskViewHolder(itemRowView);
     }
 
     @Override
-    public void onBindViewHolder(TaskViewHolder holder, int position) {
-        holder.bindContent(_controller);
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        ((TaskViewHolder) holder).bindContent(_controller);
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+
+        return super.getItemViewType(position);
     }
 
     @Override
     public int getItemCount() {
-        return _controller.getTaskListSize();
+
+        int taskListSize = _controller.getTaskListSize();
+
+        if (taskListSize > 0) {
+            return taskListSize + 1;
+        }
+
+        return 0;
     }
 }

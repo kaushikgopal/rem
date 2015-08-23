@@ -66,6 +66,7 @@ public class TaskListController {
                       Timber.d("%d tasks", tasks.size());
                       _tasks = tasks;
                       _talkToTaskList.updateTaskList(tasks);
+                      _taskListPresenter.resetCachedSeparator();
                   }
               }, new Action1<Throwable>() {
                   @Override
