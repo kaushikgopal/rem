@@ -2,10 +2,10 @@ package co.kaush.rem.ui.list;
 
 import co.kaush.rem.R;
 import co.kaush.rem.entity.Task;
-import co.kaush.rem.ui.list.TaskListPresenter;
 import co.kaush.rem.util.CoreDateUtils;
 import hirondelle.date4j.DateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -19,12 +19,13 @@ import static org.mockito.Mockito.when;
 
 public class TaskListPresenterTest {
 
+    public static final DateTime NOW = new DateTime(2013, 3, 23, 19, 12, 20, 0);
     private static CoreDateUtils _coreDateUtils = spy(new CoreDateUtils());
     private TaskListPresenter _presenter;
 
     @BeforeClass
     public static void setUpOnce() {
-        when(_coreDateUtils.now()).thenReturn(new DateTime(2013, 3, 23, 19, 12, 20, 0));
+        when(_coreDateUtils.now()).thenReturn(NOW);
         // today = "Mar 23 2013 7:12 pm"
     }
 
@@ -110,6 +111,28 @@ public class TaskListPresenterTest {
     }
 
     // -----------------------------------------------------------------------------------
+
+    @Test
+    public void TodaySeparatorPosition_ShouldBe0_When1FutureDueTaskPresent() {
+        List<Task> tasks = Collections.singletonList(getFutureTask());
+        assertThat(_presenter.getPositionForTodaySeparator(tasks)).isEqualTo(0);
+    }
+
+    @Test
+    public void TodaySeparatorPosition_ShouldBe1_When1PastDueTaskPresent() {
+        List<Task> tasks = Collections.singletonList(getTaskOverdue());
+        assertThat(_presenter.getPositionForTodaySeparator(tasks)).isEqualTo(1);
+    }
+
+    @Test
+    public void TodaySeparatorPosition_ShouldBe1_WhenPastAndFutureTaksPresent() {
+        List<Task> tasks = new ArrayList<>();
+        tasks.add(getTaskOverdue());
+        tasks.add(getFutureTask());
+        assertThat(_presenter.getPositionForTodaySeparator(tasks)).isEqualTo(1);
+    }
+
+    // -----------------------------------------------------------------------------------
     // fixtures
 
     private Task getTaskOverdue() {
@@ -118,5 +141,9 @@ public class TaskListPresenterTest {
 
     private Task getTaskDueToday() {
         return aTask().withDueDate(getDateFor(new DateTime(2013, 3, 23, 23, 12, 20, 0))).build();
+    }
+
+    private Task getFutureTask() {
+        return aTask().withDueDate(getDateFor(NOW.plusDays(20))).build();
     }
 }

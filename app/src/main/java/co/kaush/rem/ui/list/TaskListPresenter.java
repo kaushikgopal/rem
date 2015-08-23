@@ -71,4 +71,18 @@ public class TaskListPresenter {
     public String getDueMonthTextFor(Task task) {
         return CoreDateUtils.format(CoreDateUtils.DUE_DATE_MONTH, task.dueDate);
     }
+
+    public int getPositionForTodaySeparator(List<Task> sortedTaskList) {
+        int todaySeparatorPosition = 0;
+
+        for (Task task : sortedTaskList) {
+            if (_coreDateUtils.isInTheFuture(task.dueDate)) {
+                break;
+            } else {
+                todaySeparatorPosition++;
+            }
+        }
+
+        return todaySeparatorPosition;
+    }
 }

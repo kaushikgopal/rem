@@ -2,6 +2,7 @@ package co.kaush.rem.entity;
 
 import android.database.Cursor;
 import android.support.annotation.IntDef;
+import android.support.annotation.NonNull;
 import co.kaush.rem.db.DbUtils;
 import co.kaush.rem.util.CoreDateUtils;
 import java.lang.annotation.Retention;
@@ -13,17 +14,13 @@ import rx.functions.Func1;
 
 import static com.squareup.sqlbrite.SqlBrite.Query;
 
-public class Task {
-
-    @IntDef({ STATUS_SNOOZED, STATUS_COMPLETED, STATUS_DELETED })
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface Status {}
+public class Task
+      implements Comparable<Task> {
 
     public static final int STATUS_CREATED = 0;
     public static final int STATUS_SNOOZED = 1;
     public static final int STATUS_COMPLETED = 2;
     public static final int STATUS_DELETED = 3;
-
     public static final String TABLE = "tasks";
     public static final String ID = "_id";
     public static final String DESCRIPTION = "description";
@@ -31,28 +28,6 @@ public class Task {
     public static final String DUE_DATE = "due_date";
     public static final String SNOOZE_INTERVAL = "snooze_interval";
     public static final String SNOOZE_COUNT = "snooze_count";
-
-    public Long id;
-    public String description;
-    public Integer status;
-    public Date dueDate;
-    public Integer snoozeCount;
-    public Integer snoozeInterval; // in minutes
-
-    private Task(Long id,
-                 String description,
-                 Integer status,
-                 Date dueDate,
-                 Integer snoozeCount,
-                 Integer snoozeInterval) {
-        this.id = id;
-        this.description = description;
-        this.status = status;
-        this.dueDate = dueDate;
-        this.snoozeCount = snoozeCount;
-        this.snoozeInterval = snoozeInterval;
-    }
-
     public static final Func1<Query, List<Task>> MAP = new Func1<Query, List<Task>>() {
         @Override
         public List<Task> call(Query query) {
@@ -85,10 +60,38 @@ public class Task {
             }
         }
     };
+    public Long id;
+    public String description;
+    public Integer status;
+    public Date dueDate;
+    public Integer snoozeCount;
+    public Integer snoozeInterval; // in minutes
+    private Task(Long id,
+                 String description,
+                 Integer status,
+                 Date dueDate,
+                 Integer snoozeCount,
+                 Integer snoozeInterval) {
+        this.id = id;
+        this.description = description;
+        this.status = status;
+        this.dueDate = dueDate;
+        this.snoozeCount = snoozeCount;
+        this.snoozeInterval = snoozeInterval;
+    }
+
+    @Override
+    public int compareTo(@NonNull Task another) {
+        return dueDate.compareTo(another.dueDate);
+    }
 
     public boolean isOverdue(CoreDateUtils coreDateUtils) {
         return !coreDateUtils.isInTheFuture(dueDate);
     }
+
+    @IntDef({ STATUS_SNOOZED, STATUS_COMPLETED, STATUS_DELETED })
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface Status {}
 
     public static class TaskBuilder {
         public Long id;
