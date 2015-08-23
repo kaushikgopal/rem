@@ -80,7 +80,6 @@ public class TaskListFragment
         _taskListController.refreshTaskList();
     }
 
-
     // -----------------------------------------------------------------------------------
     // ITalkToTaskList implementation
 

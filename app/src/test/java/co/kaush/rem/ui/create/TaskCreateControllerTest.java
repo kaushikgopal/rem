@@ -63,6 +63,16 @@ public class TaskCreateControllerTest {
         assertThat(dueDateDiffTextCaptor.getValue()).isEqualTo("(~1 Hr back)");
     }
 
+    @Test
+    public void increaseBy1HrThenResetToNowThenIncreaseBy3Hours_ShouldShow3HourDifference() {
+        _controller.changeDueDateBy(PLUS, TimeUnit.HOURS, 4);
+        _controller.resetDueDateToNow();
+        _controller.changeDueDateBy(PLUS, TimeUnit.HOURS, 1);
+
+        verify(_talkToTCSMock, atLeastOnce()).updateDueDateDisplay("Apr 3 [Tue] 8:12 PM",
+              "(~1 Hr)");
+    }
+
     // -----------------------------------------------------------------------------------
     // Due Date Diff Text
 

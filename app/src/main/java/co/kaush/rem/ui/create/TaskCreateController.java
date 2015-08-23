@@ -28,6 +28,7 @@ public class TaskCreateController {
     }
 
     public void resetDueDateToNow() {
+        _dueDateTime = null;
         _talkToTaskCreate.updateDueDateDisplay(//
               CoreDateUtils.format(CoreDateUtils.DUE_DATE_FORMAT, _coreDateUtils.now()), "now");
     }
