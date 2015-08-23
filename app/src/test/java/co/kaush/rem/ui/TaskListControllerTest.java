@@ -11,9 +11,16 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import rx.Observable;
+import rx.Scheduler;
+import rx.android.plugins.RxAndroidPlugins;
+import rx.android.plugins.RxAndroidSchedulersHook;
+import rx.plugins.RxJavaPlugins;
+import rx.plugins.RxJavaSchedulersHook;
+import rx.schedulers.Schedulers;
 
 import static co.kaush.rem.util.CoreDateUtils.getDateFor;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.only;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -29,6 +36,10 @@ public class TaskListControllerTest {
 
     @BeforeClass
     public static void setUpOnce() {
+
+        RxJavaPlugins.getInstance().registerSchedulersHook(new RxJavaTestSchedulerHook());
+        RxAndroidPlugins.getInstance().registerSchedulersHook(new RxAndroidTestSchedulerHook());
+
         _tasks = new ArrayList<>();
         Task t = TaskBuilder.aTask()
               .withId(1l)
@@ -59,5 +70,33 @@ public class TaskListControllerTest {
         _controller.refreshTaskList();
 
         verify(_talkToTLSMock, times(1)).updateTaskList(_tasks);
+        // cool but possibly flaky for future (checking that the only method called was updateTaskList)
+        verify(_talkToTLSMock, only()).updateTaskList(_tasks);
+    }
+
+    private static class RxAndroidTestSchedulerHook
+          extends RxAndroidSchedulersHook {
+        @Override
+        public Scheduler getMainThreadScheduler() {
+            return Schedulers.immediate();
+        }
+    }
+
+    private static class RxJavaTestSchedulerHook
+          extends RxJavaSchedulersHook {
+        @Override
+        public Scheduler getComputationScheduler() {
+            return Schedulers.immediate();
+        }
+
+        @Override
+        public Scheduler getIOScheduler() {
+            return Schedulers.immediate();
+        }
+
+        @Override
+        public Scheduler getNewThreadScheduler() {
+            return Schedulers.immediate();
+        }
     }
 }
