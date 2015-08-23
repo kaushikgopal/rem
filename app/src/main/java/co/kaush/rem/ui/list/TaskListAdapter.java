@@ -27,13 +27,18 @@ public class TaskListAdapter
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ((TaskViewHolder) holder).bindContent(_controller);
+        if (holder.getItemViewType() != LIST_VIEW_TYPE_TODAY_SEPARATOR) {
+            ((TaskViewHolder) holder).bindContent(_controller);
+        }
     }
 
     @Override
     public int getItemViewType(int position) {
+        if (position == _controller.getPositionForTodaySeparator()) {
+            return LIST_VIEW_TYPE_TODAY_SEPARATOR;
+        }
 
-        return super.getItemViewType(position);
+        return LIST_VIEW_TYPE_TASK;
     }
 
     @Override

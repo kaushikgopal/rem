@@ -36,4 +36,6 @@
     <color name="orange_2">#ED7B20</color> <!--tango-->
     <color name="orange_3">#f6ab70</color>
 
+
+    <color name="today_list_separator">@color/day_1</color>
 </resources>

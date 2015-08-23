@@ -49,6 +49,10 @@ public class TaskListController {
         return _tasks.get(position);
     }
 
+    public int getPositionForTodaySeparator() {
+        return _taskListPresenter.getPositionForTodaySeparator(_tasks);
+    }
+
     // -----------------------------------------------------------------------------------
     // actions
 
