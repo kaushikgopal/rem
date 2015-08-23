@@ -37,5 +37,5 @@
     <color name="orange_3">#f6ab70</color>
 
 
-    <color name="today_list_separator">@color/day_1</color>
+    <color name="today_list_separator">@color/primary</color>
 </resources>
