@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
@@ -21,6 +22,7 @@ public class TaskListController {
     private TaskListPresenter _taskListPresenter;
 
     private List<Task> _tasks = new ArrayList<>();
+    private Subscription _subscription;
 
     @Inject
     public TaskListController(ITalkToTaskListScreen talkToTaskList,
@@ -29,6 +31,7 @@ public class TaskListController {
         _talkToTaskList = talkToTaskList;
         _taskService = taskService;
         _taskListPresenter = new TaskListPresenter(coreDateUtils);
+        _subscription = null;
     }
 
     // -----------------------------------------------------------------------------------
@@ -63,7 +66,8 @@ public class TaskListController {
     }
 
     public void refreshTaskList() {
-        _taskService.getTaskList()
+        _subscription = null;
+        _subscription = _taskService.getTaskList()
               .subscribeOn(Schedulers.io())
               .observeOn(AndroidSchedulers.mainThread())
               .subscribe(new Action1<List<Task>>() {
@@ -73,6 +77,7 @@ public class TaskListController {
                       _tasks = tasks;
                       _talkToTaskList.updateTaskList(tasks);
                       _taskListPresenter.resetCachedSeparator();
+                      _subscription.unsubscribe();
                   }
               }, new Action1<Throwable>() {
                   @Override
