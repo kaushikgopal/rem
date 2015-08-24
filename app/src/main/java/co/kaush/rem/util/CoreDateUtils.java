@@ -14,7 +14,7 @@ public class CoreDateUtils {
     public static final String DATE_FORMAT_DB = "yyyy-MM-dd HH:mm:ss";
 
     // DateTime
-    public static final String DATETIME_FORMAT_DB = "YYYY-MM-DD h24:mm:ss";
+    public static final String DATETIME_FORMAT_DB = "YYYY-MM-DD hh:mm:ss";
     public static final String DATETIME_FORMAT_DATE_ONLY = "YYYY-MM-DD";
     public static final String DUE_DATE_MONTH = "MMM";
     public static final String DUE_DATE_FORMAT = "MMM D [WWW] h12:mm a";
