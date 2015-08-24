@@ -48,6 +48,10 @@ android {
     testOptions {
         unitTests.returnDefaultValues = true
     }
+
+    dexOptions {
+        incremental true
+    }
 }
 
 dependencies {
