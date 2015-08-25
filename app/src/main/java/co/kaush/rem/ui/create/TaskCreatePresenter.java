@@ -11,65 +11,65 @@ public class TaskCreatePresenter {
         _coreDateUtils = coreDateUtils;
     }
 
-    public String getDueDateText(DateTime _dueDateTime) {
-        return CoreDateUtils.format(CoreDateUtils.DUE_DATE_FORMAT, _dueDateTime);
+    public String getDueDateText(DateTime dueDateTime) {
+        return CoreDateUtils.format(CoreDateUtils.DUE_DATE_FORMAT, dueDateTime);
     }
 
-    public String getDueDateDiffText(DateTime _dueDateTime) {
+    public String getDueDateDiffText(DateTime dueDateTime) {
         DateTime now = _coreDateUtils.now();
         int diffValue;
 
-        switch (CoreDateUtils.getDiffUnit(now, _dueDateTime)) {
+        switch (CoreDateUtils.getDiffUnit(now, dueDateTime)) {
             case MONTH:
-                if (_coreDateUtils.isInTheFuture(_dueDateTime)) {
-                    diffValue = _dueDateTime.getMonth() - now.getMonth();
+                if (_coreDateUtils.isInTheFuture(dueDateTime)) {
+                    diffValue = dueDateTime.getMonth() - now.getMonth();
                     if (diffValue < 0) {
                         diffValue += 12;
                     }
                 } else {
-                    diffValue = _dueDateTime.getMonth() - now.getMonth();
+                    diffValue = dueDateTime.getMonth() - now.getMonth();
                 }
                 return _getPluralizedDiffText("Mth", diffValue);
 
             case WEEK:
                 // If you hit a date before Sunday, January 2, 2000 you're probably going to get funky results courtesy: date4j
-                diffValue = _dueDateTime.getWeekIndex() - now.getWeekIndex();
+                diffValue = dueDateTime.getWeekIndex() - now.getWeekIndex();
                 return _getPluralizedDiffText("Week", diffValue);
 
             case DAY:
-                if (_coreDateUtils.isInTheFuture(_dueDateTime)) {
-                    diffValue = _dueDateTime.getDayOfYear() - now.getDayOfYear();
+                if (_coreDateUtils.isInTheFuture(dueDateTime)) {
+                    diffValue = dueDateTime.getDayOfYear() - now.getDayOfYear();
                     if (diffValue < 0) {
-                        diffValue += CoreDateUtils.getLastDayOfTheYear(_dueDateTime);
+                        diffValue += CoreDateUtils.getLastDayOfTheYear(dueDateTime);
                     }
                 } else {
-                    diffValue = _dueDateTime.getDayOfYear() - now.getDayOfYear();
+                    diffValue = dueDateTime.getDayOfYear() - now.getDayOfYear();
                 }
 
                 return _getPluralizedDiffText("Dy", diffValue);
 
             case HOUR:
-                if (_coreDateUtils.isInTheFuture(_dueDateTime)) {
-                    diffValue = _dueDateTime.getHour() - now.getHour();
+                if (_coreDateUtils.isInTheFuture(dueDateTime)) {
+                    diffValue = dueDateTime.getHour() - now.getHour();
                     if (diffValue < 0) {
                         diffValue += 24;
                     }
                 } else {
-                    if (_dueDateTime.isSameDayAs(_coreDateUtils.now())) {
-                        diffValue = _dueDateTime.getHour() - now.getHour();
+                    if (dueDateTime.isSameDayAs(_coreDateUtils.now())) {
+                        diffValue = dueDateTime.getHour() - now.getHour();
                     } else {
-                        diffValue = _dueDateTime.getHour() - now.getHour() - 24;
+                        diffValue = dueDateTime.getHour() - now.getHour() - 24;
                     }
                 }
 
                 return _getPluralizedDiffText("Hr", diffValue);
         }
 
-        diffValue = _dueDateTime.getMinute() - now.getMinute();
+        diffValue = dueDateTime.getMinute() - now.getMinute();
 
-        if (!_dueDateTime.getHour().equals(now.getHour())) {
+        if (!dueDateTime.getHour().equals(now.getHour())) {
 
-            if (_coreDateUtils.isInTheFuture(_dueDateTime)) {
+            if (_coreDateUtils.isInTheFuture(dueDateTime)) {
                 diffValue += 60;
             } else {
                 diffValue -= 60;
