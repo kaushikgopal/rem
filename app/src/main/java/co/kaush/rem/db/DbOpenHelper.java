@@ -58,8 +58,28 @@ final class DbOpenHelper
 
         db.execSQL("INSERT INTO " +
                    Task.TABLE +
-                   "(DESCRIPTION, DUE_DATE) VALUES ('I need a reminder app', '" +
+                   "(DESCRIPTION, DUE_DATE) VALUES ('Figure out why I can never get anything done', '" +
+                   format(DATETIME_FORMAT_DB, today.minusDays(15)) +
+                   "');");
+        db.execSQL("INSERT INTO " +
+                   Task.TABLE +
+                   "(DESCRIPTION, DUE_DATE) VALUES ('Meditate on the problem', '" +
+                   format(DATETIME_FORMAT_DB, today.minusDays(10)) +
+                   "');");
+        db.execSQL("INSERT INTO " +
+                   Task.TABLE +
+                   "(DESCRIPTION, DUE_DATE) VALUES ('Install plugin that blocks Reddit', '" +
+                   format(DATETIME_FORMAT_DB, today.minusDays(8)) +
+                   "');");
+        db.execSQL("INSERT INTO " +
+                   Task.TABLE +
+                   "(DESCRIPTION, DUE_DATE) VALUES ('Solution found: need reminder app', '" +
                    format(DATETIME_FORMAT_DB, today.minusDays(3)) +
+                   "');");
+        db.execSQL("INSERT INTO " +
+                   Task.TABLE +
+                   "(DESCRIPTION, DUE_DATE) VALUES ('All current reminder apps suck', '" +
+                   format(DATETIME_FORMAT_DB, today) +
                    "');");
         db.execSQL("INSERT INTO " +
                    Task.TABLE +
@@ -68,7 +88,7 @@ final class DbOpenHelper
                    "');");
         db.execSQL("INSERT INTO " +
                    Task.TABLE +
-                   "(DESCRIPTION, DUE_DATE) VALUES ('Accepted for DroidCon NYC', '" +
+                   "(DESCRIPTION, DUE_DATE) VALUES ('Accepted for DroidCon NYC!', '" +
                    format(DATETIME_FORMAT_DB, today.plusDays(6)) +
                    "');");
         db.execSQL("INSERT INTO " +
@@ -89,17 +109,27 @@ final class DbOpenHelper
         db.execSQL("INSERT INTO " +
                    Task.TABLE +
                    "(DESCRIPTION, DUE_DATE) VALUES ('Really make talk', '" +
-                   format(DATETIME_FORMAT_DB, today.plusDays(12)) +
+                   format(DATETIME_FORMAT_DB, today.plusDays(19)) +
                    "');");
         db.execSQL("INSERT INTO " +
                    Task.TABLE +
                    "(DESCRIPTION, DUE_DATE) VALUES ('Give actual talk', '" +
-                   format(DATETIME_FORMAT_DB, today.plusDays(13)) +
+                   format(DATETIME_FORMAT_DB, today.plusDays(21)) +
                    "');");
         db.execSQL("INSERT INTO " +
                    Task.TABLE +
                    "(DESCRIPTION, DUE_DATE) VALUES ('Party!', '" +
-                   format(DATETIME_FORMAT_DB, today.plusDays(14)) +
+                   format(DATETIME_FORMAT_DB, today.plusDays(33)) +
+                   "');");
+        db.execSQL("INSERT INTO " +
+                   Task.TABLE +
+                   "(DESCRIPTION, DUE_DATE) VALUES ('Signup for future talks', '" +
+                   format(DATETIME_FORMAT_DB, today.plusDays(58)) +
+                   "');");
+        db.execSQL("INSERT INTO " +
+                   Task.TABLE +
+                   "(DESCRIPTION, DUE_DATE) VALUES ('Procrastinate until second last day', '" +
+                   format(DATETIME_FORMAT_DB, today.plusDays(68)) +
                    "');");
     }
 }
