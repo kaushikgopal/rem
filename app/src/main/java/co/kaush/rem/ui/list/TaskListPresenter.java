@@ -56,7 +56,15 @@ public class TaskListPresenter {
         boolean zebraColorFlag = false;
         int lastWeekIndex = -1;
 
-        DateTime dateRefForWeekIndex = getDateTimeFrom(tasks.get(0).dueDate);
+
+        int dayOfWeek = _coreDateUtils.now().getWeekDay();
+        DateTime dateRefForWeekIndex = _coreDateUtils.now();
+        while (dayOfWeek == 1) { // 1 = SUNDAY
+            dateRefForWeekIndex = dateRefForWeekIndex.minusDays(1);
+            dayOfWeek--;
+        }
+
+
         DateTime dueDateForTaskInLoop;
 
         for (int i = position; i >= 0; i--) {

@@ -26,7 +26,7 @@ public class TaskListPresenterTest {
     @BeforeClass
     public static void setUpOnce() {
         when(_coreDateUtils.now()).thenReturn(NOW);
-        // today = "Mar 23 2013 7:12 pm"
+        // today = "Mar 23 2013 7:12 pm" SATURDAY
     }
 
     @Before
@@ -58,7 +58,7 @@ public class TaskListPresenterTest {
     }
 
     @Test
-    public void DueDateTimeColor_ShouldAlternateBetweenConsecutiveWeeks() {
+    public void DueDateTimeColor_ShouldAlternateBetweenDifferentWeeks() {
         DateTime someFutureDate = new DateTime(2013, 3, 23, 23, 12, 20, 0);
 
         List<Task> tasks = new ArrayList<>();
@@ -109,6 +109,40 @@ public class TaskListPresenterTest {
 
         assertThat(taskColor8).isNotEqualTo(taskColor9);
     }
+
+    @Test
+    public void DueDateTimeColor_ShouldUseClosestSundayBeforeTodayForReference_WhenStartingToAlternateColors() {
+        /*
+            FRI     May 29th 2015
+            SAT
+            SUN         ----> should start here for first color consideration
+            MON
+            TUE-------> Today
+            WED
+            THU
+            FRI    -----> should be same color as the previous Thursday
+            SAT
+            SUN    ------> really when next color should start
+        */
+
+        DateTime someFriday = new DateTime(2015, 5, 29, 9, 9, 9, 9);
+
+        CoreDateUtils coreDateUtilsFridayToday = spy(new CoreDateUtils());
+        when(coreDateUtilsFridayToday.now()).thenReturn(someFriday.plusDays(4));
+
+        List<Task> tasks = new ArrayList<>();
+        tasks.add(aTask().withDueDate(getDateFor(someFriday)).build());             // FRI (t0)
+        tasks.add(aTask().withDueDate(getDateFor(someFriday.plusDays(2))).build()); // SUN (t1)
+        tasks.add(aTask().withDueDate(getDateFor(someFriday.plusDays(4))).build()); // TUE (t2) today
+        tasks.add(aTask().withDueDate(getDateFor(someFriday.plusDays(6))).build()); // FRI (t3)
+        tasks.add(aTask().withDueDate(getDateFor(someFriday.plusDays(7))).build()); // FRI (t4)
+
+        int taskColor1 = _presenter.getDueDayTimeColorIdFor(tasks, 3);
+        int taskColor2 = _presenter.getDueDayTimeColorIdFor(tasks, 4);
+
+        assertThat(taskColor1).isEqualTo(taskColor2);
+    }
+
 
     // -----------------------------------------------------------------------------------
 
