@@ -54,6 +54,12 @@ public class TaskCreateFragment
         return layout;
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.reset(this);
+    }
+
     @OnClick(R.id.btn_task_cancel)
     public void onCancelButtonClicked() {
         _taskCreateController.onCancelButtonClicked();
