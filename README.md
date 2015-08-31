@@ -2,7 +2,8 @@
 
 A super simple TODO app that handles those nonsensical, yet essential todos, that you don't want cluttering your Calendar. This app is intentionally built to be annoying. That is a feature!
 
-I have a much crappier version of the app that I wrote for myself and it has served me well for 6 months. But I gave a talk at DroidCon NYC where I talked about an adaptation of Fowler's Supervising Controller/Passive View patterns for Android. I decided to follow my own advice and rewrite the app in said pattern.
+I have a much crappier version of the app that I wrote for myself and it has served me well for 6 months. But I gave a talk at DroidCon NYC where I talked about an adaptation of Fowler's Supervising Controller/Passive View patterns for Android. I decided to follow my own advice and rewrite the app in said pattern. The talk was a good primer to understanding the architecture chosen here. [Slides for the talk can be found here](https://speakerdeck.com/kaushikgopal/painless-ui-testing) and the video is coming.
+
 
 ### Current progress:
 
