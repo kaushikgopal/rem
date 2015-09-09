@@ -15,13 +15,13 @@ def gitSha() {
 def buildTime = new Date().format("yyyy-MM-dd'T'HH:mm'Z'", TimeZone.getTimeZone("UTC"))
 
 android {
-    compileSdkVersion 22
-    buildToolsVersion "22.0.1"
+    compileSdkVersion 23
+    buildToolsVersion "23.0.0"
 
     defaultConfig {
         applicationId "co.kaush.rem"
         minSdkVersion 15
-        targetSdkVersion 22
+        targetSdkVersion 22 // Not tested on API 23 yet
         versionCode 1
         versionName "1.0"
 
@@ -48,6 +48,11 @@ android {
     testOptions {
         unitTests.returnDefaultValues = true
     }
+
+    // For Butterknife
+    lintOptions {
+        disable 'InvalidPackage'
+    }
 }
 
 dependencies {
@@ -56,8 +61,8 @@ dependencies {
     // Support dependencies
 
     compile 'org.jetbrains:annotations:13.0'
-    compile 'com.android.support:appcompat-v7:22.1.1'
-    compile('com.android.support:recyclerview-v7:21.0.3') {
+    compile 'com.android.support:appcompat-v7:23.0.0'
+    compile('com.android.support:recyclerview-v7:23.0.0') {
         exclude module: 'support-v4'
         exclude module: 'support-annotations'
     }
@@ -65,21 +70,21 @@ dependencies {
     // -----------------------------------------
     // 3rd party libs
 
-    compile 'com.jakewharton:butterknife:5.1.1'
+    compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.jakewharton.timber:timber:2.4.2'
     compile 'com.darwinsys:hirondelle-date4j:1.5.1'
-    compile 'com.squareup.okhttp:okhttp:2.0.0'
-    compile('com.squareup.okhttp:okhttp-urlconnection:2.0.0') {
+    compile 'com.squareup.okhttp:okhttp:2.4.0'
+    compile('com.squareup.okhttp:okhttp-urlconnection:2.4.0') {
         exclude group: 'com.squareup.okhttp', module: 'okhttp'
     }
     compile 'io.reactivex:rxandroid:1.0.1'
     compile 'com.squareup.dagger:dagger:1.2.2'
     provided 'com.squareup.dagger:dagger-compiler:1.2.2'
-//    compile 'com.squareup.retrofit:retrofit:1.6.1'
-//    compile 'com.squareup.picasso:picasso:2.3.4'
+//    compile 'com.squareup.retrofit:retrofit:1.9.0'
+//    compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.squareup.sqlbrite:sqlbrite:0.2.1'
     compile 'uk.co.chrisjenx:calligraphy:2.1.0'
-    compile("com.doomonafireball.betterpickers:library:1.5.3") {
+    compile("com.doomonafireball.betterpickers:library:1.6.0") {
         exclude group: 'com.android.support', module: 'support-v4'
     }
 

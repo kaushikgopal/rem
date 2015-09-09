@@ -8,13 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import javax.inject.Inject;
+
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 import co.kaush.rem.R;
 import co.kaush.rem.ui.BaseFragment;
 import co.kaush.rem.util.CoreDateUtils;
-import javax.inject.Inject;
 
 import static co.kaush.rem.util.CoreDateUtils.IncreaseOrDecrease.MINUS;
 import static co.kaush.rem.util.CoreDateUtils.IncreaseOrDecrease.PLUS;
@@ -28,7 +30,7 @@ public class TaskCreateFragment
 
     public static final String FRAG_TAG = "co.kaush.rem.ui.create.TaskCreateFragment";
 
-    @InjectView(R.id.btn_task_due_date_display) TextView _dueDisplay;
+    @Bind(R.id.btn_task_due_date_display) TextView _dueDisplay;
 
     @Inject CoreDateUtils _coreDateUtils;
 
@@ -50,14 +52,14 @@ public class TaskCreateFragment
                              ViewGroup container,
                              Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_task_create, container, false);
-        ButterKnife.inject(this, layout);
+        ButterKnife.bind(this, layout);
         return layout;
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.reset(this);
+        ButterKnife.unbind(this);
     }
 
     @OnClick(R.id.btn_task_cancel)

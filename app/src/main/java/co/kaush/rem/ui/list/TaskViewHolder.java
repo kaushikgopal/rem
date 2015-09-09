@@ -6,24 +6,24 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.Bind;
 import co.kaush.rem.R;
 import co.kaush.rem.entity.Task;
 
 public class TaskViewHolder
       extends RecyclerView.ViewHolder {
 
-    @InjectView(R.id.item_task_desc) TextView _taskDescription;
-    @InjectView(R.id.item_task_due_display_date) TextView _dueDateDisplayDay;
-    @InjectView(R.id.item_task_due_display_month) TextView _dueDateDisplayMonth;
-    @InjectView(R.id.item_task_due_display_day_time) TextView _dueDayTime;
-    @InjectView(R.id.item_task_delete) ImageView _btnDeleteTask;
-    @InjectView(R.id.item_task_complete) ImageView _btnCompleteTask;
-    @InjectView(R.id.item_task_container) RelativeLayout _taskContainer;
+    @Bind(R.id.item_task_desc) TextView _taskDescription;
+    @Bind(R.id.item_task_due_display_date) TextView _dueDateDisplayDay;
+    @Bind(R.id.item_task_due_display_month) TextView _dueDateDisplayMonth;
+    @Bind(R.id.item_task_due_display_day_time) TextView _dueDayTime;
+    @Bind(R.id.item_task_delete) ImageView _btnDeleteTask;
+    @Bind(R.id.item_task_complete) ImageView _btnCompleteTask;
+    @Bind(R.id.item_task_container) RelativeLayout _taskContainer;
 
     public TaskViewHolder(View parentView) {
         super(parentView);
-        ButterKnife.inject(this, parentView);
+        ButterKnife.bind(this, parentView);
     }
 
     public void bindContent(final TaskListController controller) {

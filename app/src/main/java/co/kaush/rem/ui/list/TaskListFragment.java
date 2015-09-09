@@ -12,22 +12,25 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.List;
+
+import javax.inject.Inject;
+
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import co.kaush.rem.R;
 import co.kaush.rem.entity.Task;
 import co.kaush.rem.ui.BaseFragment;
 import co.kaush.rem.ui.create.TaskCreateFragment;
 import co.kaush.rem.util.ColorFilterCache;
-import java.util.List;
-import javax.inject.Inject;
 
 public class TaskListFragment
       extends BaseFragment
       implements TaskListController.ITalkToTaskListScreen {
 
-    @InjectView(R.id.toolbar) Toolbar toolbar;
-    @InjectView(R.id.task_list) RecyclerView taskList;
+    @Bind(R.id.toolbar) Toolbar toolbar;
+    @Bind(R.id.task_list) RecyclerView taskList;
 
     @Inject TaskListController _taskListController;
 
@@ -48,7 +51,7 @@ public class TaskListFragment
                              ViewGroup container,
                              Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_task_list, container, false);
-        ButterKnife.inject(this, layout);
+        ButterKnife.bind(this, layout);
         _initializeToolbar();
         return layout;
     }

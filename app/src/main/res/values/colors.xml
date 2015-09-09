@@ -27,6 +27,7 @@
     <color name="black_1">#000000</color>
     <color name="black_1_transparent">#4D000000</color>
     <color name="gray_1">#303030</color>
+    <color name="blue">#2196F3</color>
     <!--charcoal default bg for L dark-->
     <color name="gray_2">#8f8f8f</color>
     <color name="white_1">#ffffff</color>
