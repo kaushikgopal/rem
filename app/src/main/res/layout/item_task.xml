@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:textSize="@dimen/text_size_regular"
-            android:textColor="@color/white"
+            android:textColor="@android:color/white"
             tools:text="4"
             />
 
@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:textSize="@dimen/text_size_xsmall"
-            android:textColor="@color/white"
+            android:textColor="@android:color/white"
             tools:text="Apr"
             />
     </LinearLayout>
